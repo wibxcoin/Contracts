@@ -1,1 +1,3 @@
 *.sol linguist-language=Solidity
+*.acl linguist-language=Hyperledger
+*.cto linguist-language=Hyperledger
