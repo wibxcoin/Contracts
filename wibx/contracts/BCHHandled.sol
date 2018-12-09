@@ -13,6 +13,9 @@ pragma solidity ^0.4.24;
  */
 contract BCHHandled
 {
+    /**
+     * The BCH address
+     */
     address internal constant BCH_ADDR = 0xc5A9007407FBa42285E15f1cA90779D130C93C29;
 
     mapping (address => bool) private _allowed;
