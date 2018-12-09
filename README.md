@@ -35,6 +35,8 @@ Configure your network inside the `truffle.js` configuration file and run the mi
 $ truffle migrate
 ```
 
+Solidity version: `v0.4.24+commit.e67f0147`.
+
 ## Hyperledger chaincode
 
 Inside the `wibx-private` directory, contains a [generator-hyperledger-composer](https://www.npmjs.com/package/generator-hyperledger-composer) project.
