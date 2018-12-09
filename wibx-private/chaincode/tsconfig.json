@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "outDir": "../lib",
+        "module": "none",
+        "target": "esnext",
+        "allowJs": false,
+        "lib": [
+            "es2015",
+            "es6"
+        ],
+        "types": []
+    },
+    "include":[
+        "./**/*.ts"
+    ]
+}

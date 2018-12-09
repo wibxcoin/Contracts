@@ -1,0 +1,143 @@
+namespace org.wiboo.wibxp.financial
+
+import org.wiboo.wibxp.common.Wallet
+
+/**
+ * Generic financial event
+ */
+abstract event FinancialEvent
+{
+    /**
+     * Coin amount
+     */
+    o Double amount
+}
+
+/**
+ * Financial event when some transaction occurs.
+ * Based on ERC-20
+ */
+event Transfer extends FinancialEvent
+{
+    /**
+     * The coin owner
+     */
+    --> Wallet from
+
+    /**
+     * Destiny account
+     */
+    --> Wallet to
+}
+
+/**
+ * Financial event when some deposit occurs.
+ */
+event Deposit extends FinancialEvent
+{
+    /**
+     * The coin owner
+     */
+    o String fromEthAddress
+
+    /**
+     * Destiny account
+     */
+    --> Wallet to
+}
+
+/**
+ * Financial event when some withdraw occurs.
+ */
+event Withdraw extends FinancialEvent
+{
+    /**
+     * The coin owner
+     */
+    --> Wallet from
+
+    /**
+     * The ETH address that will be transfered those coins
+     */
+    o String toEthAddress
+}
+
+/**
+ * Base for all financial transactions
+ */
+abstract transaction FinancialTransaction
+{
+    /**
+     * Public network transaction id
+     */
+    o String ethTransactionId
+
+    /**
+     * Optional extra identification
+     */
+    o String externalId optional
+
+    /**
+     * Coin amount
+     */
+    o Double amount
+
+    /**
+     * Text describing this transaction
+     */
+    o String description optional
+}
+
+/**
+ * Represents a financial transaction that transfer coins from some Wallet
+ * to another.
+ */
+transaction TransferTransaction extends FinancialTransaction
+{
+    /**
+     * The coin owner
+     */
+    --> Wallet from
+
+    /**
+     * Destiny account
+     */
+    --> Wallet to
+}
+
+/**
+ * Represents a deposit transaction.
+ *
+ * It occours when some coins are transfered from the public net and are injected
+ * into the game.
+ */
+transaction DepositTransaction extends FinancialTransaction
+{
+    /**
+     * The ETH address that comes those coins
+     */
+    o String fromEthAddress
+
+    /**
+     * Destiny account
+     */
+    --> Wallet to
+}
+
+/**
+ * Represents a withdraw operation.
+ *
+ * It occours when some coins are transfered to the external net.
+ */
+transaction WithdrawTransaction extends FinancialTransaction
+{
+    /**
+     * The coin owner
+     */
+    --> Wallet from
+
+    /**
+     * The ETH address that will be transfered those coins
+     */
+    o String toEthAddress
+}

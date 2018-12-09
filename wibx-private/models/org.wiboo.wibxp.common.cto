@@ -1,0 +1,22 @@
+namespace org.wiboo.wibxp.common
+
+/**
+ * WiBOO User Wallet
+ */
+participant Wallet identified by idWallet
+{
+    /**
+     * Some identification for this wallet
+     */
+    o String idWallet
+
+    /**
+     * The ETH address
+     */
+    o String ethAddress
+
+    /**
+     * The coin balance of this wallet
+     */
+    o Double balance
+}

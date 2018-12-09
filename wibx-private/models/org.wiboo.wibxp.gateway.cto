@@ -1,0 +1,35 @@
+/**
+ * WiBOO payment gateway
+ */
+namespace org.wiboo.wibxp.gateway
+
+import org.wiboo.wibxp.common.Wallet
+
+/**
+ * Descreve uma tag NFC (lojista)
+ */
+asset NfcTag identified by idNfcTag
+{
+    o String idNfcTag
+    --> Wallet owner
+    o Double lastPendingTransactionAmount
+}
+
+/**
+ * Futura transacao para determinada tag
+ */
+transaction FutureTransaction
+{
+    --> NfcTag tag
+    o Double amount
+}
+
+/**
+ * Efetiva o pagamento de uma transacao futura
+ */
+transaction ConcreteTransaction
+{
+    --> Wallet payer
+    --> NfcTag tag
+    o Double amount
+}

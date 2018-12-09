@@ -1,0 +1,59 @@
+/**
+ * Sample access control list.
+ */
+rule EverybodyCanReadEverythingCommon
+{
+    description: "Allow all participants read access to all resources"
+    participant: "org.wiboo.wibxp.common.Wallet"
+    operation: READ
+    resource: "org.wiboo.wibxp.common.*"
+    action: ALLOW
+}
+
+rule EverybodyCanReadEverythingFinancial
+{
+    description: "Allow all participants read access to all resources"
+    participant: "org.wiboo.wibxp.common.Wallet"
+    operation: READ
+    resource: "org.wiboo.wibxp.financial.*"
+    action: ALLOW
+}
+
+rule EverybodyCanReadEverythingGateway
+{
+    description: "Allow all participants read access to all resources"
+    participant: "org.wiboo.wibxp.common.Wallet"
+    operation: READ
+    resource: "org.wiboo.wibxp.gateway.*"
+    action: ALLOW
+}
+
+rule SystemACL
+{
+    description: "Block ordinary peers to change internal system configuration"
+    participant: "org.hyperledger.composer.system.Participant"
+    operation: READ
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
+
+/**
+ * Admin perms
+ */
+rule NetworkAdminUser
+{
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+rule NetworkAdminSystem
+{
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}

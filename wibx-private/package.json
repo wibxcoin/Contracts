@@ -1,0 +1,44 @@
+{
+    "name": "wibx-private",
+    "version": "0.0.18",
+    "description": "The WiBX private blockchain network",
+    "scripts": {
+        "pretest": "npm run lint",
+        "lint": "eslint .",
+        "test": "nyc mocha -t 0 test/*.js && cucumber-js",
+        "build": "tsc -p ./chaincode/tsconfig.json && node tree-shake.js",
+        "deploy": "./pubilsh-blockchain.sh"
+    },
+    "author": {
+        "name": "Gabriel Matos",
+        "email": "gabriel.matos@wiboo.com.br"
+    },
+    "private": true,
+    "engines": {
+        "composer": "0.20.0"
+    },
+    "devDependencies": {
+        "@types/node": "^10.9.2",
+        "camelcase": "^5.0.0",
+        "chai": "latest",
+        "chai-as-promised": "latest",
+        "composer-admin": "0.20.0",
+        "composer-cli": "0.20.0",
+        "composer-client": "0.20.0",
+        "composer-common": "0.20.0",
+        "composer-connector-embedded": "0.20.0",
+        "composer-cucumber-steps": "0.20.0",
+        "cucumber": "^2.2.0",
+        "eslint": "latest",
+        "mkdirp": "latest",
+        "mocha": "latest",
+        "nyc": "latest",
+        "rimraf": "^2.6.2",
+        "ts-loader": "^4.5.0",
+        "ts-node": "^7.0.1",
+        "typescript": "^3.0.1",
+        "webpack": "4.17.1",
+        "webpack-cli": "3.1.0",
+        "webpack-dev-server": "3.1.5"
+    }
+}
