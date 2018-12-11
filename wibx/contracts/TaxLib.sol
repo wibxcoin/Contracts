@@ -21,16 +21,28 @@ library TaxLib
      * @dev Apply some percentage to some value.
      *
      * @param taxAmount The amount of tax
+     * @param taxDecimals Decimal units to be used in the taxAmount
      * @param value The total amount
-     * @param decimals Decimal units to be used
      * @return The tax amount to be payed (in WEI)
      */
-    function applyTax(uint256 taxAmount, uint256 value, uint256 decimals) internal pure returns (uint256)
+    function applyTax(uint256 taxAmount, uint256 taxDecimals, uint256 value) internal pure returns (uint256)
     {
-        // todo: The decimal calculation needs to be cached
-        uint256 normalizedTaxAmount = taxAmount.mul(10 ** decimals);
+        // todo: The decimal calculation needs to be cached (!Check with ROCA!)
+        uint256 normalizedTaxAmount = taxAmount.mul(10 ** taxDecimals);
         uint256 temp = value.mul(normalizedTaxAmount);
 
         return temp.div(100);
+    }
+
+    /**
+     * @dev Calculates the NET value of the transaction
+     *
+     * @param taxValue All tax value paid
+     * @param value The transaction value
+     * @return The NET price
+     */
+    function netValue(uint256 taxValue, uint256 value) internal pure returns (uint256)
+    {
+        return value.sub(taxValue);
     }
 }

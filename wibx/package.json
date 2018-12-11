@@ -15,7 +15,10 @@
         "openzeppelin-solidity": "2.0.0"
     },
     "devDependencies": {
+        "chai": "4.2.0",
+        "chai-bignumber": "3.0.0",
         "solium": "1.1.8",
-        "truffle": "4.1.13"
+        "truffle": "4.1.13",
+        "web3": "1.0.0-beta.37"
     }
 }

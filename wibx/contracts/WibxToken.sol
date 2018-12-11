@@ -24,28 +24,14 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
     uint256 public constant INITIAL_SUPPLY = 12000000000 * (10 ** uint256(18));
 
     /**
-     * List of tax recipients
+     * Tax recipient
      */
-    address[] private taxRecipientAddr = [
-        // WiBOO Foundation
-        0x08B9C1aE682aD62119635b5C6044204971bf1575,
-        // A1
-        0x54ead279B85D15d9884b0630BD0378a5647Ecb64,
-        // A2
-        0x369335c0218F430f2775522873FC421e6dbDac35
-    ];
+    address private _taxRecipientAddr = 0x08B9C1aE682aD62119635b5C6044204971bf1575;
 
     /**
-     * Respective list of percentages
+     * Tax amount per each transaction
      */
-    uint[] private taxRecipientAmount = [
-        // 30% for WiBOO Foundation
-        30,
-        // 10% for A1
-        10,
-        // 10% for A2
-        10
-    ];
+    uint8 private _taxRecipientAmount = 35;
 
     constructor() public ERC20Detailed("WiBX Utility Token", "WBX", 18)
     {
@@ -64,11 +50,15 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
         require(value <= balanceOf(msg.sender), "No balance");
         require(to != address(0), "Ghost addr");
 
-        return _fullTransfer(msg.sender, to, value);
+        uint256 newValueWithoutTax = _applyAndTransferTax(msg.sender, value);
+
+        _transfer(msg.sender, to, newValueWithoutTax);
+        return true;
     }
 
     /**
      * @dev Special WBX transfer tokens from one address to another checking the access for BCH
+     * FIXME: It should clear the tax from the allowance!
      *
      * @param from address The address which you want to send tokens from
      * @param to address The address which you want to transfer to
@@ -85,7 +75,11 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
             require(approve(BCH_ADDR, value), "Issue approving BCH authorization");
         }
 
-        return _fullTransfer(from, to, value);
+        require(value <= allowance(from, msg.sender), "Not allowed");
+
+        uint256 newValueWithoutTax = _applyAndTransferTax(from, value);
+
+        return super.transferFrom(from, to, newValueWithoutTax);
     }
 
     /**
@@ -109,24 +103,7 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
     }
 
     /**
-     * @dev Special WBX transfer token for a specified address.
-     *
-     * @param from The address of the spender
-     * @param to The address to transfer to.
-     * @param value The amount to be transferred.
-     * @return If the operation was successful
-     */
-    function _fullTransfer(address from, address to, uint256 value) internal returns (bool)
-    {
-        uint256 newValueWithTax = _applyAndTransferTax(from, value);
-
-        _transfer(from, to, newValueWithTax);
-
-        return true;
-    }
-
-    /**
-     * @dev Apply required taxes and transfer to the recipients
+     * @dev Apply required taxes and transfer to the tax recipient
      *
      * @param from The address of the spender
      * @param value The transaction value
@@ -134,17 +111,10 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
      */
     function _applyAndTransferTax(address from, uint256 value) private returns (uint256)
     {
-        uint256 newValueWithTax = value;
+        uint256 taxValue = TaxLib.applyTax(_taxRecipientAmount, 0, value);
 
-        for (uint256 i = 0; i < taxRecipientAddr.length; i++)
-        {
-            uint256 taxValue = TaxLib.applyTax(taxRecipientAmount[i], newValueWithTax, decimals());
+        _transfer(from, _taxRecipientAddr, taxValue);
 
-            newValueWithTax -= taxValue;
-
-            _transfer(from, taxRecipientAddr[i], taxValue);
-        }
-
-        return newValueWithTax;
+        return TaxLib.netValue(taxValue, value);
     }
 }
