@@ -30,9 +30,18 @@ Install the local dependencies:
 $ yarn
 ```
 
-Configure your network inside the `truffle.js` configuration file and run the migration (Requires the [Truffle CLI installed](https://truffleframework.com/truffle)):
+### Deploying
+
+Configure your network node inside the `truffle.js` configuration file and run the migration:
 ```
-$ truffle migrate
+$ yarn migrate
+```
+
+### Testing
+
+You need to keep your [Ganache](https://truffleframework.com/ganache) (it is possible to use [Ganache CLI](https://github.com/trufflesuite/ganache-cli) instead if you like) node up and running. It is recommended to have `100+ ETH` in the first account to run all the test cases smoothly.
+```
+$ yarn test
 ```
 
 Solidity version: `v0.4.24+commit.e67f0147`.

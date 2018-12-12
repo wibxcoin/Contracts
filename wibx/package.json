@@ -9,6 +9,9 @@
         "email": "gabriel.matos@wiboo.com.br"
     },
     "scripts": {
+        "test": "truffle test",
+        "compile": "truffle compile",
+        "migrate": "truffle migrate",
         "lint:sol": "solium -d ."
     },
     "dependencies": {
