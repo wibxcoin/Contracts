@@ -50,15 +50,19 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
         require(value <= balanceOf(msg.sender), "No balance");
         require(to != address(0), "Ghost addr");
 
-        uint256 newValueWithoutTax = _applyAndTransferTax(msg.sender, value);
+        uint256 taxValue = TaxLib.applyTax(_taxRecipientAmount, 0, value);
 
-        _transfer(msg.sender, to, newValueWithoutTax);
+        // Transfer the tax to the recipient
+        _transfer(msg.sender, _taxRecipientAddr, taxValue);
+
+        // Transfer user's tokens
+        _transfer(msg.sender, to, TaxLib.netValue(taxValue, value));
+
         return true;
     }
 
     /**
      * @dev Special WBX transfer tokens from one address to another checking the access for BCH
-     * FIXME: It should clear the tax from the allowance!
      *
      * @param from address The address which you want to send tokens from
      * @param to address The address which you want to transfer to
@@ -77,9 +81,15 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
 
         require(value <= allowance(from, msg.sender), "Not allowed");
 
-        uint256 newValueWithoutTax = _applyAndTransferTax(from, value);
+        uint256 taxValue = TaxLib.applyTax(_taxRecipientAmount, 0, value);
 
-        return super.transferFrom(from, to, newValueWithoutTax);
+        // Transfer the tax to the recipient
+        super.transferFrom(from, _taxRecipientAddr, taxValue);
+
+        // Transfer user's tokens
+        super.transferFrom(from, to, TaxLib.netValue(taxValue, value));
+
+        return true;
     }
 
     /**
@@ -100,21 +110,5 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
         }
 
         return true;
-    }
-
-    /**
-     * @dev Apply required taxes and transfer to the tax recipient
-     *
-     * @param from The address of the spender
-     * @param value The transaction value
-     * @return The value without taxes
-     */
-    function _applyAndTransferTax(address from, uint256 value) private returns (uint256)
-    {
-        uint256 taxValue = TaxLib.applyTax(_taxRecipientAmount, 0, value);
-
-        _transfer(from, _taxRecipientAddr, taxValue);
-
-        return TaxLib.netValue(taxValue, value);
     }
 }

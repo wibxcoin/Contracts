@@ -256,12 +256,12 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                         (await tokenInstance.balanceOf(to)).should.be.bignumber.equal(valueWithoutTaxes);
                     });
 
-                    /*it('decreases the spender allowance', async () =>
+                    it('decreases the spender allowance', async () =>
                     {
                         await tokenInstance.transferFrom(owner, to, amount, { from: spender });
 
                         (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(0);
-                    });*/
+                    });
 
                     it('emits a transfer event', async () =>
                     {
