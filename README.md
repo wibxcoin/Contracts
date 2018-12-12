@@ -39,9 +39,21 @@ $ yarn migrate
 
 ### Testing
 
-You need to keep your [Ganache](https://truffleframework.com/ganache) (it is possible to use [Ganache CLI](https://github.com/trufflesuite/ganache-cli) instead if you like) node up and running. It is recommended to have `100+ ETH` in the first account to run all the test cases smoothly.
+You need to keep your [Ganache](https://truffleframework.com/ganache) (it is possible to use [Ganache CLI](https://github.com/trufflesuite/ganache-cli) instead if you like) node up and running on `port 8545`. It is recommended to have `100+ ETH` in the first account to run all the test cases smoothly.
 ```
 $ yarn test
+```
+
+Or you can run it automatically:
+```
+$ yarn build:test
+```
+
+### Coverage
+
+To get coverage statistics, just run the coverage script:
+```
+$ yarn build:coverage
 ```
 
 Solidity version: `v0.4.24+commit.e67f0147`.
@@ -50,7 +62,7 @@ Solidity version: `v0.4.24+commit.e67f0147`.
 
 Inside the `wibx-private` directory, contains a [generator-hyperledger-composer](https://www.npmjs.com/package/generator-hyperledger-composer) project.
 
-To deploy it, make sure that you have the Hyperledger Composer (installed and running)[https://hyperledger.github.io/composer/latest/installing/development-tools.html] in your computer. The CLI tools are needed as well.
+To deploy it, make sure that you have the Hyperledger Composer [installed and running](https://hyperledger.github.io/composer/latest/installing/development-tools.html) in your computer. The CLI tools are needed as well.
 
 There is a script that do the deploy job for you.
 ```(sh)

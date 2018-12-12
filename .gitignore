@@ -35,6 +35,8 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+coverageEnv
+coverage.json
 
 # nyc test coverage
 .nyc_output

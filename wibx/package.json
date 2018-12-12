@@ -12,7 +12,9 @@
         "test": "truffle test",
         "compile": "truffle compile",
         "migrate": "truffle migrate",
-        "lint:sol": "solium -d ."
+        "lint:sol": "solium -d .",
+        "build:test": "scripts/test.sh",
+        "build:coverage": "SOLIDITY_COVERAGE=true scripts/test.sh"
     },
     "dependencies": {
         "openzeppelin-solidity": "2.0.0"
@@ -22,6 +24,9 @@
         "chai-bignumber": "3.0.0",
         "solium": "1.1.8",
         "truffle": "4.1.13",
-        "web3": "1.0.0-beta.37"
+        "web3": "1.0.0-beta.37",
+        "coveralls": "3.0.1",
+        "solidity-coverage": "0.5.4",
+        "ganache-cli": "6.2.3"
     }
 }
