@@ -22,6 +22,14 @@ module.exports = class
     }
 
     /**
+     * The tax recipient
+     */
+    static get TAX_RECIPIENT()
+    {
+        return '0x08b9c1ae682ad62119635b5c6044204971bf1575';
+    }
+
+    /**
      * Total tokens in Big Number.
      */
     static get INITIAL_SUPPLY()
@@ -35,14 +43,6 @@ module.exports = class
     static get UNAVAILABLE_AMOUNT()
     {
         return this.INITIAL_SUPPLY.add(1);
-    }
-
-    /**
-     * The tax recipient
-     */
-    static get TAX_RECIPIENT()
-    {
-        return '0x08b9c1ae682ad62119635b5c6044204971bf1575';
     }
 
     /**

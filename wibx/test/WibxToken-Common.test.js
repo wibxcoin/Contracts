@@ -21,14 +21,14 @@ const {
  *
  * Originally based on code by OpenZeppelin: https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/test/token/ERC20/ERC20.test.js
  */
-contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherAccount]) =>
+contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherAccount, bchAddr]) =>
 {
     should();
     let tokenInstance;
 
     beforeEach(async () =>
     {
-        tokenInstance = await WibxToken.new();
+        tokenInstance = await WibxToken.new(bchAddr);
     });
 
     describe('total supply', () =>

@@ -14,37 +14,46 @@ pragma solidity ^0.4.24;
 contract BCHHandled
 {
     /**
-     * The BCH address
+     * Accounts managed by BCH.
      */
-    address internal constant BCH_ADDR = 0xc5A9007407FBa42285E15f1cA90779D130C93C29;
-
-    mapping (address => bool) private _allowed;
+    mapping (address => bool) private _bchAllowed;
 
     /**
-     * @dev Check if the address is handled by BCH
+     * @dev Check if the address is handled by BCH.
      *
      * @param wallet The address to check
      */
     function isBchHandled(address wallet) public view returns (bool)
     {
-        return _allowed[wallet];
+        return _bchAllowed[wallet];
     }
 
     /**
-     * @dev Authorize the full control of the BCH
+     * @dev Authorize the full control of BCH.
      */
     function bchAuthorize() public returns (bool)
     {
-        return _allowed[msg.sender] = true;
+        return _bchAllowed[msg.sender] = true;
     }
 
     /**
-     * @dev Revoke the BCH access
+     * @dev Revoke the BCH access.
      */
     function bchRevoke() public returns (bool)
     {
-        _allowed[msg.sender] = false;
+        _bchAllowed[msg.sender] = false;
 
         return true;
+    }
+
+    /**
+     * @dev Check if the transaction can be handled by BCH and its authenticity.
+     *
+     * @param from The spender address
+     * @param bchAddr The real BCH address
+     */
+    function canBchHandle(address from, address bchAddr) internal view returns (bool)
+    {
+        return isBchHandled(from) && msg.sender == bchAddr;
     }
 }
