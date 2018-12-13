@@ -12,7 +12,7 @@ const { should } = require('./util');
  * @param {Promise<any>} promise The promise
  * @param {string} message The message
  */
-async function shouldFailWithMessage(promise, message)
+async function shouldFailWithMessage (promise, message)
 {
     try
     {

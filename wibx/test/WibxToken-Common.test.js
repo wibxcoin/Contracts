@@ -19,7 +19,8 @@ const {
 /**
  * WibxToken Principal EC20 Functionalities.
  *
- * Originally based on code by OpenZeppelin: https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/test/token/ERC20/ERC20.test.js
+ * Originally based on code by OpenZeppelin:
+ * https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/test/token/ERC20/ERC20.test.js
  */
 contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherAccount, bchAddr]) =>
 {
@@ -99,7 +100,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                     expectEvent.inLogs(logs, 'Transfer', {
                         from: owner,
                         to: TAX_RECIPIENT,
-                        value: taxes,
+                        value: taxes
                     });
 
                     /**
@@ -108,7 +109,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                     expectEvent.inLogs(logs, 'Transfer', {
                         from: owner,
                         to: to,
-                        value: valueWithoutTaxes,
+                        value: valueWithoutTaxes
                     });
                 });
             });
@@ -142,7 +143,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                     expectEvent.inLogs(logs, 'Approval', {
                         owner: owner,
                         spender: spender,
-                        value: amount,
+                        value: amount
                     });
                 });
 
@@ -183,7 +184,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                     expectEvent.inLogs(logs, 'Approval', {
                         owner: owner,
                         spender: spender,
-                        value: amount,
+                        value: amount
                     });
                 });
 
@@ -273,7 +274,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                         expectEvent.inLogs(logs, 'Transfer', {
                             from: owner,
                             to: TAX_RECIPIENT,
-                            value: taxes,
+                            value: taxes
                         });
 
                         /**
@@ -282,7 +283,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                         expectEvent.inLogs(logs, 'Transfer', {
                             from: owner,
                             to: to,
-                            value: valueWithoutTaxes,
+                            value: valueWithoutTaxes
                         });
                     });
                 });
@@ -350,7 +351,8 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
         {
             const spender = recipient;
 
-            function shouldDecreaseApproval(amount) {
+            function shouldDecreaseApproval (amount)
+            {
                 describe('when there was no approved amount before', () =>
                 {
                     it('reverts', async () =>
@@ -370,7 +372,9 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                     it('emits an approval event', async () =>
                     {
-                        const { logs } = await tokenInstance.decreaseAllowance(spender, approvedAmount, { from: owner });
+                        const { logs } = await tokenInstance.decreaseAllowance(
+                            spender, approvedAmount, { from: owner }
+                        );
 
                         expectEvent.inLogs(logs, 'Approval', {
                             owner: owner,
@@ -395,7 +399,9 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                     it('reverts when more than the full allowance is removed', async () =>
                     {
-                        await shouldFail.reverting(tokenInstance.decreaseAllowance(spender, approvedAmount.plus(1), { from: owner }));
+                        await shouldFail.reverting(tokenInstance.decreaseAllowance(
+                            spender, approvedAmount.plus(1), { from: owner })
+                        );
                     });
                 });
             }
@@ -440,7 +446,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                     expectEvent.inLogs(logs, 'Approval', {
                         owner: owner,
                         spender: spender,
-                        value: amount,
+                        value: amount
                     });
                 });
 
@@ -481,7 +487,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                     expectEvent.inLogs(logs, 'Approval', {
                         owner: owner,
                         spender: spender,
-                        value: amount,
+                        value: amount
                     });
                 });
 

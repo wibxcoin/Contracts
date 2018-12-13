@@ -63,7 +63,7 @@ contract('WibxToken: BCH batch transfer', ([owner, recipient, anotherAccount, bc
      *
      * @param {string} from The sender address
      */
-    async function transfer(from)
+    async function transfer (from)
     {
         const amount = INITIAL_SUPPLY;
         const halfAmount = amount.div(2);
@@ -87,7 +87,7 @@ contract('WibxToken: BCH batch transfer', ([owner, recipient, anotherAccount, bc
     /**
      * Authorize the BCH address manipulation
      */
-    async function bchAuthorize()
+    async function bchAuthorize ()
     {
         await tokenInstance.bchAuthorize();
 

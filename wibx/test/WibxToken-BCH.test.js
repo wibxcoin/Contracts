@@ -79,7 +79,7 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
             expectEvent.inLogs(logs, 'Transfer', {
                 from: owner,
                 to: TAX_RECIPIENT,
-                value: taxes,
+                value: taxes
             });
 
             /**
@@ -88,20 +88,22 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
             expectEvent.inLogs(logs, 'Transfer', {
                 from: owner,
                 to: to,
-                value: valueWithoutTaxes,
+                value: valueWithoutTaxes
             });
         });
     });
 
     it('should not transfer value from a unauthorized BCH manipulated address', async () =>
     {
-        await shouldFail.reverting(tokenInstance.transferFrom(owner, anotherAccount, INITIAL_SUPPLY, { from: bchAddr }));
+        await shouldFail.reverting(tokenInstance.transferFrom(
+            owner, anotherAccount, INITIAL_SUPPLY, { from: bchAddr })
+        );
     });
 
     /**
      * Authorize the BCH address manipulation
      */
-    async function authorize()
+    async function authorize ()
     {
         await tokenInstance.bchAuthorize();
 

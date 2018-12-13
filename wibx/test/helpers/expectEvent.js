@@ -16,7 +16,7 @@ const should = require('chai')
  * @param {string} eventName The event name
  * @param {any} eventArgs The event args
  */
-function inLogs(logs, eventName, eventArgs = {})
+function inLogs (logs, eventName, eventArgs = {})
 {
     const event = logs.find(
         e => e.event === eventName && e.args.to === eventArgs.to
@@ -37,7 +37,7 @@ function inLogs(logs, eventName, eventArgs = {})
  * @param {string} key Event key
  * @param {string} value Event value
  */
-function contains(args, key, value)
+function contains (args, key, value)
 {
     if (isBigNumber(args[key]))
     {
@@ -54,11 +54,11 @@ function contains(args, key, value)
  *
  * @param {any} object The object to test
  */
-function isBigNumber(object)
+function isBigNumber (object)
 {
-    return object.isBigNumber
-        || object instanceof BigNumber
-        || (object.constructor && object.constructor.name === 'BigNumber');
+    return object.isBigNumber ||
+        object instanceof BigNumber ||
+        (object.constructor && object.constructor.name === 'BigNumber');
 }
 
 module.exports = {

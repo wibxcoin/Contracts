@@ -11,7 +11,7 @@ const { ALL_TAXES } = require('./constants');
  * @param {BigNumber} value
  * @param {BigNumber} taxDecimals
  */
-function applyTax(value, taxDecimals = 0)
+function applyTax (value, taxDecimals = 0)
 {
     const normalizedTaxAmount = ALL_TAXES.mul(10 ** taxDecimals);
     const temp = value.mul(normalizedTaxAmount);
@@ -21,4 +21,4 @@ function applyTax(value, taxDecimals = 0)
 
 module.exports = {
     applyTax
-}
+};

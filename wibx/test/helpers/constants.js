@@ -16,7 +16,7 @@ module.exports = class
     /**
      * Ghost Address.
      */
-    static get ZERO_ADDRESS()
+    static get ZERO_ADDRESS ()
     {
         return '0x0000000000000000000000000000000000000000';
     }
@@ -24,7 +24,7 @@ module.exports = class
     /**
      * The tax recipient
      */
-    static get TAX_RECIPIENT()
+    static get TAX_RECIPIENT ()
     {
         return '0x08b9c1ae682ad62119635b5c6044204971bf1575';
     }
@@ -32,7 +32,7 @@ module.exports = class
     /**
      * Total tokens in Big Number.
      */
-    static get INITIAL_SUPPLY()
+    static get INITIAL_SUPPLY ()
     {
         return new BigNumber(TOTAL_TOKENS.toString());
     }
@@ -40,7 +40,7 @@ module.exports = class
     /**
      * Some amount that no one can have.
      */
-    static get UNAVAILABLE_AMOUNT()
+    static get UNAVAILABLE_AMOUNT ()
     {
         return this.INITIAL_SUPPLY.add(1);
     }
@@ -48,7 +48,7 @@ module.exports = class
     /**
      * All taxes
      */
-    static get ALL_TAXES()
+    static get ALL_TAXES ()
     {
         return new BigNumber(35);
     }
