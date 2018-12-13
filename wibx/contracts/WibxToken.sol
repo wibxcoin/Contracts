@@ -34,7 +34,7 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
     uint8 private constant TAX_RECIPIENT_AMOUNT = 35;
 
     /**
-     * The BCH address.
+     * The BCH module address.
      */
     address private _bchAddress;
 
@@ -97,7 +97,14 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
 
         for (uint256 i = 0; i < values.length; i = i.add(1))
         {
-            require(transferFrom(from, recipients[i], values[i]), "Issue on transfer");
+            if (msg.sender == from)
+            {
+                _fullTransfer(from, recipients[i], values[i]);
+            }
+            else
+            {
+                transferFrom(from, recipients[i], values[i]);
+            }
         }
 
         return true;
