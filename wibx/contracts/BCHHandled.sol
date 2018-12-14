@@ -14,9 +14,24 @@ pragma solidity ^0.4.24;
 contract BCHHandled
 {
     /**
+     * The BCH module address.
+     */
+    address private _bchAddress;
+
+    /**
      * Accounts managed by BCH.
      */
     mapping (address => bool) private _bchAllowed;
+
+    /**
+     * BCH Approval event
+     */
+    event BchApproval(address indexed addr, bool state);
+
+    constructor(address bchAddress) public
+    {
+        _bchAddress = bchAddress;
+    }
 
     /**
      * @dev Check if the address is handled by BCH.
@@ -33,7 +48,7 @@ contract BCHHandled
      */
     function bchAuthorize() public returns (bool)
     {
-        return _bchAllowed[msg.sender] = true;
+        return _changeState(true);
     }
 
     /**
@@ -41,7 +56,17 @@ contract BCHHandled
      */
     function bchRevoke() public returns (bool)
     {
-        _bchAllowed[msg.sender] = false;
+        return _changeState(false);
+    }
+
+    /**
+     * @dev Change the BCH ownership state
+     *
+     * @param state The new state
+     */
+    function _changeState(bool state) private returns (bool)
+    {
+        emit BchApproval(msg.sender, _bchAllowed[msg.sender] = state);
 
         return true;
     }
@@ -50,10 +75,9 @@ contract BCHHandled
      * @dev Check if the transaction can be handled by BCH and its authenticity.
      *
      * @param from The spender address
-     * @param bchAddr The real BCH address
      */
-    function canBchHandle(address from, address bchAddr) internal view returns (bool)
+    function canBchHandle(address from) internal view returns (bool)
     {
-        return isBchHandled(from) && msg.sender == bchAddr;
+        return isBchHandled(from) && msg.sender == _bchAddress;
     }
 }
