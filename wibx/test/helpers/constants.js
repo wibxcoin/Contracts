@@ -50,6 +50,6 @@ module.exports = class
      */
     static get ALL_TAXES ()
     {
-        return new BigNumber(35);
+        return new BigNumber(9 * 10 ** 1); // Initial tax: 0.9%
     }
 };

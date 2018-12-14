@@ -18,20 +18,50 @@ library TaxLib
     using SafeMath for uint256;
 
     /**
+     * Modifiable tax container
+     */
+    struct DynamicTax
+    {
+        /**
+         * Tax amount per each transaction (in %).
+         */
+        uint256 amount;
+
+        /**
+         * Amount number shift.
+         */
+        uint8 shift;
+
+        /**
+         * Cache the value already calculated to save GAS.
+         * Represents: amount * (10 ^ shift).
+         */
+        uint256 normalizedAmount;
+    }
+
+    /**
      * @dev Apply some percentage to some value.
      *
      * @param taxAmount The amount of tax
-     * @param taxDecimals Decimal units to be used in the taxAmount
      * @param value The total amount
      * @return The tax amount to be payed (in WEI)
      */
-    function applyTax(uint256 taxAmount, uint256 taxDecimals, uint256 value) internal pure returns (uint256)
+    function applyTax(uint256 taxAmount, uint256 value) internal pure returns (uint256)
     {
-        // todo: The decimal calculation needs to be cached (!Check with ROCA!)
-        uint256 normalizedTaxAmount = taxAmount.mul(10 ** taxDecimals);
-        uint256 temp = value.mul(normalizedTaxAmount);
+        uint256 temp = value.mul(taxAmount);
 
         return temp.div(100);
+    }
+
+    /**
+     * @dev Shifts the tax amount
+     *
+     * @param taxAmount The chosen tax amount
+     * @param shift The power chosen
+     */
+    function normalizeTaxAmount(uint256 taxAmount, uint256 shift) internal pure returns (uint256)
+    {
+        return taxAmount.mul(10 ** shift);
     }
 
     /**

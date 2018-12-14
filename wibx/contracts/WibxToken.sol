@@ -8,6 +8,7 @@ pragma solidity ^0.4.24;
 
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
+import "./Taxable.sol";
 import "./BCHHandled.sol";
 import "./TaxLib.sol";
 
@@ -16,32 +17,15 @@ import "./TaxLib.sol";
  *
  * @dev Implementation of the main WiBX token smart contract.
  */
-contract WibxToken is ERC20, ERC20Detailed, BCHHandled
+contract WibxToken is ERC20, ERC20Detailed, Taxable, BCHHandled
 {
     /**
      * 12 billion tokens raised by 18 decimal places.
      */
     uint256 public constant INITIAL_SUPPLY = 12000000000 * (10 ** uint256(18));
 
-    /**
-     * Tax recipient.
-     */
-    address private constant TAX_RECIPIENT_ADDR = 0x08B9C1aE682aD62119635b5C6044204971bf1575;
-
-    /**
-     * Tax amount per each transaction (in %).
-     */
-    uint8 private constant TAX_RECIPIENT_AMOUNT = 35;
-
-    /**
-     * The BCH module address.
-     */
-    address private _bchAddress;
-
-    constructor(address bchAddress) public ERC20Detailed("WiBX Utility Token", "WBX", 18)
+    constructor(address bchAddress) public ERC20Detailed("WiBX Utility Token", "WBX", 18) BCHHandled(bchAddress)
     {
-        _bchAddress = bchAddress;
-
         _mint(msg.sender, INITIAL_SUPPLY);
     }
 
@@ -67,15 +51,15 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
      */
     function transferFrom(address from, address to, uint256 value) public returns (bool)
     {
-        if (canBchHandle(from, _bchAddress))
+        if (canBchHandle(from))
         {
             return _fullTransfer(from, to, value);
         }
 
-        uint256 taxValue = TaxLib.applyTax(TAX_RECIPIENT_AMOUNT, 0, value);
+        uint256 taxValue = _applyTax(value);
 
         // Transfer the tax to the recipient
-        super.transferFrom(from, TAX_RECIPIENT_ADDR, taxValue);
+        super.transferFrom(from, _TAX_RECIPIENT_ADDR, taxValue);
 
         // Transfer user's tokens
         super.transferFrom(from, to, TaxLib.netValue(taxValue, value));
@@ -120,10 +104,10 @@ contract WibxToken is ERC20, ERC20Detailed, BCHHandled
      */
     function _fullTransfer(address from, address to, uint256 value) private returns (bool)
     {
-        uint256 taxValue = TaxLib.applyTax(TAX_RECIPIENT_AMOUNT, 0, value);
+        uint256 taxValue = _applyTax(value);
 
         // Transfer the tax to the recipient
-        _transfer(from, TAX_RECIPIENT_ADDR, taxValue);
+        _transfer(from, _TAX_RECIPIENT_ADDR, taxValue);
 
         // Transfer user's tokens
         _transfer(from, to, TaxLib.netValue(taxValue, value));
