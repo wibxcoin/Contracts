@@ -9,7 +9,7 @@ In order to do this, WiBX needs to provide a solid and fast platform for immedia
 
 All tokens are issued in the Ethereum network through the smart contract `WibxToken` and are tracked within the private network Hyperledger, through the chaincode `org.wiboo.wibxp.financial`, which is, the Hyperledger performing a fast network, processing the information well faster than Ethereum mainnet.
 
-This implies having a module called `BCH` that acts on both networks, tracing one blockchain to another and vice versa.
+This implies having a module called BCH (Blockchain Handler) that acts on both networks, tracing one blockchain to another and vice versa.
 
 ## How will BCH (Blockchain Handler) manage these transactions?
 
