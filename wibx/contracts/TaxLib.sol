@@ -61,7 +61,7 @@ library TaxLib
      */
     function normalizeTaxAmount(uint256 taxAmount, uint256 shift) internal pure returns (uint256)
     {
-        require(shift <= 5, "Shift value too high");
+        require(shift <= 1, "Shift value too high");
 
         return taxAmount.mul(10 ** shift);
     }

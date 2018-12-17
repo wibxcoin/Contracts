@@ -35,32 +35,32 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr]) =>
     {
         it('should adminsitrator change the tax amount', async () =>
         {
-            await changeTax(1, 0, owner);
+            await changeTax(1, 1, owner);
         });
 
         it('should adminsitrator change the tax amount to the max', async () =>
         {
-            await changeTax(3, 0, owner);
+            await changeTax(3, 1, owner);
         });
 
         it('should adminsitrator change a fractional tax amount', async () =>
         {
-            await changeTax(9, 1, owner);
+            await changeTax(9, 0, owner);
         });
 
         it('should other user not change the tax amount', async () =>
         {
-            await shouldFail.reverting(changeTax(1, 0, anotherAccount));
+            await shouldFail.reverting(changeTax(1, 1, anotherAccount));
         });
 
         it('should administrator not change the tax amount greater than 3%', async () =>
         {
-            await shouldFail.reverting(changeTax(4, 0));
+            await shouldFail.reverting(changeTax(4, 1));
         });
 
-        it('should administrator not change the tax amount sift greater than 5 decimals', async () =>
+        it('should administrator not change the tax amount shift greater than 1 decimals', async () =>
         {
-            await shouldFail.reverting(changeTax(1, 6));
+            await shouldFail.reverting(changeTax(1, 2));
         });
 
         it('should keep the tax information available for everyone', async () =>
@@ -116,7 +116,7 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr]) =>
         {
             const taxContainer = {
                 amount: new BigNumber(3),
-                shift: new BigNumber(0)
+                shift: new BigNumber(1)
             };
             const taxes = applyTax(amount, taxContainer.shift, taxContainer.amount);
             const valueWithoutTaxes = amount.minus(taxes);

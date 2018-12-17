@@ -52,7 +52,9 @@ module.exports = class
      */
     static get ALL_TAXES ()
     {
-        return new BigNumber(9 * 10 ** 1);
+        return new BigNumber(9).mul(
+            new BigNumber(10).pow(this.ALL_TAXES_SHIFT)
+        );
     }
 
     /**
@@ -62,6 +64,6 @@ module.exports = class
      */
     static get ALL_TAXES_SHIFT ()
     {
-        return new BigNumber(1);
+        return new BigNumber(0);
     }
 };

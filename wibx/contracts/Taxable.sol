@@ -31,7 +31,7 @@ contract Taxable is Ownable
         /**
          * Tax: Starting at 0.9%
          */
-        changeTax(9, 1);
+        changeTax(9, 0);
     }
 
     /**
@@ -61,8 +61,7 @@ contract Taxable is Ownable
      */
     function changeTax(uint256 amount, uint8 shift) public onlyOwner
     {
-        // Full tax number
-        if (shift == 0)
+        if (shift == 1)
         {
             require(amount <= 3, "You can't set a tax greater than 3%");
         }
