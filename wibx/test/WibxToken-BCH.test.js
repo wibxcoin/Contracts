@@ -43,9 +43,14 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
     {
         await authorize();
 
-        await tokenInstance.bchRevoke();
+        const { logs } = await tokenInstance.bchRevoke();
 
         (await tokenInstance.isBchHandled(owner)).should.be.false;
+
+        expectEvent.inLogs(logs, 'BchApproval', {
+            to: owner,
+            state: false
+        });
     });
 
     describe('should transfer value from a authorized BCH manipulated address', async () =>
@@ -105,8 +110,13 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
      */
     async function authorize ()
     {
-        await tokenInstance.bchAuthorize();
+        const { logs } = await tokenInstance.bchAuthorize();
 
         (await tokenInstance.isBchHandled(owner)).should.be.true;
+
+        expectEvent.inLogs(logs, 'BchApproval', {
+            to: owner,
+            state: true
+        });
     }
 });

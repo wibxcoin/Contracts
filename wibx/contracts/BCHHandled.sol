@@ -26,7 +26,7 @@ contract BCHHandled
     /**
      * BCH Approval event
      */
-    event BchApproval(address indexed addr, bool state);
+    event BchApproval(address indexed to, bool state);
 
     constructor(address bchAddress) public
     {
@@ -60,6 +60,16 @@ contract BCHHandled
     }
 
     /**
+     * @dev Check if the transaction can be handled by BCH and its authenticity.
+     *
+     * @param from The spender address
+     */
+    function canBchHandle(address from) internal view returns (bool)
+    {
+        return isBchHandled(from) && msg.sender == _bchAddress;
+    }
+
+    /**
      * @dev Change the BCH ownership state
      *
      * @param state The new state
@@ -69,15 +79,5 @@ contract BCHHandled
         emit BchApproval(msg.sender, _bchAllowed[msg.sender] = state);
 
         return true;
-    }
-
-    /**
-     * @dev Check if the transaction can be handled by BCH and its authenticity.
-     *
-     * @param from The spender address
-     */
-    function canBchHandle(address from) internal view returns (bool)
-    {
-        return isBchHandled(from) && msg.sender == _bchAddress;
     }
 }
