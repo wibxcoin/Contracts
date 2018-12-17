@@ -8,12 +8,13 @@ const { ALL_TAXES } = require('./constants');
 /**
  * Apply the WiBX token takes to given value.
  *
- * @param {BigNumber} value
- * @param {BigNumber} taxDecimals
+ * @param {BigNumber} value Transaction value
+ * @param {BigNumber} taxDecimals Tax number shift
+ * @param {BigNumber} taxAmount The tax amount
  */
-function applyTax (value, taxDecimals = 0)
+function applyTax (value, taxDecimals = 0, taxAmount = ALL_TAXES)
 {
-    const normalizedTaxAmount = ALL_TAXES.mul(10 ** taxDecimals);
+    const normalizedTaxAmount = taxAmount.mul(10 ** taxDecimals);
     const temp = value.mul(normalizedTaxAmount);
 
     return temp.div(100);

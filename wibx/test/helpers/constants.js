@@ -22,7 +22,7 @@ module.exports = class
     }
 
     /**
-     * The tax recipient
+     * The tax recipient.
      */
     static get TAX_RECIPIENT ()
     {
@@ -46,10 +46,22 @@ module.exports = class
     }
 
     /**
-     * All taxes
+     * All taxes.
+     *
+     * Initial tax: 0.9%
      */
     static get ALL_TAXES ()
     {
-        return new BigNumber(9 * 10 ** 1); // Initial tax: 0.9%
+        return new BigNumber(9 * 10 ** 1);
+    }
+
+    /**
+     * All taxes (shift value).
+     *
+     * Initial tax: 0.9%
+     */
+    static get ALL_TAXES_SHIFT ()
+    {
+        return new BigNumber(1);
     }
 };
