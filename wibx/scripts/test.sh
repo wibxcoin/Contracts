@@ -1,8 +1,8 @@
+#!/usr/bin/env bash
 #
 # Test script for build environments.
 # Originally based on code by OpenZeppelin: https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/scripts/coverage.sh
 #
-#!/usr/bin/env bash
 
 # Exit script as soon as a command fails.
 set -o errexit

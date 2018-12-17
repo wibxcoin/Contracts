@@ -1,5 +1,8 @@
 # <img src="https://wibx.io/assets/svg/logo-site.svg" alt="WiBX" width="150px">
 
+[![Build Status](https://travis-ci.com/wibxcoin/Contracts.svg?branch=master)](https://travis-ci.com/wibxcoin/Contracts)
+[![Coverage Status](https://coveralls.io/repos/github/wibxcoin/Contracts/badge.svg?branch=master)](https://coveralls.io/github/wibxcoin/Contracts?branch=master)
+
 **WiBX is an Ethereum and Hyperledger DAPP.** The first utility token with mass usability in the exchange of products and services. The best in the NFC (Near Field Communication) wich is a mobile proximity payments transfer method model. The most flexible in his assignments.
 
 How it works technically
@@ -19,7 +22,7 @@ There are two types of addresses:
 
   * Custody address: This type of wallet is used totally restricted for the internal operations of the WiBOO mall platform and will not allow any type of creation or external manipulation; these tokens will be administered by the `BCH` in full. Those tokens could be extracted to  a personal address, however it will be possible just via the WiBOO marketplace.
 
-# How to Install 
+# How to Install
 
 ## Ethereum smart contract
 

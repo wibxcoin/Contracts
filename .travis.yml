@@ -1,0 +1,39 @@
+dist: xenial
+sudo: false
+group: beta
+language: node_js
+node_js:
+  - "8"
+
+cache:
+  directories:
+    - wibx/node_modules
+
+jobs:
+  # XXX fast_finish doesn't work with stages yet. See
+  # https://github.com/travis-ci/travis-ci/issues/8425
+  # --elopio - 20180531
+  fast_finish: true
+
+  include:
+    - stage: tests
+      name: "Linter"
+      script:
+        - cd wibx
+        - npm install
+        - npm run lint
+
+    - stage: tests
+      name: "Unit tests"
+      script:
+        - cd wibx
+        - npm install
+        - npm run build:test
+
+    - stage: tests
+      name: "Unit tests with coverage report"
+      script:
+        - cd wibx
+        - npm install
+        - npm run build:test
+      env: SOLIDITY_COVERAGE=true
