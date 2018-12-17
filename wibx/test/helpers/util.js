@@ -7,6 +7,8 @@
 const BigNumber = web3.BigNumber;
 
 module.exports = {
+    BigNumber,
+
     /**
      * Prepare the test function 'should'.
      */

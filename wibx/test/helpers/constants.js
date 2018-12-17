@@ -4,7 +4,7 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-const BigNumber = web3.BigNumber;
+const { BigNumber } = require('./util');
 
 /**
  * 12 billion tokens raised by 18 decimal places.

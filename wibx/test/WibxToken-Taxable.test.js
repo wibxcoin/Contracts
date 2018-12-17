@@ -8,14 +8,13 @@ const WibxToken = artifacts.require('WibxToken');
 const shouldFail = require('./helpers/shouldFail');
 const expectEvent = require('./helpers/expectEvent');
 const { applyTax } = require('./helpers/tax');
-const { should } = require('./helpers/util');
+const { BigNumber, should } = require('./helpers/util');
 const {
     INITIAL_SUPPLY,
     TAX_RECIPIENT,
     ALL_TAXES,
     ALL_TAXES_SHIFT
 } = require('./helpers/constants');
-const BigNumber = web3.BigNumber;
 
 /**
  * WibxToken BCH batch transfer.

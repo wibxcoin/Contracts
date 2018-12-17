@@ -4,7 +4,7 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-const BigNumber = web3.BigNumber;
+const { BigNumber } = require('./util');
 const should = require('chai')
     .use(require('chai-bignumber')(BigNumber))
     .should();
