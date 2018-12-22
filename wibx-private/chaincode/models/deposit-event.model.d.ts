@@ -9,7 +9,7 @@ declare interface DepositCTO extends FinancialEventCTO
     fromEthAddress: string;
 
     /**
-     * Destiny account
+     * Destination account
      */
     to: WalletCTO;
 }

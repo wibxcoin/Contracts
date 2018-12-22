@@ -57,7 +57,7 @@ declare type Event<T> = T;
 declare interface Participant<T>
 {
     /**
-     * Update some info inside the participant
+     * Update participant information 
      *
      * @param item The participant
      */

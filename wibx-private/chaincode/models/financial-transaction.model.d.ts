@@ -19,7 +19,7 @@ declare interface FinancialTransactionCTO
     amount: number;
 
     /**
-     * Text describing this transaction
+     * Text describing the transaction
      */
     description: string;
 }

@@ -10,7 +10,7 @@ declare interface TransferCTO extends FinancialEventCTO
     from: WalletCTO;
 
     /**
-     * Destiny account
+     * Destination account
      */
     to: WalletCTO;
 }

@@ -1,18 +1,17 @@
 /**
  * Represents a deposit transaction.
  *
- * It occours when some coins are transfered from the public net and are injected
- * into the game.
+ * It occurs when some coins are transferred from the public to the private net.
  */
 declare interface DepositTransactionCTO extends FinancialTransactionCTO
 {
     /**
-     * The ETH address that comes those coins
+     * The origin ETH address of the coins
      */
     fromEthAddress: string;
 
     /**
-     * Destiny account
+     * Destination account
      */
     to: WalletCTO;
 }
