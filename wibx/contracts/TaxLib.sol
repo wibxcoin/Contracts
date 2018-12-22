@@ -40,7 +40,7 @@ library TaxLib
     }
 
     /**
-     * @dev Apply some percentage to some value.
+     * @dev Apply percentage to the value.
      *
      * @param taxAmount The amount of tax
      * @param value The total amount

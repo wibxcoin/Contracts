@@ -1,7 +1,7 @@
 /**
  * Represents a withdraw operation.
  *
- * It occours when some coins are transfered to the external net.
+ * It occurs when some coins are transferred to the external net.
  */
 declare interface WithdrawTransactionCTO extends FinancialTransactionCTO
 {
@@ -11,7 +11,7 @@ declare interface WithdrawTransactionCTO extends FinancialTransactionCTO
     from: WalletCTO;
 
     /**
-     * The ETH address that will be transfered those coins
+     * The origin ETH address of the coins.
      */
     toEthAddress: string;
 }

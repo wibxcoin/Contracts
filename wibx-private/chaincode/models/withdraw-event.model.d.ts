@@ -1,5 +1,5 @@
 /**
- * Financial event when some withdraw occurs.
+ * Financial event when some withdrawal occurs.
  */
 declare interface WithdrawCTO extends FinancialEventCTO
 {
@@ -9,7 +9,7 @@ declare interface WithdrawCTO extends FinancialEventCTO
     from: WalletCTO;
 
     /**
-     * The ETH address that will be transfered those coins
+     * The ETH address which will be transferred the coins.
      */
     toEthAddress: string;
 }

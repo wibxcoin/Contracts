@@ -14,7 +14,7 @@
 'use strict';
 
 /**
- * Uma transacao futura agendada para uma tag
+ * A future transaction scheduled for a tag.
  *
  * @param {org.wiboo.wibxp.gateway.FutureTransaction} tx The future transaction.
  * @transaction
@@ -29,7 +29,7 @@ async function futureTransaction(tx)
 }
 
 /**
- * Uma transacao que concretiza uma transacao futura.
+ * Function to concrete a future transaction.
  *
  * @param {org.wiboo.wibxp.gateway.ConcreteTransaction} tx The concrete transaction.
  * @transaction

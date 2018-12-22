@@ -32,7 +32,7 @@ const entities: Record<string, string> = {
 };
 
 /**
- * Transfer transaction processor function.
+ * Function to process the transfer transaction.
  *
  * @param {org.wiboo.wibxp.financial.TransferTransaction} tx The financial transaction
  * @transaction
@@ -42,8 +42,8 @@ async function transferTransaction(tx: TransferTransactionCTO): Promise<void>
     // Check if the amount is valid
     isAmountValid(tx.amount);
 
-    // Check if the origin account have founds to transfer
-    assert(tx.from.balance > tx.amount, 'The origin doesnt have founds to pay.')
+    // Check if the origin account has funds to transfer
+    assert(tx.from.balance > tx.amount, 'The origin account doesnt have funds to pay.')
 
     tx.from.balance -= tx.amount;
     tx.to.balance += tx.amount;
@@ -72,8 +72,7 @@ async function transferTransaction(tx: TransferTransactionCTO): Promise<void>
 /**
  * Represents a deposit transaction.
  *
- * It occours when some coins are transfered from the public net and are injected
- * into the game.
+ * It occurs when some coins are transferred from the public to the private net.
  *
  * @param {org.wiboo.wibxp.financial.DepositTransaction} tx The deposit transaction
  * @transaction
@@ -105,9 +104,9 @@ async function depositTransaction(tx: DepositTransactionCTO): Promise<void>
 }
 
 /**
- * Represents a withdraw operation.
+ * Represents a withdrawal operation.
  *
- * It occours when some coins are transfered to the external net.
+ * It occurs when some coins are transferred to the external net.
  *
  * @param {org.wiboo.wibxp.financial.WithdrawTransaction} tx The withdraw transaction
  * @transaction

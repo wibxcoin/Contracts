@@ -6,7 +6,7 @@ namespace org.wiboo.wibxp.common
 participant Wallet identified by idWallet
 {
     /**
-     * Some identification for this wallet
+     * Wallet identification
      */
     o String idWallet
 
@@ -16,7 +16,7 @@ participant Wallet identified by idWallet
     o String ethAddress
 
     /**
-     * The coin balance of this wallet
+     * Coin balance of the wallet
      */
     o Double balance
 }

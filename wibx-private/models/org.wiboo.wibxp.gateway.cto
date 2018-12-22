@@ -6,7 +6,7 @@ namespace org.wiboo.wibxp.gateway
 import org.wiboo.wibxp.common.Wallet
 
 /**
- * Descreve uma tag NFC (lojista)
+ * Describes an NFC tag (storekeeper)
  */
 asset NfcTag identified by idNfcTag
 {
@@ -16,7 +16,7 @@ asset NfcTag identified by idNfcTag
 }
 
 /**
- * Futura transacao para determinada tag
+ * Future transaction for the tag.
  */
 transaction FutureTransaction
 {
@@ -25,7 +25,7 @@ transaction FutureTransaction
 }
 
 /**
- * Efetiva o pagamento de uma transacao futura
+ * Effective the payment for a future transaction.
  */
 transaction ConcreteTransaction
 {
