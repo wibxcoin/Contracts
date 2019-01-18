@@ -3,21 +3,22 @@
  *
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
+const { BN } = require('openzeppelin-test-helpers');
 const { ALL_TAXES } = require('./constants');
 
 /**
  * Apply the WiBX token takes to given value.
  *
- * @param {BigNumber} value Transaction value
- * @param {BigNumber} taxDecimals Tax number shift
- * @param {BigNumber} taxAmount The tax amount
+ * @param {BN} value Transaction value
+ * @param {BN} taxDecimals Tax number shift
+ * @param {BN} taxAmount The tax amount
  */
 function applyTax (value, taxDecimals = 0, taxAmount = ALL_TAXES)
 {
-    const normalizedTaxAmount = taxAmount.mul(10 ** taxDecimals);
-    const temp = value.mul(normalizedTaxAmount);
+    const normalizedTaxAmount = new BN(100).mul(new BN(10 ** taxDecimals));
+    const temp = value.mul(taxAmount);
 
-    return temp.div(100);
+    return temp.div(normalizedTaxAmount);
 }
 
 module.exports = {

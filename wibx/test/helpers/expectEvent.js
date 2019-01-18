@@ -4,10 +4,7 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-const { BigNumber } = require('./util');
-const should = require('chai')
-    .use(require('chai-bignumber')(BigNumber))
-    .should();
+const { BN, expect, should } = require('openzeppelin-test-helpers');
 
 /**
  * Checks if some event is in the log.
@@ -39,14 +36,20 @@ function inLogs (logs, eventName, eventArgs = {})
  */
 function contains (args, key, value)
 {
-    if (isBigNumber(args[key]))
+    (key in args).should.equal(true, `Unknown event argument '${key}'`);
+
+    if (value === null)
     {
-        args[key].should.be.bignumber.equal(value);
-
-        return;
+        expect(args[key]).to.equal(null);
     }
-
-    args[key].should.be.equal(value);
+    else if (isBN(args[key]))
+    {
+        expect(args[key]).to.be.bignumber.equal(value);
+    }
+    else
+    {
+        expect(args[key]).to.be.equal(value);
+    }
 }
 
 /**
@@ -54,11 +57,9 @@ function contains (args, key, value)
  *
  * @param {any} object The object to test
  */
-function isBigNumber (object)
+function isBN (object)
 {
-    return object.isBigNumber ||
-        object instanceof BigNumber ||
-        (object.constructor && object.constructor.name === 'BigNumber');
+    return BN.isBN(object) || object instanceof BN;
 }
 
 module.exports = {

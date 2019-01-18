@@ -19,9 +19,12 @@
         "build:coverage": "SOLIDITY_COVERAGE=true scripts/test.sh"
     },
     "dependencies": {
-        "openzeppelin-solidity": "2.0.0"
+        "openzeppelin-solidity": "2.1.1"
     },
     "devDependencies": {
+        "openzeppelin-test-helpers": "0.1.2",
+        "bn.js": "4.11.8",
+        "webpack": "4.28.4",
         "eslint": "4.19.1",
         "eslint-config-standard": "10.2.1",
         "eslint-plugin-import": "2.13.0",
@@ -29,10 +32,8 @@
         "eslint-plugin-node": "5.2.1",
         "eslint-plugin-promise": "3.8.0",
         "eslint-plugin-standard": "3.1.0",
-        "chai": "4.2.0",
-        "chai-bignumber": "3.0.0",
         "solium": "1.1.8",
-        "truffle": "4.1.13",
+        "truffle": "5.0.2",
         "web3": "1.0.0-beta.37",
         "coveralls": "3.0.1",
         "solidity-coverage": "0.5.4",

@@ -4,14 +4,12 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
+const { BN, shouldFail } = require('openzeppelin-test-helpers');
 const WibxToken = artifacts.require('WibxToken');
-const shouldFail = require('./helpers/shouldFail');
-const expectEvent = require('./helpers/expectEvent');
 const { applyTax } = require('./helpers/tax');
-const { BigNumber, should } = require('./helpers/util');
+const expectEvent = require('./helpers/expectEvent');
 const {
     INITIAL_SUPPLY,
-    TAX_RECIPIENT,
     ALL_TAXES,
     ALL_TAXES_SHIFT
 } = require('./helpers/constants');
@@ -21,46 +19,42 @@ const {
  *
  * Test BCH batch feature.
  */
-contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr]) =>
+contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr, taxRecipientAddr]) =>
 {
-    should();
     let tokenInstance;
 
     beforeEach(async () =>
     {
-        tokenInstance = await WibxToken.new(bchAddr);
+        tokenInstance = await WibxToken.new(bchAddr, taxRecipientAddr);
     });
 
     describe('Tax administration', () =>
     {
+        const normalizedTaxShift = new BN(100).mul(new BN(10).pow(ALL_TAXES_SHIFT));
+
         it('should adminsitrator change the tax amount', async () =>
         {
-            await changeTax(1, 1, owner);
+            await changeTax(1, 0, owner);
         });
 
         it('should adminsitrator change the tax amount to the max', async () =>
         {
-            await changeTax(3, 1, owner);
+            await changeTax(3, 0, owner);
         });
 
         it('should adminsitrator change a fractional tax amount', async () =>
         {
-            await changeTax(9, 0, owner);
+            await changeTax(9, 1, owner);
         });
 
         it('should other user not change the tax amount', async () =>
         {
-            await shouldFail.reverting(changeTax(1, 1, anotherAccount));
+            await shouldFail.reverting(changeTax(1, 0, anotherAccount));
         });
 
         it('should administrator not change the tax amount greater than 3%', async () =>
         {
-            await shouldFail.reverting(changeTax(4, 1));
-        });
-
-        it('should administrator not change the tax amount shift greater than 1 decimals', async () =>
-        {
-            await shouldFail.reverting(changeTax(1, 2));
+            await shouldFail.reverting(changeTax(400, 0));
         });
 
         it('should keep the tax information available for everyone', async () =>
@@ -68,17 +62,23 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr]) =>
             const from = { from: anotherAccount };
 
             (await tokenInstance.currentTaxAmount(from)).should.be.bignumber.equal(
-                ALL_TAXES.div(10 ** ALL_TAXES_SHIFT)
+                ALL_TAXES
             );
-            (await tokenInstance.currentTaxShift(from)).should.be.bignumber.equal(ALL_TAXES_SHIFT);
+
+            (await tokenInstance.currentTaxShift(from)).should.be.bignumber.equal(
+                normalizedTaxShift
+            );
         });
 
         it('should start the tax information with default values', async () =>
         {
             (await tokenInstance.currentTaxAmount()).should.be.bignumber.equal(
-                ALL_TAXES.div(10 ** ALL_TAXES_SHIFT)
+                ALL_TAXES
             );
-            (await tokenInstance.currentTaxShift()).should.be.bignumber.equal(ALL_TAXES_SHIFT);
+
+            (await tokenInstance.currentTaxShift()).should.be.bignumber.equal(
+                normalizedTaxShift
+            );
         });
     });
 
@@ -89,8 +89,8 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr]) =>
 
         it('emits a transfer event with the default tax value', async () =>
         {
-            const taxes = applyTax(amount);
-            const valueWithoutTaxes = amount.minus(taxes);
+            const taxes = applyTax(amount, ALL_TAXES_SHIFT);
+            const valueWithoutTaxes = amount.sub(taxes);
             const { logs } = await tokenInstance.transfer(to, amount, { from: owner });
 
             /**
@@ -98,7 +98,7 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr]) =>
              */
             expectEvent.inLogs(logs, 'Transfer', {
                 from: owner,
-                to: TAX_RECIPIENT,
+                to: taxRecipientAddr,
                 value: taxes
             });
 
@@ -115,11 +115,11 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr]) =>
         it('emits a transfer event with a changed tax value', async () =>
         {
             const taxContainer = {
-                amount: new BigNumber(3),
-                shift: new BigNumber(1)
+                amount: new BN(3),
+                shift: new BN(0)
             };
             const taxes = applyTax(amount, taxContainer.shift, taxContainer.amount);
-            const valueWithoutTaxes = amount.minus(taxes);
+            const valueWithoutTaxes = amount.sub(taxes);
 
             await changeTax(taxContainer.amount, taxContainer.shift);
             const { logs } = await tokenInstance.transfer(to, amount, { from: owner });
@@ -129,7 +129,7 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr]) =>
              */
             expectEvent.inLogs(logs, 'Transfer', {
                 from: owner,
-                to: TAX_RECIPIENT,
+                to: taxRecipientAddr,
                 value: taxes
             });
 
@@ -148,14 +148,20 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr]) =>
      * Change the global tax
      *
      * @param {number} amount The new amount
-     * @param {number} shift Decimal places to shift
+     * @param {number} shift The decimal places shift
      * @param {string} from From account
      */
     async function changeTax (amount, shift, from)
     {
-        await tokenInstance.changeTax(amount, shift, from ? { from } : undefined);
+        const changeTaxArgs = [ amount, shift ];
 
-        (await tokenInstance.currentTaxAmount()).should.be.bignumber.equal(amount);
-        (await tokenInstance.currentTaxShift()).should.be.bignumber.equal(shift);
+        if (from)
+        {
+            changeTaxArgs.push({ from });
+        }
+
+        await tokenInstance.changeTax(...changeTaxArgs);
+
+        (await tokenInstance.currentTaxAmount()).should.be.bignumber.equal(new BN(amount));
     }
 });

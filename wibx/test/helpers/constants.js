@@ -4,12 +4,14 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-const { BigNumber } = require('./util');
+const { BN } = require('openzeppelin-test-helpers');
 
 /**
  * 12 billion tokens raised by 18 decimal places.
+ *
+ * 12000000000 * (10 ** 18)
  */
-const TOTAL_TOKENS = 12000000000 * (10 ** 18);
+const TOTAL_TOKENS = '12000000000000000000000000000';
 
 module.exports = class
 {
@@ -22,19 +24,11 @@ module.exports = class
     }
 
     /**
-     * The tax recipient.
-     */
-    static get TAX_RECIPIENT ()
-    {
-        return '0x08b9c1ae682ad62119635b5c6044204971bf1575';
-    }
-
-    /**
      * Total tokens in Big Number.
      */
     static get INITIAL_SUPPLY ()
     {
-        return new BigNumber(TOTAL_TOKENS.toString());
+        return new BN(TOTAL_TOKENS.toString());
     }
 
     /**
@@ -42,7 +36,9 @@ module.exports = class
      */
     static get UNAVAILABLE_AMOUNT ()
     {
-        return this.INITIAL_SUPPLY.add(1);
+        const addionalSupply = new BN(1);
+
+        return this.INITIAL_SUPPLY.add(addionalSupply);
     }
 
     /**
@@ -52,9 +48,7 @@ module.exports = class
      */
     static get ALL_TAXES ()
     {
-        return new BigNumber(9).mul(
-            new BigNumber(10).pow(this.ALL_TAXES_SHIFT)
-        );
+        return new BN(9);
     }
 
     /**
@@ -64,6 +58,6 @@ module.exports = class
      */
     static get ALL_TAXES_SHIFT ()
     {
-        return new BigNumber(0);
+        return new BN(1);
     }
 };

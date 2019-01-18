@@ -4,14 +4,13 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
+const { BN, shouldFail } = require('openzeppelin-test-helpers');
 const WibxToken = artifacts.require('WibxToken');
-const shouldFail = require('./helpers/shouldFail');
-const expectEvent = require('./helpers/expectEvent');
 const { applyTax } = require('./helpers/tax');
-const { should } = require('./helpers/util');
+const expectEvent = require('./helpers/expectEvent');
 const {
     INITIAL_SUPPLY,
-    TAX_RECIPIENT
+    ALL_TAXES_SHIFT
 } = require('./helpers/constants');
 
 /**
@@ -19,14 +18,13 @@ const {
  *
  * Test BCH management features.
  */
-contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAddr]) =>
+contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAddr, taxRecipientAddr]) =>
 {
-    should();
     let tokenInstance;
 
     beforeEach(async () =>
     {
-        tokenInstance = await WibxToken.new(bchAddr);
+        tokenInstance = await WibxToken.new(bchAddr, taxRecipientAddr);
     });
 
     it('should check the status of an unallowed address', async () =>
@@ -43,7 +41,7 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
     {
         await authorize();
 
-        const { logs } = await tokenInstance.bchRevoke();
+        const { logs } = await tokenInstance.bchRevoke({ from: owner });
 
         (await tokenInstance.isBchHandled(owner)).should.be.false;
 
@@ -57,8 +55,8 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
     {
         const to = anotherAccount;
         const amount = INITIAL_SUPPLY;
-        const taxes = applyTax(amount);
-        const valueWithoutTaxes = amount.minus(taxes);
+        const taxes = applyTax(amount, ALL_TAXES_SHIFT);
+        const valueWithoutTaxes = amount.sub(taxes);
 
         beforeEach(async () =>
         {
@@ -69,7 +67,7 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
         {
             await tokenInstance.transferFrom(owner, to, amount, { from: bchAddr });
 
-            (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(0);
+            (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(new BN(0));
 
             (await tokenInstance.balanceOf(to)).should.be.bignumber.equal(valueWithoutTaxes);
         });
@@ -83,7 +81,7 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
              */
             expectEvent.inLogs(logs, 'Transfer', {
                 from: owner,
-                to: TAX_RECIPIENT,
+                to: taxRecipientAddr,
                 value: taxes
             });
 
@@ -110,7 +108,7 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
      */
     async function authorize ()
     {
-        const { logs } = await tokenInstance.bchAuthorize();
+        const { logs } = await tokenInstance.bchAuthorize({ from: owner });
 
         (await tokenInstance.isBchHandled(owner)).should.be.true;
 

@@ -4,10 +4,11 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-pragma solidity ^0.4.24;
+pragma solidity 0.5.0;
 
-import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20Pausable.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./Taxable.sol";
 import "./BCHHandled.sol";
 import "./TaxLib.sol";
@@ -17,14 +18,18 @@ import "./TaxLib.sol";
  *
  * @dev Implementation of the main WiBX token smart contract.
  */
-contract WibxToken is ERC20, ERC20Detailed, Taxable, BCHHandled
+contract WibxToken is ERC20Pausable, ERC20Detailed, Taxable, BCHHandled
 {
+    using SafeMath for uint256;
+
     /**
      * 12 billion tokens raised by 18 decimal places.
      */
     uint256 public constant INITIAL_SUPPLY = 12000000000 * (10 ** uint256(18));
 
-    constructor(address bchAddress) public ERC20Detailed("WiBX Utility Token", "WBX", 18) BCHHandled(bchAddress)
+    constructor(address bchAddress, address taxRecipientAddr) public ERC20Detailed("WiBX Utility Token", "WBX", 18)
+                                                                     BCHHandled(bchAddress)
+                                                                     Taxable(taxRecipientAddr)
     {
         _mint(msg.sender, INITIAL_SUPPLY);
     }
@@ -59,7 +64,7 @@ contract WibxToken is ERC20, ERC20Detailed, Taxable, BCHHandled
         uint256 taxValue = _applyTax(value);
 
         // Transfer the tax to the recipient
-        super.transferFrom(from, _TAX_RECIPIENT_ADDR, taxValue);
+        super.transferFrom(from, _taxRecipientAddr, taxValue);
 
         // Transfer user's tokens
         super.transferFrom(from, to, TaxLib.netValue(taxValue, value));
@@ -75,11 +80,12 @@ contract WibxToken is ERC20, ERC20Detailed, Taxable, BCHHandled
      * @param from Spender address
      * @return If the operation was successful
      */
-    function sendBatch(address[] recipients, uint256[] values, address from) public returns (bool)
+    function sendBatch(address[] memory recipients, uint256[] memory values, address from) public returns (bool)
     {
         require(recipients.length == values.length, "Wrong data");
+        uint transactionCount = recipients.length;
 
-        for (uint256 i = 0; i < values.length; i = i.add(1))
+        for (uint256 i = 0; i < transactionCount; i = i.add(1))
         {
             if (msg.sender == from)
             {
@@ -107,7 +113,7 @@ contract WibxToken is ERC20, ERC20Detailed, Taxable, BCHHandled
         uint256 taxValue = _applyTax(value);
 
         // Transfer the tax to the recipient
-        _transfer(from, _TAX_RECIPIENT_ADDR, taxValue);
+        _transfer(from, _taxRecipientAddr, taxValue);
 
         // Transfer user's tokens
         _transfer(from, to, TaxLib.netValue(taxValue, value));

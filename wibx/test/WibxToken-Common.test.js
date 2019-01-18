@@ -4,16 +4,15 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
+const { BN, shouldFail } = require('openzeppelin-test-helpers');
 const WibxToken = artifacts.require('WibxToken');
-const shouldFail = require('./helpers/shouldFail');
-const expectEvent = require('./helpers/expectEvent');
 const { applyTax } = require('./helpers/tax');
-const { should } = require('./helpers/util');
+const expectEvent = require('./helpers/expectEvent');
 const {
     ZERO_ADDRESS,
     INITIAL_SUPPLY,
     UNAVAILABLE_AMOUNT,
-    TAX_RECIPIENT
+    ALL_TAXES_SHIFT
 } = require('./helpers/constants');
 
 /**
@@ -22,14 +21,13 @@ const {
  * Originally based on code by OpenZeppelin:
  * https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/test/token/ERC20/ERC20.test.js
  */
-contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherAccount, bchAddr]) =>
+contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherAccount, bchAddr, taxRecipientAddr]) =>
 {
-    should();
     let tokenInstance;
 
     beforeEach(async () =>
     {
-        tokenInstance = await WibxToken.new(bchAddr);
+        tokenInstance = await WibxToken.new(bchAddr, taxRecipientAddr);
     });
 
     describe('total supply', () =>
@@ -46,7 +44,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
         {
             it('returns zero', async () =>
             {
-                (await tokenInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(0);
+                (await tokenInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(new BN(0));
             });
         });
 
@@ -78,14 +76,14 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
             describe('when the sender has enough balance', () =>
             {
                 const amount = INITIAL_SUPPLY;
-                const taxes = applyTax(amount);
-                const valueWithoutTaxes = amount.minus(taxes);
+                const taxes = applyTax(amount, ALL_TAXES_SHIFT);
+                const valueWithoutTaxes = amount.sub(taxes);
 
                 it('transfers the requested amount', async () =>
                 {
                     await tokenInstance.transfer(to, amount, { from: owner });
 
-                    (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(0);
+                    (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(new BN(0));
 
                     (await tokenInstance.balanceOf(to)).should.be.bignumber.equal(valueWithoutTaxes);
                 });
@@ -99,7 +97,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                      */
                     expectEvent.inLogs(logs, 'Transfer', {
                         from: owner,
-                        to: TAX_RECIPIENT,
+                        to: taxRecipientAddr,
                         value: taxes
                     });
 
@@ -245,14 +243,14 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                 describe('when the owner has enough balance', () =>
                 {
                     const amount = INITIAL_SUPPLY;
-                    const taxes = applyTax(amount);
-                    const valueWithoutTaxes = amount.minus(taxes);
+                    const taxes = applyTax(amount, ALL_TAXES_SHIFT);
+                    const valueWithoutTaxes = amount.sub(taxes);
 
                     it('transfers the requested amount', async () =>
                     {
                         await tokenInstance.transferFrom(owner, to, amount, { from: spender });
 
-                        (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(0);
+                        (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(new BN(0));
 
                         (await tokenInstance.balanceOf(to)).should.be.bignumber.equal(valueWithoutTaxes);
                     });
@@ -261,7 +259,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                     {
                         await tokenInstance.transferFrom(owner, to, amount, { from: spender });
 
-                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(0);
+                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(new BN(0));
                     });
 
                     it('emits a transfer event', async () =>
@@ -273,7 +271,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                          */
                         expectEvent.inLogs(logs, 'Transfer', {
                             from: owner,
-                            to: TAX_RECIPIENT,
+                            to: taxRecipientAddr,
                             value: taxes
                         });
 
@@ -303,7 +301,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
             {
                 beforeEach(async () =>
                 {
-                    await tokenInstance.approve(spender, INITIAL_SUPPLY.minus(1), { from: owner });
+                    await tokenInstance.approve(spender, INITIAL_SUPPLY.sub(new BN(1)), { from: owner });
                 });
 
                 describe('when the owner has enough balance', () =>
@@ -379,28 +377,28 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                         expectEvent.inLogs(logs, 'Approval', {
                             owner: owner,
                             spender: spender,
-                            value: 0
+                            value: new BN(0)
                         });
                     });
 
                     it('decreases the spender allowance subtracting the requested amount', async () =>
                     {
-                        await tokenInstance.decreaseAllowance(spender, approvedAmount.minus(1), { from: owner });
+                        await tokenInstance.decreaseAllowance(spender, approvedAmount.sub(new BN(1)), { from: owner });
 
-                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(1);
+                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(new BN(1));
                     });
 
                     it('sets the allowance to zero when all allowance is removed', async () =>
                     {
                         await tokenInstance.decreaseAllowance(spender, approvedAmount, { from: owner });
 
-                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(0);
+                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(new BN(0));
                     });
 
                     it('reverts when more than the full allowance is removed', async () =>
                     {
                         await shouldFail.reverting(tokenInstance.decreaseAllowance(
-                            spender, approvedAmount.plus(1), { from: owner })
+                            spender, approvedAmount.add(new BN(1)), { from: owner })
                         );
                     });
                 });
@@ -471,7 +469,9 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                     {
                         await tokenInstance.increaseAllowance(spender, amount, { from: owner });
 
-                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(amount.add(1));
+                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(
+                            amount.add(new BN(1))
+                        );
                     });
                 });
             });
@@ -512,7 +512,9 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                     {
                         await tokenInstance.increaseAllowance(spender, amount, { from: owner });
 
-                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(amount.add(1));
+                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(
+                            amount.add(new BN(1))
+                        );
                     });
                 });
             });

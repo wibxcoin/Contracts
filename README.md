@@ -59,7 +59,7 @@ To get coverage statistics, just run the coverage script:
 $ yarn build:coverage
 ```
 
-Solidity version: `v0.4.24+commit.e67f0147`.
+Solidity version: `v0.5.0+commit.1d4f565a`.
 
 ## Hyperledger chaincode
 
