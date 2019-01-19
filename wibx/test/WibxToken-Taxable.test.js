@@ -57,6 +57,11 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr, taxR
             await shouldFail.reverting(changeTax(400, 0));
         });
 
+        it('should administrator not change the tax shift amount greater than 2 decimal places', async () =>
+        {
+            await shouldFail.reverting(changeTax(1, 3));
+        });
+
         it('should keep the tax information available for everyone', async () =>
         {
             const from = { from: anotherAccount };
