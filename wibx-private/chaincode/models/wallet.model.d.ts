@@ -1,6 +1,5 @@
 declare interface WalletCTO
 {
-
     idWallet: string;
 
     /**

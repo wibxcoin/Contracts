@@ -19,15 +19,6 @@ rule EverybodyCanReadEverythingFinancial
     action: ALLOW
 }
 
-rule EverybodyCanReadEverythingGateway
-{
-    description: "Allow all participants read access to all resources"
-    participant: "org.wiboo.wibxp.common.Wallet"
-    operation: READ
-    resource: "org.wiboo.wibxp.gateway.*"
-    action: ALLOW
-}
-
 rule SystemACL
 {
     description: "Block ordinary peers to change internal system configuration"
