@@ -16,7 +16,7 @@ declare interface FinancialTransactionCTO
     /**
      * Coin amount
      */
-    amount: number;
+    amount: string;
 
     /**
      * Text describing the transaction

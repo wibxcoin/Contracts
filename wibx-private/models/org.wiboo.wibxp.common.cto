@@ -18,5 +18,5 @@ participant Wallet identified by idWallet
     /**
      * Coin balance of the wallet
      */
-    o Double balance
+    o String balance
 }

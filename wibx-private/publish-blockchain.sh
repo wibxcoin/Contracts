@@ -13,21 +13,21 @@ fi
 
 # Check if fabric is running...
 echo "Checking Fabric instance..."
-docker ps | grep 'fabric' &> /dev/null
+sudo docker ps | grep 'fabric' &> /dev/null
 if [ $? != 0 ]; then
     echo "Fabric is not running!"
     exit
 fi
 
 echo "Cleaning..."
-rm -rfv build lib/*.js
+rm -rfv build lib
 mkdir -p build
 cd build
 
 echo "Deploying..."
-yarn build && composer archive create -t dir -n ../ && \
-composer network install --card PeerAdmin@hlfv1 --archiveFile wibx-private@$VERSION.bna && \
-composer network start --networkName wibx-private --networkVersion $VERSION \
---networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card && \
+yarn build && \
+composer archive create -t dir -n ../ && \
+composer network install --archiveFile wibx-private@$VERSION.bna --card PeerAdmin@hlfv1 && \
+composer network start --networkName wibx-private --networkVersion $VERSION --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card && \
 composer card import --file networkadmin.card && \
 composer network ping --card admin@wibx-private

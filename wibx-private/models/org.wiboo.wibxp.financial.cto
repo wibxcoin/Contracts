@@ -10,7 +10,7 @@ abstract event FinancialEvent
     /**
      * Coin amount
      */
-    o Double amount
+    o String amount
 }
 
 /**
@@ -80,7 +80,7 @@ abstract transaction FinancialTransaction
     /**
      * Coin amount
      */
-    o Double amount
+    o String amount
 
     /**
      * Transaction description

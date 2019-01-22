@@ -10,7 +10,5 @@ declare interface WalletCTO
     /**
      * The coin balance of this wallet
      */
-    balance: number;
-
-    signatures: Array<string>;
+    balance: string;
 }

@@ -6,5 +6,5 @@ declare interface FinancialEventCTO
     /**
      * Coin amount
      */
-    amount: number;
+    amount: string;
 }

@@ -43,10 +43,10 @@ async function transferTransaction(tx: TransferTransactionCTO): Promise<void>
     isAmountValid(tx.amount);
 
     // Check if the origin account has funds to transfer
-    assert(tx.from.balance > tx.amount, 'The origin account doesnt have funds to pay.')
+    assert(SafeMath.gte(tx.from.balance, tx.amount), 'The origin account doesnt have funds to pay.');
 
-    tx.from.balance -= tx.amount;
-    tx.to.balance += tx.amount;
+    tx.from.balance = SafeMath.sub(tx.from.balance, tx.amount);
+    tx.to.balance = SafeMath.add(tx.to.balance, tx.amount);
 
     // Update participants (Wallets)
     const walletParticipant: Participant<WalletCTO> = await getParticipantRegistry<WalletCTO>(
@@ -81,7 +81,7 @@ async function depositTransaction(tx: DepositTransactionCTO): Promise<void>
 {
     isAmountValid(tx.amount);
 
-    tx.to.balance += tx.amount;
+    tx.to.balance = SafeMath.add(tx.to.balance, tx.amount);
 
     // Update participants (Wallets)
     const walletParticipant: Participant<WalletCTO> = await getParticipantRegistry<WalletCTO>(
@@ -115,7 +115,7 @@ async function withdrawTransaction(tx: WithdrawTransactionCTO): Promise<void>
 {
     isAmountValid(tx.amount);
 
-    tx.from.balance -= tx.amount;
+    tx.from.balance = SafeMath.sub(tx.from.balance, tx.amount);
 
     // Update participants (Wallets)
     const walletParticipant: Participant<WalletCTO> = await getParticipantRegistry<WalletCTO>(entities.wallet);
