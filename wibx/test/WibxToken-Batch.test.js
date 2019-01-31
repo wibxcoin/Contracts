@@ -47,6 +47,20 @@ contract('WibxToken: BCH batch transfer', ([owner, recipient, anotherAccount, bc
         ));
     });
 
+    it('should fail with more transactions than permitted', async () =>
+    {
+        const transactionNumber = 150;
+        const recipients = Array(transactionNumber).fill(recipient);
+        const amounts = Array(transactionNumber).fill(new BN(1));
+
+        await shouldFail.reverting(tokenInstance.sendBatch(
+            recipients,
+            amounts,
+            owner,
+            { from: anotherAccount }
+        ));
+    });
+
     it('should transfer correctly some value in batch from the real account owner', async () =>
     {
         await transfer(owner);

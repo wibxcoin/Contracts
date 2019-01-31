@@ -20,12 +20,10 @@ import "./TaxLib.sol";
  */
 contract WibxToken is ERC20Pausable, ERC20Detailed, Taxable, BCHHandled
 {
-    using SafeMath for uint256;
-
     /**
      * 12 billion tokens raised by 18 decimal places.
      */
-    uint256 public constant INITIAL_SUPPLY = 12000000000 * (10 ** uint256(18));
+    uint256 public constant INITIAL_SUPPLY = 12000000000 * (10 ** 18);
 
     constructor(address bchAddress, address taxRecipientAddr) public ERC20Detailed("WiBX Utility Token", "WBX", 18)
                                                                      BCHHandled(bchAddress)
@@ -73,7 +71,7 @@ contract WibxToken is ERC20Pausable, ERC20Detailed, Taxable, BCHHandled
     }
 
     /**
-     * @dev Batch token transfer
+     * @dev Batch token transfer (maxium 100 transfers)
      *
      * @param recipients The recipients for transfer to
      * @param values The values
@@ -82,19 +80,57 @@ contract WibxToken is ERC20Pausable, ERC20Detailed, Taxable, BCHHandled
      */
     function sendBatch(address[] memory recipients, uint256[] memory values, address from) public returns (bool)
     {
-        require(recipients.length == values.length, "Wrong data");
+        /*
+         * The maximum batch send should be 100 transactions.
+         * Each transaction we recommend 65000 of GAS limit and the maximum block size is 6700000.
+         * 6700000 / 65000 = ~103.0769 ∴ 100 transacitons (safe rounded).
+         */
+        uint maxTransactionCount = 100;
         uint transactionCount = recipients.length;
 
-        for (uint256 i = 0; i < transactionCount; i = i.add(1))
+        require(transactionCount <= maxTransactionCount, "Max transaction count violated");
+        require(transactionCount == values.length, "Wrong data");
+
+        if (msg.sender == from)
         {
-            if (msg.sender == from)
-            {
-                _fullTransfer(from, recipients[i], values[i]);
-            }
-            else
-            {
-                transferFrom(from, recipients[i], values[i]);
-            }
+            return _sendBatchSelf(recipients, values, transactionCount);
+        }
+
+        return _sendBatchFrom(recipients, values, from, transactionCount);
+    }
+
+    /**
+     * @dev Batch token transfer from MSG sender
+     *
+     * @param recipients The recipients for transfer to
+     * @param values The values
+     * @param transactionCount Total transaction count
+     * @return If the operation was successful
+     */
+    function _sendBatchSelf(address[] memory recipients, uint256[] memory values, uint transactionCount) private returns (bool)
+    {
+        for (uint i = 0; i < transactionCount; i++)
+        {
+            _fullTransfer(msg.sender, recipients[i], values[i]);
+        }
+
+        return true;
+    }
+
+    /**
+     * @dev Batch token transfer from other sender
+     *
+     * @param recipients The recipients for transfer to
+     * @param values The values
+     * @param from Spender address
+     * @param transactionCount Total transaction count
+     * @return If the operation was successful
+     */
+    function _sendBatchFrom(address[] memory recipients, uint256[] memory values, address from, uint transactionCount) private returns (bool)
+    {
+        for (uint i = 0; i < transactionCount; i++)
+        {
+            transferFrom(from, recipients[i], values[i]);
         }
 
         return true;
