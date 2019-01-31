@@ -59,6 +59,16 @@ contract WibxToken is ERC20Pausable, ERC20Detailed, Taxable, BCHHandled
             return _fullTransfer(from, to, value);
         }
 
+        /*
+         * Exempting the tax account to avoid an infinite loop in transferring values from this wallet.
+         */
+        if (from == _taxRecipientAddr)
+        {
+            super.transferFrom(from, to, value);
+
+            return true;
+        }
+
         uint256 taxValue = _applyTax(value);
 
         // Transfer the tax to the recipient
@@ -146,6 +156,16 @@ contract WibxToken is ERC20Pausable, ERC20Detailed, Taxable, BCHHandled
      */
     function _fullTransfer(address from, address to, uint256 value) private returns (bool)
     {
+        /*
+         * Exempting the tax account to avoid an infinite loop in transferring values from this wallet.
+         */
+        if (from == _taxRecipientAddr)
+        {
+            _transfer(from, to, value);
+
+            return true;
+        }
+
         uint256 taxValue = _applyTax(value);
 
         // Transfer the tax to the recipient

@@ -21,7 +21,7 @@ const {
  * Originally based on code by OpenZeppelin:
  * https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/test/token/ERC20/ERC20.test.js
  */
-contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherAccount, bchAddr, taxRecipientAddr]) =>
+contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherAccount, bchAddr, taxRecipientAddr, boardAccount]) =>
 {
     let tokenInstance;
 
@@ -86,6 +86,22 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                     (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(new BN(0));
 
                     (await tokenInstance.balanceOf(to)).should.be.bignumber.equal(valueWithoutTaxes);
+                });
+
+                it('should transfer the full value from the tax recipient address', async () =>
+                {
+                    // Transfer the value to some wallet
+                    await tokenInstance.transfer(to, amount, { from: owner });
+
+                    // Check the tax amount in the tax addr recipient
+                    (await tokenInstance.balanceOf(taxRecipientAddr)).should.be.bignumber.equal(taxes);
+
+                    // Transfer for some other wallet
+                    await tokenInstance.transfer(boardAccount, taxes, { from: taxRecipientAddr });
+
+                    // Final check
+                    (await tokenInstance.balanceOf(boardAccount)).should.be.bignumber.equal(taxes);
+                    (await tokenInstance.balanceOf(taxRecipientAddr)).should.be.bignumber.equal(new BN(0));
                 });
 
                 it('emits a transfer event', async () =>
@@ -260,6 +276,25 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                         await tokenInstance.transferFrom(owner, to, amount, { from: spender });
 
                         (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(new BN(0));
+                    });
+
+                    it('should transfer the full value from the tax recipient address', async () =>
+                    {
+                        // Approve spender to manipulate the TAX wallet
+                        await tokenInstance.approve(spender, taxes, { from: taxRecipientAddr });
+
+                        // Transfer the value to some wallet
+                        await tokenInstance.transferFrom(owner, to, amount, { from: spender });
+
+                        // Check the tax amount in the tax addr recipient
+                        (await tokenInstance.balanceOf(taxRecipientAddr)).should.be.bignumber.equal(taxes);
+
+                        // Transfer to some other wallet
+                        await tokenInstance.transferFrom(taxRecipientAddr, boardAccount, taxes, { from: spender });
+
+                        // Final check
+                        (await tokenInstance.balanceOf(boardAccount)).should.be.bignumber.equal(taxes);
+                        (await tokenInstance.balanceOf(taxRecipientAddr)).should.be.bignumber.equal(new BN(0));
                     });
 
                     it('emits a transfer event', async () =>
