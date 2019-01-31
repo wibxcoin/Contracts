@@ -70,7 +70,7 @@
         ],
         "max-len": [
             "error",
-            120,
+            145,
             2
         ],
         "brace-style": [

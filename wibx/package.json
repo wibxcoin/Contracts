@@ -12,6 +12,7 @@
         "test": "truffle test",
         "compile": "truffle compile",
         "migrate": "truffle migrate",
+        "console": "truffle console",
         "lint:js": "eslint .",
         "lint:sol": "solium -d .",
         "lint": "npm run lint:js && npm run lint:sol",
