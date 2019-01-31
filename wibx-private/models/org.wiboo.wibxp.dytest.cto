@@ -1,0 +1,9 @@
+namespace org.wiboo.wibxp.dytest
+
+/**
+ * Just test dynamic transactions calls.
+ */
+transaction TestTransaction
+{
+    o String name
+}

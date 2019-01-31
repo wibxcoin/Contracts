@@ -1,6 +1,3 @@
-/**
- * Sample access control list.
- */
 rule EverybodyCanReadEverythingCommon
 {
     description: "Allow all participants read access to all resources"
@@ -16,6 +13,15 @@ rule EverybodyCanReadEverythingFinancial
     participant: "org.wiboo.wibxp.common.Wallet"
     operation: READ
     resource: "org.wiboo.wibxp.financial.*"
+    action: ALLOW
+}
+
+rule EverybodyCanReadEverythingDytest
+{
+    description: "Allow all participants read access to all dynamic tests"
+    participant: "org.wiboo.wibxp.common.Wallet"
+    operation: READ
+    resource: "org.wiboo.wibxp.dytest.*"
     action: ALLOW
 }
 
