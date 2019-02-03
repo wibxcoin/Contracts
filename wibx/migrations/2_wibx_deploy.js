@@ -5,12 +5,12 @@ module.exports = (deployer) =>
     /**
      * The REAL BCH Addr
      */
-    const BCH_ADDR = '0xc5a9007407fba42285e15f1ca90779d130c93c29';
+    const BCH_ADDR = '0xDc34526883467d9698a0037d530197e3D4C7529C';
 
     /**
      * Tax recipient wallet
      */
-    const TAX_RECIPIENT_ADDR = '0x08B9C1aE682aD62119635b5C6044204971bf1575';
+    const TAX_RECIPIENT_ADDR = '0xE372d0001C0ed9768ee0679D0F5F78ED46e558d9';
 
     deployer.deploy(
         WibxToken,
