@@ -1,12 +1,12 @@
 {
     "name": "wibx-private",
-    "version": "0.0.22",
+    "version": "0.0.23",
     "description": "The WiBX private blockchain network",
     "scripts": {
         "pretest": "npm run lint",
         "lint": "eslint .",
         "test": "nyc mocha -t 0 test/*.js && cucumber-js",
-        "build": "tsc -p ./chaincode/tsconfig.json && node tree-shake.js",
+        "build": "tsc -p ./chaincode/tsconfig.json",
         "deploy": "./pubilsh-blockchain.sh"
     },
     "author": {

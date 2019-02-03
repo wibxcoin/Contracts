@@ -13,19 +13,49 @@
  */
 
 /**
+ * Hyperledger generic event
+ */
+declare type Event<T> = T;
+
+/**
+ * Hyperledger participant registry
+ */
+declare interface Participant<T>
+{
+    /**
+     * Update participant information
+     *
+     * @param item The participant
+     */
+    update(item: T): void;
+}
+
+/**
+ * Hyperledger objects factory
+ */
+declare interface Factory
+{
+    /**
+     * Create a new event instance
+     */
+    newEvent<T>(namespace: string, eventName: string): Event<T>;
+}
+
+/**
  * Assert some condition
  *
  * @param condition The error condition
  * @param errorMessage The error message case this condition fails
+ * @throws If the condition doesnt match
  */
-declare function assert(condition: boolean, errorMessage: string);
+declare function assert(condition: boolean, errorMessage: string): void;
 
 /**
  * Get the asset registry
  *
  * @param asset The asset name with namespace
  */
-declare function getAssetRegistry(asset: string);
+declare function getAssetRegistry<T>(asset: string): T;
 
 /**
  * Get the participant registry
@@ -45,32 +75,3 @@ declare function getFactory(): Factory;
  * @param event The event
  */
 declare function emit<T>(event: Event<T>): void;
-
-/**
- * Hyperledger generic event
- */
-declare type Event<T> = T;
-
-/**
- * Hyperledger participant registry
- */
-declare interface Participant<T>
-{
-    /**
-     * Update participant information 
-     *
-     * @param item The participant
-     */
-    update(item: T);
-}
-
-/**
- * Hyperledger objects factory
- */
-declare interface Factory
-{
-    /**
-     * Create a new event instance
-     */
-    newEvent<T>(namespace: string, eventName: string): Event<T>;
-}
