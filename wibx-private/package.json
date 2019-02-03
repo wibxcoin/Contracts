@@ -1,6 +1,6 @@
 {
     "name": "wibx-private",
-    "version": "0.0.23",
+    "version": "0.0.24",
     "description": "The WiBX private blockchain network",
     "scripts": {
         "pretest": "npm run lint",
@@ -19,6 +19,7 @@
     },
     "devDependencies": {
         "@types/node": "^10.9.2",
+        "types-hyperledger-composer-api": "0.0.1",
         "camelcase": "^5.0.0",
         "chai": "4.2.0",
         "chai-as-promised": "7.1.1",

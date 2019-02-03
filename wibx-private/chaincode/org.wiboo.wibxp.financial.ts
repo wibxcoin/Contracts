@@ -49,7 +49,7 @@ async function transferTransaction(tx: TransferTransactionCTO): Promise<void>
     tx.to.balance = SafeMath.add(tx.to.balance, tx.amount);
 
     // Update participants (Wallets)
-    const walletParticipant: Participant<WalletCTO> = await getParticipantRegistry<WalletCTO>(
+    const walletParticipant: HyperledgerParticipant<WalletCTO> = await getParticipantRegistry<WalletCTO>(
         entities.wallet
     );
 
@@ -57,7 +57,7 @@ async function transferTransaction(tx: TransferTransactionCTO): Promise<void>
     await walletParticipant.update(tx.to);
 
     // Emit events
-    const transferEvent: Event<TransferCTO> = getFactory().newEvent<TransferCTO>(
+    const transferEvent: HyperledgerEvent<TransferCTO> = getFactory().newEvent<TransferCTO>(
         namespaces.financial,
         entities.transfer
     );
@@ -84,14 +84,14 @@ async function depositTransaction(tx: DepositTransactionCTO): Promise<void>
     tx.to.balance = SafeMath.add(tx.to.balance, tx.amount);
 
     // Update participants (Wallets)
-    const walletParticipant: Participant<WalletCTO> = await getParticipantRegistry<WalletCTO>(
+    const walletParticipant: HyperledgerParticipant<WalletCTO> = await getParticipantRegistry<WalletCTO>(
         entities.wallet
     );
 
     await walletParticipant.update(tx.to);
 
     // Emit events
-    const depositEvent: Event<DepositCTO> = getFactory().newEvent<DepositCTO>(
+    const depositEvent: HyperledgerEvent<DepositCTO> = getFactory().newEvent<DepositCTO>(
         namespaces.financial,
         entities.deposit
     );
@@ -118,12 +118,12 @@ async function withdrawTransaction(tx: WithdrawTransactionCTO): Promise<void>
     tx.from.balance = SafeMath.sub(tx.from.balance, tx.amount);
 
     // Update participants (Wallets)
-    const walletParticipant: Participant<WalletCTO> = await getParticipantRegistry<WalletCTO>(entities.wallet);
+    const walletParticipant: HyperledgerParticipant<WalletCTO> = await getParticipantRegistry<WalletCTO>(entities.wallet);
 
     await walletParticipant.update(tx.from);
 
     // Emit events
-    const transferEvent: Event<WithdrawCTO> = getFactory().newEvent<WithdrawCTO> (
+    const transferEvent: HyperledgerEvent<WithdrawCTO> = getFactory().newEvent<WithdrawCTO> (
         namespaces.financial,
         entities.withdraw
     );

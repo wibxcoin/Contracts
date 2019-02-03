@@ -6383,6 +6383,11 @@ type-detect@^4.0.0, type-detect@^4.0.5:
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
 
+types-hyperledger-composer-api@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/types-hyperledger-composer-api/-/types-hyperledger-composer-api-0.0.1.tgz#5a7ce45cef1faca08dad17003b142bb4d844245b"
+  integrity sha512-PmQFWoDY9c0W7CUAwmyZe7JQYyVabxtwUOX0cLxCAzWbfs9dEMMArnVvYvwp7INHfr636cO/bd5sIXP8Yc2JQw==
+
 typescript@3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.4.tgz#c585cb952912263d915b462726ce244ba510ef3d"
