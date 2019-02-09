@@ -1,6 +1,7 @@
 const WibxToken = artifacts.require('./WibxToken.sol');
+const WibxTokenVesting = artifacts.require('./WibxTokenVesting.sol');
 
-module.exports = (deployer) =>
+module.exports = async (deployer) =>
 {
     /**
      * The REAL BCH Addr
@@ -12,9 +13,20 @@ module.exports = (deployer) =>
      */
     const TAX_RECIPIENT_ADDR = '0xE372d0001C0ed9768ee0679D0F5F78ED46e558d9';
 
-    deployer.deploy(
+    /**
+     * Deploy the Wibx Token Contract
+     */
+    await deployer.deploy(
         WibxToken,
         BCH_ADDR,
         TAX_RECIPIENT_ADDR
+    );
+
+    /**
+     * Deploy the Wibx Token Vesting Contract (with the WibxToken instance)
+     */
+    await deployer.deploy(
+        WibxTokenVesting,
+        WibxToken.address
     );
 };

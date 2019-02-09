@@ -38,6 +38,6 @@
         "web3": "1.0.0-beta.37",
         "coveralls": "3.0.1",
         "solidity-coverage": "0.5.4",
-        "ganache-cli": "6.2.3"
+        "ganache-cli": "6.3.0"
     }
 }
