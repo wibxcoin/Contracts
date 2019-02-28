@@ -22,7 +22,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
     /**
      * The time shift period. Should be equals to VestingLib._timeShiftPeriod.
      */
-    const timeLeap = time.duration.days('180');
+    const timeLeap = time.duration.days('60');
 
     let wibxInstance;
     let vestingInstance;

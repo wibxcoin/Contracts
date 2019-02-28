@@ -19,9 +19,9 @@ library VestingLib
     using SafeMath for uint256;
 
     /**
-     * Period to get tokens (3 - 3 months).
+     * Period to get tokens (bimester).
      */
-    uint256 private constant _timeShiftPeriod = 180 days;
+    uint256 private constant _timeShiftPeriod = 60 days;
 
     struct TeamMember
     {
