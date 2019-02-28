@@ -683,7 +683,7 @@ function SafeMath()
 SafeMath.add = function(a: BigNumber, b: BigNumber): string
 {
     const c: BigNumber = __BigJS(a).plus(__BigJS(b));
-    assert(c >= a, 'Invalid add');
+    assert(SafeMath.gte(c, a), 'Invalid add');
 
     return SafeMath.scientificToDec(c);
 }
@@ -697,7 +697,7 @@ SafeMath.add = function(a: BigNumber, b: BigNumber): string
  */
 SafeMath.sub = function(a: BigNumber, b: BigNumber): string
 {
-    assert(a >= b, 'Invalid subtraction');
+    assert(SafeMath.gte(a, b), 'Invalid subtraction');
     const c: BigNumber = __BigJS(a).minus(__BigJS(b));
 
     return SafeMath.scientificToDec(c);
