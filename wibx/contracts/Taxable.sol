@@ -37,6 +37,14 @@ contract Taxable is Ownable
     }
 
     /**
+     * Returns the tax recipient account
+     */
+    function taxRecipientAddr() public view returns (address)
+    {
+        return _taxRecipientAddr;
+    }
+
+    /**
      * @dev Get the current tax amount.
      */
     function currentTaxAmount() public view returns (uint256)

@@ -62,7 +62,7 @@ contract WibxToken is ERC20Pausable, ERC20Detailed, Taxable, BCHHandled
         /*
          * Exempting the tax account to avoid an infinite loop in transferring values from this wallet.
          */
-        if (from == _taxRecipientAddr)
+        if (from == taxRecipientAddr() || to == taxRecipientAddr())
         {
             super.transferFrom(from, to, value);
 
@@ -72,10 +72,10 @@ contract WibxToken is ERC20Pausable, ERC20Detailed, Taxable, BCHHandled
         uint256 taxValue = _applyTax(value);
 
         // Transfer the tax to the recipient
-        super.transferFrom(from, _taxRecipientAddr, taxValue);
+        super.transferFrom(from, taxRecipientAddr(), taxValue);
 
         // Transfer user's tokens
-        super.transferFrom(from, to, TaxLib.netValue(taxValue, value));
+        super.transferFrom(from, to, value);
 
         return true;
     }
@@ -159,7 +159,7 @@ contract WibxToken is ERC20Pausable, ERC20Detailed, Taxable, BCHHandled
         /*
          * Exempting the tax account to avoid an infinite loop in transferring values from this wallet.
          */
-        if (from == _taxRecipientAddr)
+        if (from == taxRecipientAddr() || to == taxRecipientAddr())
         {
             _transfer(from, to, value);
 
@@ -169,10 +169,10 @@ contract WibxToken is ERC20Pausable, ERC20Detailed, Taxable, BCHHandled
         uint256 taxValue = _applyTax(value);
 
         // Transfer the tax to the recipient
-        _transfer(from, _taxRecipientAddr, taxValue);
+        _transfer(from, taxRecipientAddr(), taxValue);
 
         // Transfer user's tokens
-        _transfer(from, to, TaxLib.netValue(taxValue, value));
+        _transfer(from, to, value);
 
         return true;
     }

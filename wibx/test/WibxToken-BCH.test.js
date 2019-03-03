@@ -4,12 +4,13 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-const { BN, shouldFail } = require('openzeppelin-test-helpers');
+const { shouldFail } = require('openzeppelin-test-helpers');
 const WibxToken = artifacts.require('WibxToken');
 const { applyTax } = require('./helpers/tax');
 const expectEvent = require('./helpers/expectEvent');
 const {
     INITIAL_SUPPLY,
+    TRANSFER_TEST_AMOUNT,
     ALL_TAXES_SHIFT
 } = require('./helpers/constants');
 
@@ -54,9 +55,8 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
     describe('should transfer value from a authorized BCH manipulated address', async () =>
     {
         const to = anotherAccount;
-        const amount = INITIAL_SUPPLY;
+        const amount = TRANSFER_TEST_AMOUNT;
         const taxes = applyTax(amount, ALL_TAXES_SHIFT);
-        const valueWithoutTaxes = amount.sub(taxes);
 
         beforeEach(async () =>
         {
@@ -67,9 +67,9 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
         {
             await tokenInstance.transferFrom(owner, to, amount, { from: bchAddr });
 
-            (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(new BN(0));
+            (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(INITIAL_SUPPLY.sub(amount).sub(taxes));
 
-            (await tokenInstance.balanceOf(to)).should.be.bignumber.equal(valueWithoutTaxes);
+            (await tokenInstance.balanceOf(to)).should.be.bignumber.equal(amount);
         });
 
         it('emits the transfer events', async () =>
@@ -91,7 +91,7 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
             expectEvent.inLogs(logs, 'Transfer', {
                 from: owner,
                 to: to,
-                value: valueWithoutTaxes
+                value: amount
             });
         });
     });

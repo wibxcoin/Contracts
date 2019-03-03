@@ -9,6 +9,7 @@ const WibxToken = artifacts.require('WibxToken');
 const { applyTax } = require('./helpers/tax');
 const {
     INITIAL_SUPPLY,
+    TRANSFER_TEST_AMOUNT,
     ALL_TAXES_SHIFT
 } = require('./helpers/constants');
 
@@ -37,7 +38,7 @@ contract('WibxToken: BCH batch transfer', ([owner, recipient, anotherAccount, bc
 
     it('should fail with a different and unauthorized sender', async () =>
     {
-        const halfAmount = INITIAL_SUPPLY.div(new BN(2));
+        const halfAmount = TRANSFER_TEST_AMOUNT;
 
         await shouldFail.reverting(tokenInstance.sendBatch(
             [recipient, anotherAccount],
@@ -80,12 +81,11 @@ contract('WibxToken: BCH batch transfer', ([owner, recipient, anotherAccount, bc
      */
     async function transfer (from)
     {
-        const amount = INITIAL_SUPPLY;
+        const amount = TRANSFER_TEST_AMOUNT;
         const halfAmount = amount.div(new BN(2));
-        const taxes = applyTax(halfAmount, ALL_TAXES_SHIFT);
-        const valueWithoutTaxes = halfAmount.sub(taxes);
+        const taxes = applyTax(amount, ALL_TAXES_SHIFT);
 
-        (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(amount);
+        (await tokenInstance.balanceOf(owner)).should.be.bignumber.least(amount);
 
         await tokenInstance.sendBatch(
             [recipient, anotherAccount],
@@ -94,9 +94,9 @@ contract('WibxToken: BCH batch transfer', ([owner, recipient, anotherAccount, bc
             { from }
         );
 
-        (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(new BN(0));
-        (await tokenInstance.balanceOf(recipient)).should.be.bignumber.equal(valueWithoutTaxes);
-        (await tokenInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(valueWithoutTaxes);
+        (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(INITIAL_SUPPLY.sub(amount).sub(taxes));
+        (await tokenInstance.balanceOf(recipient)).should.be.bignumber.equal(halfAmount);
+        (await tokenInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(halfAmount);
     }
 
     /**

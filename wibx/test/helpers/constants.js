@@ -32,6 +32,14 @@ module.exports = class
     }
 
     /**
+     * A big number that will be used to transfers in tests
+     */
+    static get TRANSFER_TEST_AMOUNT ()
+    {
+        return this.INITIAL_SUPPLY.div(new BN('2'));
+    }
+
+    /**
      * Some amount that no one can have.
      */
     static get UNAVAILABLE_AMOUNT ()
