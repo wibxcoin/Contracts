@@ -9,7 +9,7 @@ const WibxToken = artifacts.require('WibxToken');
 const { applyTax } = require('./helpers/tax');
 const expectEvent = require('./helpers/expectEvent');
 const {
-    INITIAL_SUPPLY,
+    TRANSFER_TEST_AMOUNT,
     ALL_TAXES,
     ALL_TAXES_SHIFT
 } = require('./helpers/constants');
@@ -89,13 +89,13 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr, taxR
 
     describe('Dynamic tax transference', () =>
     {
-        const amount = INITIAL_SUPPLY;
         const to = recipient;
 
         it('emits a transfer event with the default tax value', async () =>
         {
+            const amount = TRANSFER_TEST_AMOUNT;
             const taxes = applyTax(amount, ALL_TAXES_SHIFT);
-            const valueWithoutTaxes = amount.sub(taxes);
+
             const { logs } = await tokenInstance.transfer(to, amount, { from: owner });
 
             /**
@@ -113,7 +113,7 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr, taxR
             expectEvent.inLogs(logs, 'Transfer', {
                 from: owner,
                 to: to,
-                value: valueWithoutTaxes
+                value: amount
             });
         });
 
@@ -123,8 +123,8 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr, taxR
                 amount: new BN(3),
                 shift: new BN(0)
             };
+            const amount = TRANSFER_TEST_AMOUNT;
             const taxes = applyTax(amount, taxContainer.shift, taxContainer.amount);
-            const valueWithoutTaxes = amount.sub(taxes);
 
             await changeTax(taxContainer.amount, taxContainer.shift);
             const { logs } = await tokenInstance.transfer(to, amount, { from: owner });
@@ -144,7 +144,7 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr, taxR
             expectEvent.inLogs(logs, 'Transfer', {
                 from: owner,
                 to: to,
-                value: valueWithoutTaxes
+                value: amount
             });
         });
     });

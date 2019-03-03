@@ -11,6 +11,7 @@ const expectEvent = require('./helpers/expectEvent');
 const {
     ZERO_ADDRESS,
     INITIAL_SUPPLY,
+    TRANSFER_TEST_AMOUNT,
     UNAVAILABLE_AMOUNT,
     ALL_TAXES_SHIFT
 } = require('./helpers/constants');
@@ -75,17 +76,16 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
             describe('when the sender has enough balance', () =>
             {
-                const amount = INITIAL_SUPPLY;
+                const amount = TRANSFER_TEST_AMOUNT;
                 const taxes = applyTax(amount, ALL_TAXES_SHIFT);
-                const valueWithoutTaxes = amount.sub(taxes);
 
                 it('transfers the requested amount', async () =>
                 {
                     await tokenInstance.transfer(to, amount, { from: owner });
 
-                    (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(new BN(0));
+                    (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(INITIAL_SUPPLY.sub(amount).sub(taxes));
 
-                    (await tokenInstance.balanceOf(to)).should.be.bignumber.equal(valueWithoutTaxes);
+                    (await tokenInstance.balanceOf(to)).should.be.bignumber.equal(amount);
                 });
 
                 it('should transfer the full value from the tax recipient address', async () =>
@@ -123,7 +123,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                     expectEvent.inLogs(logs, 'Transfer', {
                         from: owner,
                         to: to,
-                        value: valueWithoutTaxes
+                        value: amount
                     });
                 });
             });
@@ -258,24 +258,23 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                 describe('when the owner has enough balance', () =>
                 {
-                    const amount = INITIAL_SUPPLY;
+                    const amount = TRANSFER_TEST_AMOUNT;
                     const taxes = applyTax(amount, ALL_TAXES_SHIFT);
-                    const valueWithoutTaxes = amount.sub(taxes);
 
                     it('transfers the requested amount', async () =>
                     {
                         await tokenInstance.transferFrom(owner, to, amount, { from: spender });
 
-                        (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(new BN(0));
+                        (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(INITIAL_SUPPLY.sub(amount).sub(taxes));
 
-                        (await tokenInstance.balanceOf(to)).should.be.bignumber.equal(valueWithoutTaxes);
+                        (await tokenInstance.balanceOf(to)).should.be.bignumber.equal(amount);
                     });
 
                     it('decreases the spender allowance', async () =>
                     {
                         await tokenInstance.transferFrom(owner, to, amount, { from: spender });
 
-                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(new BN(0));
+                        (await tokenInstance.allowance(owner, spender)).should.be.bignumber.equal(INITIAL_SUPPLY.sub(amount).sub(taxes));
                     });
 
                     it('should transfer the full value from the tax recipient address', async () =>
@@ -316,7 +315,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                         expectEvent.inLogs(logs, 'Transfer', {
                             from: owner,
                             to: to,
-                            value: valueWithoutTaxes
+                            value: amount
                         });
                     });
                 });

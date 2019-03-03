@@ -62,16 +62,4 @@ library TaxLib
 
         return value.mul(10 ** shift);
     }
-
-    /**
-     * @dev Calculates the NET value of the transaction
-     *
-     * @param taxValue All tax value paid
-     * @param value The transaction value
-     * @return The NET price
-     */
-    function netValue(uint256 taxValue, uint256 value) internal pure returns (uint256)
-    {
-        return value.sub(taxValue);
-    }
 }

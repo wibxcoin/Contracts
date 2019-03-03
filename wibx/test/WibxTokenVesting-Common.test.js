@@ -102,7 +102,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
                 'There is no more tokens to transfer to this wallet'
             );
 
-            (await wibxInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(amountWithoutTaxes(defaultAmount));
+            (await wibxInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(defaultAmount);
             (await vestingInstance.remainingTokenAmount(anotherAccount)).should.be.bignumber.equal(new BN('0'));
             (await vestingInstance.totalWibxVestingSupply()).should.be.bignumber.equal(new BN('0'));
         });
@@ -123,7 +123,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
                 'There is no more tokens to transfer to this wallet'
             );
 
-            (await wibxInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(amountWithoutTaxes(defaultAmount));
+            (await wibxInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(defaultAmount);
             (await vestingInstance.remainingTokenAmount(anotherAccount)).should.be.bignumber.equal(new BN('0'));
             (await vestingInstance.totalWibxVestingSupply()).should.be.bignumber.equal(new BN('0'));
         });
@@ -164,11 +164,12 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
         {
             await transferTokensToVestingContract(defaultAmount);
 
-            const ownerBalanceAfterVesting = await wibxInstance.balanceOf(owner);
+            const taxBalanceAfterVesting = await wibxInstance.balanceOf(taxRecipientAddr);
 
             await vestingInstance.terminateTokenVesting();
 
-            (await wibxInstance.balanceOf(owner)).should.be.bignumber.greaterThan(ownerBalanceAfterVesting);
+            (await wibxInstance.balanceOf(taxRecipientAddr)).should.be.bignumber.greaterThan(taxBalanceAfterVesting);
+            (await wibxInstance.balanceOf(vestingInstance.address)).should.be.bignumber.equal(new BN('0'));
         });
 
         it('should contract be not available after its destruction', async () =>
@@ -192,13 +193,13 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
 
         await transferTokensToVestingContract(defaultAmount);
 
-        (await vestingInstance.totalWibxVestingSupply()).should.be.bignumber.equal(defaultAmount);
+        (await vestingInstance.totalWibxVestingSupply()).should.be.bignumber.equal(amountWithTaxes(defaultAmount));
 
         await vestingInstance.addTeamMember(wallet, defaultAmount);
 
         await vestingInstance.withdrawal(wallet);
 
-        (await wibxInstance.balanceOf(wallet)).should.be.bignumber.equal(amountWithoutTaxes('9000000000000000000000000'));
+        (await wibxInstance.balanceOf(wallet)).should.be.bignumber.equal('9000000000000000000000000');
 
         await shouldFail.reverting.withMessage(
             vestingInstance.withdrawal(wallet),
@@ -216,9 +217,11 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
      */
     async function transferTokensToVestingContract (amount)
     {
-        await wibxInstance.transfer(taxRecipientAddr, amount);
+        const amountBN = amountWithTaxes(amount);
 
-        await wibxInstance.transfer(vestingInstance.address, amount, { from: taxRecipientAddr });
+        await wibxInstance.transfer(taxRecipientAddr, amountBN);
+
+        await wibxInstance.transfer(vestingInstance.address, amountBN, { from: taxRecipientAddr });
     }
 
     /**
@@ -226,11 +229,10 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
      *
      * @param {BN | string} amount
      */
-    function amountWithoutTaxes (amount)
+    function amountWithTaxes (amount)
     {
         const amountBN = new BN(amount);
-        const taxes = applyTax(amountBN, ALL_TAXES_SHIFT);
 
-        return amountBN.sub(taxes);
+        return amountBN.add(applyTax(amountBN, ALL_TAXES_SHIFT));
     }
 });

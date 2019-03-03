@@ -104,7 +104,7 @@ contract WibxTokenVesting is Ownable
 
         if (totalWibxVestingSupply() > 0)
         {
-            _wibxToken.transfer(owner(), totalWibxVestingSupply());
+            _wibxToken.transfer(_wibxToken.taxRecipientAddr(), totalWibxVestingSupply());
         }
 
         /**
