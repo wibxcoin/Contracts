@@ -16,7 +16,13 @@ participant Wallet identified by idWallet
     o String ethAddress
 
     /**
-     * Coin balance of the wallet
+     * Coin balance of the wallet (real balance)
      */
     o String balance
+
+    /**
+     * Finance reserved fields
+     */
+    o String finReservedBalance
+    o String finBalance
 }

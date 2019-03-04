@@ -16,6 +16,15 @@ rule EverybodyCanReadEverythingFinancial
     action: ALLOW
 }
 
+rule EverybodyCanReadEverythingFin
+{
+    description: "Allow all participants read access to all resources"
+    participant: "org.wiboo.wibxp.common.Wallet"
+    operation: READ
+    resource: "org.wiboo.wibxp.fin.*"
+    action: ALLOW
+}
+
 rule EverybodyCanReadEverythingDytest
 {
     description: "Allow all participants read access to all dynamic tests"
