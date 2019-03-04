@@ -11,4 +11,10 @@ declare interface WalletCTO
      * The coin balance of this wallet
      */
     balance: string;
+
+    /**
+     * Finance reserved fields
+     */
+    finReservedBalance: string;
+    finBalance: string;
 }

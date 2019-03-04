@@ -1,0 +1,33 @@
+namespace org.wiboo.wibxp.fin
+
+import org.wiboo.wibxp.common.Wallet
+
+/**
+ * Generic FIN transaction
+ */
+abstract transaction FinFlowTransaction
+{
+    /**
+     * From user wallet
+     */
+    --> Wallet from
+
+    /**
+     * Amount of the transaction (WEI)
+     */
+    o String amount
+}
+
+transaction ReservationTransaction extends FinFlowTransaction
+{ }
+
+transaction SettlementTransaction extends FinFlowTransaction
+{
+    /**
+     * To user wallet
+     */
+    --> Wallet to
+}
+
+transaction CancelationTransaction extends FinFlowTransaction
+{ }

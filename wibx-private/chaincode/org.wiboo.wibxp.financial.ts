@@ -64,6 +64,7 @@ async function depositTransaction(tx: DepositTransactionCTO): Promise<void>
     isAmountValid(tx.amount);
 
     tx.to.balance = SafeMath.add(tx.to.balance, tx.amount);
+    tx.to.finBalance = SafeMath.add(tx.to.finBalance, tx.amount);
 
     // Update participants (Wallets)
     const walletParticipant: HyperledgerParticipant<WalletCTO> = await getParticipantRegistry<WalletCTO>(
