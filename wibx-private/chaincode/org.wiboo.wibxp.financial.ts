@@ -14,24 +14,6 @@
 'use strict';
 
 /**
- * Recognized contract namespaces
- */
-const namespaces: Record<string, string> = {
-    common: 'org.wiboo.wibxp.common',
-    financial: 'org.wiboo.wibxp.financial'
-};
-
-/**
- * Financial entities
- */
-const entities: Record<string, string> = {
-    wallet: `${namespaces.common}.Wallet`,
-    transfer: 'Transfer',
-    deposit: 'Deposit',
-    withdraw: 'Withdraw'
-};
-
-/**
  * Function to process the transfer transaction.
  *
  * @param {org.wiboo.wibxp.financial.TransferTransaction} tx The financial transaction

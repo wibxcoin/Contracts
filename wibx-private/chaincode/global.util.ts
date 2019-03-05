@@ -16,6 +16,24 @@
 declare type BigNumber = number | string;
 
 /**
+ * Recognized contract namespaces
+ */
+const namespaces: Record<string, string> = {
+    common: 'org.wiboo.wibxp.common',
+    financial: 'org.wiboo.wibxp.financial'
+};
+
+/**
+ * Financial entities
+ */
+const entities: Record<string, string> = {
+    wallet: `${namespaces.common}.Wallet`,
+    transfer: 'Transfer',
+    deposit: 'Deposit',
+    withdraw: 'Withdraw'
+};
+
+/**
  * big.js v5.2.2
  * A small, fast, easy-to-use library for arbitrary-precision decimal arithmetic.
  * Copyright (c) 2018 Michael Mclaughlin <M8ch88l@gmail.com>
@@ -670,58 +688,58 @@ function isAmountValid(amount: BigNumber): void
  *
  * @utility
  */
-function SafeMath()
-{}
-
-/**
- * Add some number
- *
- * @param {BigNumber} a The first number
- * @param {BigNumber} b The second number
- * @utility
- */
-SafeMath.add = function(a: BigNumber, b: BigNumber): string
+class SafeMath
 {
-    const c: BigNumber = __BigJS(a).plus(__BigJS(b));
-    assert(SafeMath.gte(c, a), 'Invalid add');
+    /**
+     * Add some number
+     *
+     * @param {BigNumber} a The first number
+     * @param {BigNumber} b The second number
+     * @utility
+     */
+    static add(a: BigNumber, b: BigNumber): string
+    {
+        const c: BigNumber = __BigJS(a).plus(__BigJS(b));
+        assert(SafeMath.gte(c, a), 'Invalid add');
 
-    return SafeMath.scientificToDec(c);
-}
+        return SafeMath.scientificToDec(c);
+    }
 
-/**
- * Subtract some number
- *
- * @param {BigNumber} a The first number
- * @param {BigNumber} b The second number
- * @utility
- */
-SafeMath.sub = function(a: BigNumber, b: BigNumber): string
-{
-    assert(SafeMath.gte(a, b), 'Invalid subtraction');
-    const c: BigNumber = __BigJS(a).minus(__BigJS(b));
+    /**
+     * Subtract some number
+     *
+     * @param {BigNumber} a The first number
+     * @param {BigNumber} b The second number
+     * @utility
+     */
+    static sub(a: BigNumber, b: BigNumber): string
+    {
+        assert(SafeMath.gte(a, b), 'Invalid subtraction');
+        const c: BigNumber = __BigJS(a).minus(__BigJS(b));
 
-    return SafeMath.scientificToDec(c);
-}
+        return SafeMath.scientificToDec(c);
+    }
 
-/**
- * Get if the number is greater than or equal some other
- *
- * @param {BigNumber} a The first number
- * @param {BigNumber} b The second number
- * @utility
- */
-SafeMath.gte = function(a: BigNumber, b: BigNumber): boolean
-{
-    return __BigJS(a).gte(__BigJS(b));
-}
+    /**
+     * Get if the number is greater than or equal some other
+     *
+     * @param {BigNumber} a The first number
+     * @param {BigNumber} b The second number
+     * @utility
+     */
+    static gte(a: BigNumber, b: BigNumber): boolean
+    {
+        return __BigJS(a).gte(__BigJS(b));
+    }
 
-/**
- * Convert some number in scientific to decimal
- *
- * @param {BigNumber} number The number to convert
- * @utility
- */
-SafeMath.scientificToDec = function(number: BigNumber): string
-{
-    return __BigJS(number).toFixed();
+    /**
+     * Convert some number in scientific to decimal
+     *
+     * @param {BigNumber} number The number to convert
+     * @utility
+     */
+    static scientificToDec(number: BigNumber): string
+    {
+        return __BigJS(number).toFixed();
+    }
 }
