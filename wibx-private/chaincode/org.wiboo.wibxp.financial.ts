@@ -24,10 +24,13 @@ async function transferTransaction(tx: TransferTransactionCTO): Promise<void>
     // Check if the amount is valid
     isAmountValid(tx.amount);
 
-    // Check if the origin account has funds to transfer
-    assert(SafeMath.gte(tx.from.balance, tx.amount), 'The origin account doesnt have funds to pay.');
+    // Full amount with taxes
+    const amountWithTax: string = SafeMath.add(tx.amount, tx.taxAmount);
 
-    tx.from.balance = SafeMath.sub(tx.from.balance, tx.amount);
+    // Check if the origin account has funds to transfer
+    assert(SafeMath.gte(tx.from.balance, amountWithTax), 'The origin account doesnt have funds to pay.');
+
+    tx.from.balance = SafeMath.sub(tx.from.balance, amountWithTax);
     tx.to.balance = SafeMath.add(tx.to.balance, tx.amount);
 
     // Update participants (Wallets)
@@ -44,9 +47,12 @@ async function transferTransaction(tx: TransferTransactionCTO): Promise<void>
         entities.transfer
     );
 
-    transferEvent.from = tx.from;
-    transferEvent.to = tx.to;
-    transferEvent.amount = tx.amount;
+    Object.assign<TransferCTO, TransferCTO>(transferEvent, {
+        from: tx.from,
+        to: tx.to,
+        amount: tx.amount,
+        taxAmount: tx.taxAmount
+    });
 
     emit(transferEvent);
 }
@@ -79,9 +85,11 @@ async function depositTransaction(tx: DepositTransactionCTO): Promise<void>
         entities.deposit
     );
 
-    depositEvent.fromEthAddress = tx.fromEthAddress;
-    depositEvent.to = tx.to;
-    depositEvent.amount = tx.amount;
+    Object.assign<DepositCTO, DepositCTO>(depositEvent, {
+        fromEthAddress: tx.fromEthAddress,
+        to: tx.to,
+        amount: tx.amount
+    });
 
     emit(depositEvent);
 }
@@ -111,9 +119,11 @@ async function withdrawTransaction(tx: WithdrawTransactionCTO): Promise<void>
         entities.withdraw
     );
 
-    transferEvent.from = tx.from;
-    transferEvent.toEthAddress = tx.toEthAddress;
-    transferEvent.amount = tx.amount;
+    Object.assign<WithdrawCTO, WithdrawCTO>(transferEvent, {
+        from: tx.from,
+        toEthAddress: tx.toEthAddress,
+        amount: tx.amount
+    });
 
     emit(transferEvent);
 }
