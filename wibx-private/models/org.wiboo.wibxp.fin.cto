@@ -18,16 +18,30 @@ abstract transaction FinFlowTransaction
     o String amount
 }
 
+/**
+ * Reserve some amount to be used/transferred by FIN
+ */
 transaction ReservationTransaction extends FinFlowTransaction
 { }
 
+/**
+ * Effective FIN transaction settlement
+ */
 transaction SettlementTransaction extends FinFlowTransaction
 {
     /**
      * To user wallet
      */
     --> Wallet to
+
+    /**
+     * The tax amount paid
+     */
+    o String taxAmount
 }
 
+/**
+ * Rollback some reservation transaction
+ */
 transaction CancelationTransaction extends FinFlowTransaction
 { }

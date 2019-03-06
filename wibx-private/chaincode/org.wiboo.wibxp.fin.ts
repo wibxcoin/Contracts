@@ -49,10 +49,13 @@ async function settlementTransaction(tx: SettlementTransactionCTO): Promise<void
     // Check if the amount is valid
     isAmountValid(tx.amount);
 
-    // Check if the origin account has funds to transfer
-    assert(SafeMath.gte(tx.from.finReservedBalance, tx.amount), 'The origin account doesnt have funds to pay.');
+    // Full amount with taxes
+    const amountWithTax: string = SafeMath.add(tx.amount, tx.taxAmount);
 
-    tx.from.finReservedBalance = SafeMath.sub(tx.from.finReservedBalance, tx.amount);
+    // Check if the origin account has funds to transfer
+    assert(SafeMath.gte(tx.from.finReservedBalance, amountWithTax), 'The origin account doesnt have funds to pay.');
+
+    tx.from.finReservedBalance = SafeMath.sub(tx.from.finReservedBalance, amountWithTax);
     tx.to.finBalance = SafeMath.add(tx.to.finBalance, tx.amount);
 
     // Update participants (Wallets)
