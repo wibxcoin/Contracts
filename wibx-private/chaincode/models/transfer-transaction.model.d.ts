@@ -1,5 +1,5 @@
 /**
- * Represents a financial transaction that transfer coins between wallets. 
+ * Represents a financial transaction that transfer coins between wallets.
  */
 declare interface TransferTransactionCTO extends FinancialTransactionCTO
 {
@@ -12,4 +12,9 @@ declare interface TransferTransactionCTO extends FinancialTransactionCTO
      * Destination account
      */
     to: WalletCTO;
+
+    /**
+     * Tax paid
+     */
+    taxAmount: string;
 }

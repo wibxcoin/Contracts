@@ -28,6 +28,11 @@ event Transfer extends FinancialEvent
      * Destiny account
      */
     --> Wallet to
+
+    /**
+     * Tax paid
+     */
+    o String taxAmount
 }
 
 /**
@@ -102,6 +107,11 @@ transaction TransferTransaction extends FinancialTransaction
      * Destiny account
      */
     --> Wallet to
+
+    /**
+     * Tax paid
+     */
+    o String taxAmount
 }
 
 /**

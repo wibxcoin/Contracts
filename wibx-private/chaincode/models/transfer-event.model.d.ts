@@ -13,4 +13,9 @@ declare interface TransferCTO extends FinancialEventCTO
      * Destination account
      */
     to: WalletCTO;
+
+    /**
+     * Tax paid
+     */
+    taxAmount: string;
 }

@@ -1,6 +1,6 @@
 {
     "name": "wibx-private",
-    "version": "0.0.26",
+    "version": "0.0.29",
     "description": "The WiBX private blockchain network",
     "scripts": {
         "pretest": "npm run lint",
