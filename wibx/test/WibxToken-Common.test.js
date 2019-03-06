@@ -22,7 +22,7 @@ const {
  * Originally based on code by OpenZeppelin:
  * https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/test/token/ERC20/ERC20.test.js
  */
-contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherAccount, bchAddr, taxRecipientAddr, boardAccount]) =>
+contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherAccount, bchAddr, taxRecipientAddr, boardAccount, burner]) =>
 {
     let tokenInstance;
 
@@ -561,6 +561,123 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
             it('reverts', async () =>
             {
                 await shouldFail.reverting(tokenInstance.increaseAllowance(spender, amount, { from: owner }));
+            });
+        });
+    });
+
+    describe('burn', function ()
+    {
+        describe('when the given amount is not greater than balance of the sender', function ()
+        {
+            context('for a zero amount', function ()
+            {
+                shouldBurn(new BN(0));
+            });
+
+            context('for a non-zero amount', function ()
+            {
+                shouldBurn(TRANSFER_TEST_AMOUNT);
+            });
+
+            function shouldBurn (amount)
+            {
+                beforeEach(async function ()
+                {
+                    ({ logs: this.logs } = await tokenInstance.burn(amount, { from: owner }));
+                });
+
+                it('burns the requested amount', async function ()
+                {
+                    (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(INITIAL_SUPPLY.sub(amount));
+                });
+
+                it('emits a transfer event', async function ()
+                {
+                    expectEvent.inLogs(this.logs, 'Transfer', {
+                        from: owner,
+                        to: ZERO_ADDRESS,
+                        value: amount
+                    });
+                });
+            }
+        });
+
+        describe('when the given amount is greater than the balance of the sender', function ()
+        {
+            const amount = INITIAL_SUPPLY.addn(1);
+
+            it('reverts', async function ()
+            {
+                await shouldFail.reverting(tokenInstance.burn(amount, { from: owner }));
+            });
+        });
+    });
+
+    describe('burnFrom', function ()
+    {
+        describe('on success', function ()
+        {
+            context('for a zero amount', function ()
+            {
+                shouldBurnFrom(new BN(0));
+            });
+
+            context('for a non-zero amount', function ()
+            {
+                shouldBurnFrom(TRANSFER_TEST_AMOUNT);
+            });
+
+            function shouldBurnFrom (amount)
+            {
+                const originalAllowance = amount.muln(3);
+
+                beforeEach(async function ()
+                {
+                    await tokenInstance.approve(burner, originalAllowance, { from: owner });
+                    const { logs } = await tokenInstance.burnFrom(owner, amount, { from: burner });
+                    this.logs = logs;
+                });
+
+                it('burns the requested amount', async function ()
+                {
+                    (await tokenInstance.balanceOf(owner)).should.be.bignumber.equal(INITIAL_SUPPLY.sub(amount));
+                });
+
+                it('decrements allowance', async function ()
+                {
+                    (await tokenInstance.allowance(owner, burner)).should.be.bignumber.equal(originalAllowance.sub(amount));
+                });
+
+                it('emits a transfer event', async function ()
+                {
+                    expectEvent.inLogs(this.logs, 'Transfer', {
+                        from: owner,
+                        to: ZERO_ADDRESS,
+                        value: amount
+                    });
+                });
+            }
+        });
+
+        describe('when the given amount is greater than the balance of the sender', function ()
+        {
+            const amount = INITIAL_SUPPLY.addn(1);
+
+            it('reverts', async function ()
+            {
+                await tokenInstance.approve(burner, amount, { from: owner });
+                await shouldFail.reverting(tokenInstance.burnFrom(owner, amount, { from: burner }));
+            });
+        });
+
+        describe('when the given amount is greater than the allowance', function ()
+        {
+            const allowance = TRANSFER_TEST_AMOUNT;
+
+            it('reverts', async function ()
+            {
+                await tokenInstance.approve(burner, allowance, { from: owner });
+                await shouldFail.reverting(tokenInstance.burnFrom(owner, allowance.addn(1), { from: burner }));
             });
         });
     });

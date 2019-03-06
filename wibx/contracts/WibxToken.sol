@@ -8,6 +8,7 @@ pragma solidity 0.5.0;
 
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Pausable.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
+import "openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./Taxable.sol";
 import "./BCHHandled.sol";
@@ -18,7 +19,7 @@ import "./TaxLib.sol";
  *
  * @dev Implementation of the main WiBX token smart contract.
  */
-contract WibxToken is ERC20Pausable, ERC20Detailed, Taxable, BCHHandled
+contract WibxToken is ERC20Pausable, ERC20Burnable, ERC20Detailed, Taxable, BCHHandled
 {
     /**
      * 12 billion tokens raised by 18 decimal places.
