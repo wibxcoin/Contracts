@@ -13,6 +13,7 @@
         "compile": "truffle compile",
         "migrate": "truffle migrate",
         "console": "truffle console",
+        "texec": "truffle exec",
         "lint:js": "eslint .",
         "lint:sol": "solium -d .",
         "lint": "npm run lint:js && npm run lint:sol",
