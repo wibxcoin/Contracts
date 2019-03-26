@@ -1,5 +1,6 @@
 const WibxToken = artifacts.require('./WibxToken.sol');
 const WibxTokenVesting = artifacts.require('./WibxTokenVesting.sol');
+const MultiSignWibxTokenHolder = artifacts.require('./MultiSignWibxTokenHolder.sol');
 
 module.exports = async (deployer) =>
 {
@@ -27,6 +28,14 @@ module.exports = async (deployer) =>
      */
     await deployer.deploy(
         WibxTokenVesting,
+        WibxToken.address
+    );
+
+    /**
+     * Deploy the multi sign WiBX token holder (with the WibxToken instance)
+     */
+    await deployer.deploy(
+        MultiSignWibxTokenHolder,
         WibxToken.address
     );
 };
