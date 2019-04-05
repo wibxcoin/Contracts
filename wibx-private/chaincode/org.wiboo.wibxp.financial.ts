@@ -104,9 +104,16 @@ async function depositTransaction(tx: DepositTransactionCTO): Promise<void>
  */
 async function withdrawTransaction(tx: WithdrawTransactionCTO): Promise<void>
 {
+    // Check if the amount is valid
     isAmountValid(tx.amount);
 
-    tx.from.balance = SafeMath.sub(tx.from.balance, tx.amount);
+    // Full amount with taxes
+    const amountWithTax: string = SafeMath.add(tx.amount, tx.taxAmount);
+
+    // Check if the origin account has funds to transfer
+    assert(SafeMath.gte(tx.from.balance, amountWithTax), 'The origin account doesnt have funds to pay.');
+
+    tx.from.balance = SafeMath.sub(tx.from.balance, amountWithTax);
 
     // Update participants (Wallets)
     const walletParticipant: HyperledgerParticipant<WalletCTO> = await getParticipantRegistry<WalletCTO>(entities.wallet);
@@ -114,15 +121,16 @@ async function withdrawTransaction(tx: WithdrawTransactionCTO): Promise<void>
     await walletParticipant.update(tx.from);
 
     // Emit events
-    const transferEvent: HyperledgerEvent<WithdrawCTO> = getFactory().newEvent<WithdrawCTO> (
+    const transferEvent: HyperledgerEvent<WithdrawEventCTO> = getFactory().newEvent<WithdrawEventCTO> (
         namespaces.financial,
         entities.withdraw
     );
 
-    Object.assign<WithdrawCTO, WithdrawCTO>(transferEvent, {
+    Object.assign<WithdrawEventCTO, WithdrawEventCTO>(transferEvent, {
         from: tx.from,
         toEthAddress: tx.toEthAddress,
-        amount: tx.amount
+        amount: tx.amount,
+        taxAmount: tx.taxAmount
     });
 
     emit(transferEvent);

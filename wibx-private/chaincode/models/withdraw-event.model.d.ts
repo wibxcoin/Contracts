@@ -1,7 +1,7 @@
 /**
  * Financial event when some withdrawal occurs.
  */
-declare interface WithdrawCTO extends FinancialEventCTO
+declare interface WithdrawEventCTO extends FinancialEventCTO
 {
     /**
      * The coin owner
@@ -12,4 +12,9 @@ declare interface WithdrawCTO extends FinancialEventCTO
      * The ETH address which will be transferred the coins.
      */
     toEthAddress: string;
+
+    /**
+     * Tax paid
+     */
+    taxAmount: string;
 }

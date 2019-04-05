@@ -65,6 +65,11 @@ event Withdraw extends FinancialEvent
      * The ETH address which will be transferred the coins
      */
     o String toEthAddress
+
+    /**
+     * Tax paid
+     */
+    o String taxAmount
 }
 
 /**
@@ -148,4 +153,9 @@ transaction WithdrawTransaction extends FinancialTransaction
      * The ETH address which will be transferred the coins
      */
     o String toEthAddress
+
+    /**
+     * Tax paid
+     */
+    o String taxAmount
 }

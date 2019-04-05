@@ -14,4 +14,9 @@ declare interface WithdrawTransactionCTO extends FinancialTransactionCTO
      * The origin ETH address of the coins.
      */
     toEthAddress: string;
+
+    /**
+     * Tax paid
+     */
+    taxAmount: string;
 }
