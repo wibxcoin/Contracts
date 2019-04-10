@@ -42,7 +42,7 @@ module.exports = async function (callback)
 
         console.log(`[Done] Transaction hash: ${wbxReceipt.tx}`);
     }
-    catch(e)
+    catch (e)
     {
         return trap(e);
     }
@@ -56,7 +56,7 @@ module.exports = async function (callback)
  * @param {string} key The argument key
  * @returns {string} The parsed key
  */
-function getParam(key)
+function getParam (key)
 {
     let keyPosition = process.argv.indexOf(key);
 
@@ -80,7 +80,7 @@ function getParam(key)
  *
  * @param {Error} error The error
  */
-function trap(error)
+function trap (error)
 {
     console.error(error.message);
     process.exit(1);
