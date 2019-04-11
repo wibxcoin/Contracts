@@ -1,14 +1,14 @@
 {
   "contractName": "TaxLib",
   "abi": [],
-  "bytecode": "0x604c602c600b82828239805160001a60731460008114601c57601e565bfe5b5030600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a723058204057c5c43468b1cd9cd62236c98a352ba5460120e3168468816f8b73d25c10da0029",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a723058204057c5c43468b1cd9cd62236c98a352ba5460120e3168468816f8b73d25c10da0029",
+  "bytecode": "0x604c602c600b82828239805160001a60731460008114601c57601e565bfe5b5030600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a72305820588c99ec0ff454396d492a4d01fb1c1c1a36a7020f1c126b25e4fcd6b76e4ea20029",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a72305820588c99ec0ff454396d492a4d01fb1c1c1a36a7020f1c126b25e4fcd6b76e4ea20029",
   "sourceMap": "358:1134:2:-;;132:2:-1;166:7;155:9;146:7;137:37;252:7;246:14;243:1;238:23;232:4;229:33;270:1;265:20;;;;222:63;;265:20;274:9;222:63;;298:9;295:1;288:20;328:4;319:7;311:22;352:7;343;336:24",
   "deployedSourceMap": "358:1134:2:-;;;;;;;;",
   "source": "/**\n * This smart contract code is Copyright 2018 WiBX. For more information see https://wibx.io\n *\n * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt\n */\n\npragma solidity 0.5.0;\n\nimport \"openzeppelin-solidity/contracts/math/SafeMath.sol\";\n\n/**\n * @title Taxation Library\n *\n * @dev Helpers for taxation\n */\nlibrary TaxLib\n{\n    using SafeMath for uint256;\n\n    /**\n     * Modifiable tax container\n     */\n    struct DynamicTax\n    {\n        /**\n         * Tax amount per each transaction (in %).\n         */\n        uint256 amount;\n\n        /**\n         * The shift value.\n         * Represents: 100 * 10 ** shift\n         */\n        uint256 shift;\n    }\n\n    /**\n     * @dev Apply percentage to the value.\n     *\n     * @param taxAmount The amount of tax\n     * @param shift The shift division amount\n     * @param value The total amount\n     * @return The tax amount to be payed (in WEI)\n     */\n    function applyTax(uint256 taxAmount, uint256 shift, uint256 value) internal pure returns (uint256)\n    {\n        uint256 temp = value.mul(taxAmount);\n\n        return temp.div(shift);\n    }\n\n    /**\n     * @dev Normalize the shift value\n     *\n     * @param shift The power chosen\n     */\n    function normalizeShiftAmount(uint256 shift) internal pure returns (uint256)\n    {\n        require(shift >= 0 && shift <= 2, \"You can't set more than 2 decimal places\");\n\n        uint256 value = 100;\n\n        return value.mul(10 ** shift);\n    }\n}",
-  "sourcePath": "/home/gabriel/Documents/gitViews/wibxcoin/Contracts/wibx/contracts/TaxLib.sol",
+  "sourcePath": "/home/ubuntu/Contracts/wibx/contracts/TaxLib.sol",
   "ast": {
-    "absolutePath": "/home/gabriel/Documents/gitViews/wibxcoin/Contracts/wibx/contracts/TaxLib.sol",
+    "absolutePath": "/home/ubuntu/Contracts/wibx/contracts/TaxLib.sol",
     "exportedSymbols": {
       "TaxLib": [
         217
@@ -33,7 +33,7 @@
         "id": 154,
         "nodeType": "ImportDirective",
         "scope": 218,
-        "sourceUnit": 1436,
+        "sourceUnit": 1439,
         "src": "230:59:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -58,10 +58,10 @@
               "id": 155,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1435,
+              "referencedDeclaration": 1438,
               "src": "385:8:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$1435",
+                "typeIdentifier": "t_contract$_SafeMath_$1438",
                 "typeString": "library SafeMath"
               }
             },
@@ -224,7 +224,7 @@
                       "lValueRequested": false,
                       "memberName": "mul",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1342,
+                      "referencedDeclaration": 1345,
                       "src": "1081:9:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -293,7 +293,7 @@
                       "lValueRequested": false,
                       "memberName": "div",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1366,
+                      "referencedDeclaration": 1369,
                       "src": "1119:8:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -615,10 +615,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2223,
-                        2224
+                        2257,
+                        2258
                       ],
-                      "referencedDeclaration": 2224,
+                      "referencedDeclaration": 2258,
                       "src": "1336:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -779,7 +779,7 @@
                       "lValueRequested": false,
                       "memberName": "mul",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1342,
+                      "referencedDeclaration": 1345,
                       "src": "1461:9:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -894,7 +894,7 @@
     "src": "206:1286:2"
   },
   "legacyAST": {
-    "absolutePath": "/home/gabriel/Documents/gitViews/wibxcoin/Contracts/wibx/contracts/TaxLib.sol",
+    "absolutePath": "/home/ubuntu/Contracts/wibx/contracts/TaxLib.sol",
     "exportedSymbols": {
       "TaxLib": [
         217
@@ -919,7 +919,7 @@
         "id": 154,
         "nodeType": "ImportDirective",
         "scope": 218,
-        "sourceUnit": 1436,
+        "sourceUnit": 1439,
         "src": "230:59:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -944,10 +944,10 @@
               "id": 155,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1435,
+              "referencedDeclaration": 1438,
               "src": "385:8:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$1435",
+                "typeIdentifier": "t_contract$_SafeMath_$1438",
                 "typeString": "library SafeMath"
               }
             },
@@ -1110,7 +1110,7 @@
                       "lValueRequested": false,
                       "memberName": "mul",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1342,
+                      "referencedDeclaration": 1345,
                       "src": "1081:9:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1179,7 +1179,7 @@
                       "lValueRequested": false,
                       "memberName": "div",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1366,
+                      "referencedDeclaration": 1369,
                       "src": "1119:8:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1501,10 +1501,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2223,
-                        2224
+                        2257,
+                        2258
                       ],
-                      "referencedDeclaration": 2224,
+                      "referencedDeclaration": 2258,
                       "src": "1336:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1665,7 +1665,7 @@
                       "lValueRequested": false,
                       "memberName": "mul",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1342,
+                      "referencedDeclaration": 1345,
                       "src": "1461:9:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -1785,7 +1785,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-03-13T02:38:24.495Z",
+  "updatedAt": "2019-04-11T00:56:02.105Z",
   "devdoc": {
     "details": "Helpers for taxation",
     "methods": {},
