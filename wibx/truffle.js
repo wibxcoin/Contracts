@@ -17,6 +17,12 @@ module.exports = {
             network_id: '*' // eslint-disable-line camelcase
         },
 
+        localdocker: {
+            host: 'setup-geth',
+            port: 30303,
+            network_id: '*' // eslint-disable-line camelcase
+        },
+
         // Build coverage server
         coverage: {
             host: '127.0.0.1',
