@@ -13,7 +13,7 @@ module.exports = {
         // Local server
         development: {
             host: '127.0.0.1',
-            port: 8545,
+            port: 8646,
             network_id: '*' // eslint-disable-line camelcase
         },
 
