@@ -1,3 +1,4 @@
+# <img src="https://wallet.wiboo.io/assets/img/logo-card.png" alt="WiBX" width="150px">	
 [![Build Status](https://travis-ci.com/wibxcoin/Contracts.svg?branch=master)](https://travis-ci.com/wibxcoin/Contracts)
 [![Coverage Status](https://coveralls.io/repos/github/wibxcoin/Contracts/badge.svg?branch=master)](https://coveralls.io/github/wibxcoin/Contracts?branch=master)
 
