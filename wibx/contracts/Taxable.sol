@@ -26,6 +26,16 @@ contract Taxable is Ownable
      */
     TaxLib.DynamicTax private _taxContainer;
 
+    /**
+     * @dev Event that is emited when the owner changes the tax of the token.
+     */
+    event TaxChange(
+        uint256 oldAmount,
+        uint256 oldShift,
+        uint256 newAmount,
+        uint256 newShift
+    );
+
     constructor(address taxRecipientAddr) public
     {
         _taxRecipientAddr = taxRecipientAddr;
@@ -79,6 +89,13 @@ contract Taxable is Ownable
         {
             require(amount <= 3, "You can't set a tax greater than 3%");
         }
+
+        emit TaxChange(
+            _taxContainer.amount,
+            _taxContainer.shift,
+            amount,
+            shift
+        );
 
         _taxContainer = TaxLib.DynamicTax(
             amount,

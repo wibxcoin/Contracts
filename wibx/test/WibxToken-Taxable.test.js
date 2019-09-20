@@ -37,6 +37,18 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr, taxR
             await changeTax(1, 0, owner);
         });
 
+        it('should adminsitrator change the tax amount and see the event', async () =>
+        {
+            const { logs } = await changeTax(1, 0, owner);
+
+            expectEvent.inLogs(logs, 'TaxChange', {
+                oldAmount: ALL_TAXES,
+                oldShift: ALL_TAXES_SHIFT.mul(new BN(1000)),
+                newAmount: new BN(1),
+                newShift: new BN(0)
+            });
+        });
+
         it('should adminsitrator change the tax amount to the max', async () =>
         {
             await changeTax(3, 0, owner);
@@ -165,8 +177,10 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr, taxR
             changeTaxArgs.push({ from });
         }
 
-        await tokenInstance.changeTax(...changeTaxArgs);
+        const changeTaxTx = await tokenInstance.changeTax(...changeTaxArgs);
 
         (await tokenInstance.currentTaxAmount()).should.be.bignumber.equal(new BN(amount));
+
+        return changeTaxTx;
     }
 });
