@@ -9,6 +9,7 @@ pragma solidity 0.5.0;
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Pausable.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol";
+import "openzeppelin-solidity/contracts/lifecycle/Pausable.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./Taxable.sol";
 import "./BCHHandled.sol";
@@ -39,7 +40,7 @@ contract WibxToken is ERC20Pausable, ERC20Burnable, ERC20Detailed, Taxable, BCHH
      * @param value The amount to be transferred.
      * @return If the operation was successful
      */
-    function transfer(address to, uint256 value) public returns (bool)
+    function transfer(address to, uint256 value) public whenNotPaused returns (bool)
     {
         return _fullTransfer(msg.sender, to, value);
     }
@@ -52,7 +53,7 @@ contract WibxToken is ERC20Pausable, ERC20Burnable, ERC20Detailed, Taxable, BCHH
      * @param value uint256 the amount of tokens to be transferred
      * @return If the operation was successful
      */
-    function transferFrom(address from, address to, uint256 value) public returns (bool)
+    function transferFrom(address from, address to, uint256 value) public whenNotPaused returns (bool)
     {
         if (canBchHandle(from))
         {
@@ -88,7 +89,7 @@ contract WibxToken is ERC20Pausable, ERC20Burnable, ERC20Detailed, Taxable, BCHH
      * @param from Spender address
      * @return If the operation was successful
      */
-    function sendBatch(address[] memory recipients, uint256[] memory values, address from) public returns (bool)
+    function sendBatch(address[] memory recipients, uint256[] memory values, address from) public whenNotPaused returns (bool)
     {
         /*
          * The maximum batch send should be 100 transactions.

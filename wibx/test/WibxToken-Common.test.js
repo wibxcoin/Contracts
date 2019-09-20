@@ -681,4 +681,135 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
             });
         });
     });
+
+    describe('Pausable', function ()
+    {
+        context('when unpaused', function ()
+        {
+            beforeEach(async function ()
+            {
+                expect(await tokenInstance.paused()).to.equal(false);
+            });
+
+            describe('pausing', function ()
+            {
+                it('is pausable by the pauser', async function ()
+                {
+                    await tokenInstance.pause({ from: owner });
+                    expect(await tokenInstance.paused()).to.equal(true);
+                });
+
+                it('reverts when pausing from non-pauser', async function ()
+                {
+                    await shouldFail.reverting(tokenInstance.pause({ from: anotherAccount }),
+                        'PauserRole: caller does not have the Pauser role'
+                    );
+                });
+
+                context('when paused', function ()
+                {
+                    beforeEach(async function ()
+                    {
+                        ({ logs: this.logs } = await tokenInstance.pause({ from: owner }));
+                    });
+
+                    it('emits a Paused event', function ()
+                    {
+                        expectEvent.inLogs(this.logs, 'Paused', { account: owner });
+                    });
+
+                    it('cannot perform transfer in pause', async function () {
+                        await shouldFail.reverting(
+                            tokenInstance.transfer(anotherAccount, '1', { from: owner }),
+                            'Pausable: paused'
+                        );
+                    });
+
+                    it('cannot perform transferFrom in pause', async function () {
+                        await shouldFail.reverting(
+                            tokenInstance.transferFrom(owner, anotherAccount, '1', { from: owner }),
+                            'Pausable: paused'
+                        );
+                    });
+
+                    it('cannot perform transferBatch in pause', async function () {
+                        await shouldFail.reverting(
+                            tokenInstance.sendBatch(
+                                [recipient, anotherAccount],
+                                ['1', '1'],
+                                owner,
+                                { from: owner }
+                            ),
+                            'Pausable: paused'
+                        );
+                    });
+
+                    it('reverts when re-pausing', async function ()
+                    {
+                        await shouldFail.reverting(tokenInstance.pause({ from: owner }), 'Pausable: paused');
+                    });
+
+                    describe('unpausing', function ()
+                    {
+                        it('is unpausable by the pauser', async function ()
+                        {
+                            await tokenInstance.unpause({ from: owner });
+                            expect(await tokenInstance.paused()).to.equal(false);
+                        });
+
+                        it('reverts when unpausing from non-pauser', async function ()
+                        {
+                            await shouldFail.reverting(tokenInstance.unpause({ from: anotherAccount }),
+                                'PauserRole: caller does not have the Pauser role'
+                            );
+                        });
+
+                        context('when unpaused', function ()
+                        {
+                            beforeEach(async function ()
+                            {
+                                ({ logs: this.logs } = await tokenInstance.unpause({ from: owner }));
+                            });
+
+                            it('emits an Unpaused event', function ()
+                            {
+                                expectEvent.inLogs(this.logs, 'Unpaused', { account: owner });
+                            });
+
+                            it('should resume allowing transfer', async function () {
+                                await tokenInstance.transfer(anotherAccount, '1', { from: owner });
+                                (await tokenInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(new BN(1));
+                            });
+
+                            it('should resume allowing transferFrom', async function () {
+                                await tokenInstance.bchAuthorize({ from: recipient });
+                                await tokenInstance.transfer(recipient, '100000000000000000000', { from: owner });
+
+                                await tokenInstance.transferFrom(recipient, anotherAccount, '1', { from: bchAddr });
+
+                                (await tokenInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(new BN(1));
+                            });
+
+                            it('should resume allowing transferBatch', async function () {
+                                tokenInstance.sendBatch(
+                                    [recipient, anotherAccount],
+                                    ['1', '1'],
+                                    owner,
+                                    { from: owner }
+                                );
+
+                                (await tokenInstance.balanceOf(recipient)).should.be.bignumber.equal(new BN(1));
+                                (await tokenInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(new BN(1));
+                            });
+
+                            it('reverts when re-unpausing', async function ()
+                            {
+                                await shouldFail.reverting(tokenInstance.unpause({ from: owner }), 'Pausable: not paused');
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
 });
