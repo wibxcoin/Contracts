@@ -8,7 +8,6 @@ pragma solidity 0.5.0;
 
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./VestingLib.sol";
-import "./TaxLib.sol";
 import "./WibxToken.sol";
 
 /**

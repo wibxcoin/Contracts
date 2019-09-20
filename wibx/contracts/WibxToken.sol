@@ -12,7 +12,6 @@ import "openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 import "./Taxable.sol";
 import "./BCHHandled.sol";
-import "./TaxLib.sol";
 
 /**
  * @title WiBX Utility Token
