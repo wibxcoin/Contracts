@@ -19,7 +19,6 @@
     },
     "devDependencies": {
         "@types/node": "^10.9.2",
-        "types-hyperledger-composer-api": "0.0.1",
         "camelcase": "^5.0.0",
         "chai": "4.2.0",
         "chai-as-promised": "7.1.1",
@@ -33,10 +32,16 @@
         "eslint": "5.12.1",
         "mkdirp": "0.5.1",
         "mocha": "5.2.0",
-        "nyc": "13.1.0",
+        "nyc": "^14.1.1",
         "rimraf": "^2.6.2",
         "ts-loader": "^4.5.0",
         "ts-node": "^7.0.1",
+        "types-hyperledger-composer-api": "0.0.1",
         "typescript": "3.2.4"
+    },
+    "resolutions": {
+        "fstream": "1.0.12",
+        "lodash": "4.17.14",
+        "handlebars": "4.1.2"
     }
 }
