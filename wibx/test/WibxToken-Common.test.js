@@ -718,21 +718,24 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                         expectEvent.inLogs(this.logs, 'Paused', { account: owner });
                     });
 
-                    it('cannot perform transfer in pause', async function () {
+                    it('cannot perform transfer in pause', async function ()
+                    {
                         await shouldFail.reverting(
                             tokenInstance.transfer(anotherAccount, '1', { from: owner }),
                             'Pausable: paused'
                         );
                     });
 
-                    it('cannot perform transferFrom in pause', async function () {
+                    it('cannot perform transferFrom in pause', async function ()
+                    {
                         await shouldFail.reverting(
                             tokenInstance.transferFrom(owner, anotherAccount, '1', { from: owner }),
                             'Pausable: paused'
                         );
                     });
 
-                    it('cannot perform transferBatch in pause', async function () {
+                    it('cannot perform transferBatch in pause', async function ()
+                    {
                         await shouldFail.reverting(
                             tokenInstance.sendBatch(
                                 [recipient, anotherAccount],
@@ -776,12 +779,14 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                                 expectEvent.inLogs(this.logs, 'Unpaused', { account: owner });
                             });
 
-                            it('should resume allowing transfer', async function () {
+                            it('should resume allowing transfer', async function ()
+                            {
                                 await tokenInstance.transfer(anotherAccount, '1', { from: owner });
                                 (await tokenInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(new BN(1));
                             });
 
-                            it('should resume allowing transferFrom', async function () {
+                            it('should resume allowing transferFrom', async function ()
+                            {
                                 await tokenInstance.bchAuthorize({ from: recipient });
                                 await tokenInstance.transfer(recipient, '100000000000000000000', { from: owner });
 
@@ -790,7 +795,8 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                                 (await tokenInstance.balanceOf(anotherAccount)).should.be.bignumber.equal(new BN(1));
                             });
 
-                            it('should resume allowing transferBatch', async function () {
+                            it('should resume allowing transferBatch', async function ()
+                            {
                                 tokenInstance.sendBatch(
                                     [recipient, anotherAccount],
                                     ['1', '1'],
