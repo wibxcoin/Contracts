@@ -32,6 +32,11 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr, taxR
     {
         const normalizedTaxShift = new BN(100).mul(new BN(10).pow(ALL_TAXES_SHIFT));
 
+        it('should AbiCoder throw an error if the administrator try to set an float point number', async () =>
+        {
+            shouldFail(changeTax(1.5, 2, owner));
+        });
+
         it('should adminsitrator change the tax amount', async () =>
         {
             await changeTax(1, 0, owner);
