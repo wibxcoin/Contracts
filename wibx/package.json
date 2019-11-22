@@ -21,11 +21,11 @@
         "build:coverage": "SOLIDITY_COVERAGE=true scripts/test.sh"
     },
     "dependencies": {
-        "openzeppelin-solidity": "2.1.1"
+        "openzeppelin-solidity": "2.4.0"
     },
     "devDependencies": {
         "openzeppelin-test-helpers": "0.1.2",
-        "bn.js": "4.11.8",
+        "bn.js": "5.0.0",
         "webpack": "4.28.4",
         "eslint": "4.19.1",
         "eslint-config-standard": "10.2.1",
@@ -38,8 +38,8 @@
         "truffle": "5.1.1",
         "web3": "1.2.4",
         "coveralls": "3.0.1",
-        "solidity-coverage": "0.5.11",
-        "ganache-cli": "6.3.0"
+        "solidity-coverage": "0.5.12",
+        "ganache-cli": "6.7.0"
     },
     "resolutions": {
         "braces": "2.3.1",
