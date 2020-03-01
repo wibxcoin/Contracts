@@ -20,6 +20,7 @@ module.exports = {
         localdocker: {
             host: 'setup-geth',
             port: 8646,
+            gas: 6283185,
             network_id: '*' // eslint-disable-line camelcase
         },
 
