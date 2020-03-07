@@ -62,4 +62,45 @@ library TaxLib
 
         return value.mul(10 ** shift);
     }
+
+    /**
+     * Considering a tax that will be applied over a value, what is
+     * the value to request as trasnfer amount and make the sender balance
+     * to be zero as resultant.
+     *
+     * @param value the amount that will transferred.
+     */
+    function calculateAmountToCleanBalance(uint256 taxAmount, uint256 shift, uint256 value) internal pure returns (uint256)
+    {
+        uint256 base = 1000;
+        uint256 errorPropagator = base * 10; // this will add one more digit for error propagation.
+        uint256 dividend = base.mul(taxAmount).div(shift).add(base);
+        return _roundDivision(value.mul(errorPropagator).div(dividend));
+    }
+
+    /**
+     * When executing some divisions that overflow 18 digits, this is consider
+     * the 19th digit and return a rounding as : if > 5 then sum 1 to LSB.
+     */
+    function _roundDivision(uint256 value) internal pure returns (uint256)
+    {
+        uint256 lsb = value.div(100000000000000000);
+
+        if (lsb > 5)
+        {
+            return value.add(10).div(10);
+        }
+        return value.div(10);
+    }
+    /**
+     * Return amount plus the tax that will transferred from the sender.
+     */
+    function totalAmountTransfer(uint256 taxAmount, uint256 shift, uint256 value) internal pure returns (uint256)
+    {
+        return applyTax(
+            taxAmount,
+            shift,
+            value
+        ).add(value);
+    }
 }

@@ -106,6 +106,52 @@ contract Taxable is Ownable
     }
 
     /**
+     * Used to check the tax value that will be applied to a
+     * given amount.
+     *
+     * @param value the amount that will transferred.
+     */
+    function simulateTaxValue(uint256 value) public view returns (uint256)
+    {
+        return TaxLib.applyTax(
+            _taxContainer.amount,
+            _taxContainer.shift,
+            value
+        );
+    }
+
+    /**
+     * Used to check the total amount that will discounted
+     * from sender after applying the tax.
+     *
+     * @param value the amount that will transferred.
+     */
+    function simulateTransferValue(uint256 value) public view returns (uint256)
+    {
+        return TaxLib.totalAmountTransfer(
+            _taxContainer.amount,
+            _taxContainer.shift,
+            value
+        );
+    }
+
+    /**
+     * Considering a tax that will be applied over a value, what is
+     * the value to request as trasnfer amount and make the sender balance
+     * to be zero as resultant.
+     *
+     * @param value the amount that will transferred.
+     */
+    function amountToCleanBalance(uint256 value) public view returns (uint256)
+    {
+        return TaxLib.calculateAmountToCleanBalance(
+            _taxContainer.amount,
+            _taxContainer.shift,
+            value
+        );
+    }
+
+    /**
      * @dev Apply the tax based on the dynamic tax container
      *
      * @param value The value of transaction
@@ -118,4 +164,5 @@ contract Taxable is Ownable
             value
         );
     }
+
 }

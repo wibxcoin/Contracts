@@ -9,6 +9,7 @@
         "email": "gabriel.matos@wiboo.com.br"
     },
     "scripts": {
+        "cleannetwork": "truffle networks --clean",
         "test": "truffle test",
         "compile": "truffle compile",
         "migrate": "truffle migrate",
