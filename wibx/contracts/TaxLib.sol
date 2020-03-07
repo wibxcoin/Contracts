@@ -80,13 +80,13 @@ library TaxLib
 
     /**
      * When executing some divisions that overflow 18 digits, this is consider
-     * the 19th digit and return a rounding as : if > 5 then sum 1 to LSB.
+     * the 19th digit and return a rounding as : if >= 5 then sum 1 to LSB.
      */
     function _roundDivision(uint256 value) internal pure returns (uint256)
     {
         uint256 lsb = value.div(100000000000000000);
 
-        if (lsb > 5)
+        if (lsb >= 5)
         {
             return value.add(10).div(10);
         }
