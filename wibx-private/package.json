@@ -15,19 +15,19 @@
     },
     "private": true,
     "engines": {
-        "composer": "0.20.0"
+        "composer": "ˆ0.20.9"
     },
     "devDependencies": {
         "@types/node": "^10.9.2",
         "camelcase": "^5.0.0",
         "chai": "4.2.0",
         "chai-as-promised": "7.1.1",
-        "composer-admin": "0.20.0",
-        "composer-cli": "0.20.0",
-        "composer-client": "0.20.0",
-        "composer-common": "0.20.0",
-        "composer-connector-embedded": "0.20.0",
-        "composer-cucumber-steps": "0.20.0",
+        "composer-admin": "ˆ0.20.9",
+        "composer-cli": "ˆ0.20.9",
+        "composer-client": "ˆ0.20.9",
+        "composer-common": "ˆ0.20.9",
+        "composer-connector-embedded": "ˆ0.20.9",
+        "composer-cucumber-steps": "ˆ0.20.9",
         "cucumber": "^2.2.0",
         "eslint": "5.12.1",
         "mkdirp": "0.5.1",
