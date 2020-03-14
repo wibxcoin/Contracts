@@ -4,6 +4,8 @@
 # Originally based on code by OpenZeppelin: https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/scripts/coverage.sh
 #
 
+NODE_BIN=node_modules/.bin
+
 # Exit script as soon as a command fails.
 set -o errexit
 
@@ -51,10 +53,12 @@ start_ganache()
     )
 
     if [ "$SOLIDITY_COVERAGE" = true ]; then
-        node_modules/.bin/testrpc-sc --gasLimit 0xfffffffffff --port "$ganache_port" "${accounts[@]}" > /dev/null &
+        $NODE_BIN/testrpc-sc --gasLimit 0xfffffffffff --port "$ganache_port" "${accounts[@]}" > /dev/null &
     else
-        node_modules/.bin/ganache-cli --gasLimit 0xfffffffffff "${accounts[@]}" > /dev/null &
+        $NODE_BIN/ganache-cli --gasLimit 0xfffffffffff "${accounts[@]}" > /dev/null &
     fi
+
+    sleep 10
 
     ganache_pid=$!
 }
@@ -71,14 +75,14 @@ if [ "$SOLC_NIGHTLY" = true ]; then
     wget -q https://raw.githubusercontent.com/ethereum/solc-bin/gh-pages/bin/soljson-nightly.js -O /tmp/soljson.js && find . -name soljson.js -exec cp /tmp/soljson.js {} \;
 fi
 
-node_modules/.bin/truffle version
+$NODE_BIN/truffle version
 
 if [ "$SOLIDITY_COVERAGE" = true ]; then
-    node_modules/.bin/solidity-coverage
+    $NODE_BIN/solidity-coverage
 
     if [ "$CONTINUOUS_INTEGRATION" = true ]; then
-        cat coverage/lcov.info | node_modules/.bin/coveralls
+        cat coverage/lcov.info | $NODE_BIN/coveralls
     fi
 else
-    node_modules/.bin/truffle test "$@" --network=build
+    $NODE_BIN/truffle test "$@" --network=build
 fi

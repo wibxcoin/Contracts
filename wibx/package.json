@@ -24,7 +24,7 @@
         "openzeppelin-solidity": "2.4.0"
     },
     "devDependencies": {
-        "openzeppelin-test-helpers": "0.1.2",
+        "openzeppelin-test-helpers": "0.5.1",
         "bn.js": "5.0.0",
         "webpack": "4.28.4",
         "eslint": "4.19.1",
@@ -39,7 +39,9 @@
         "web3": "1.2.4",
         "coveralls": "3.0.1",
         "solidity-coverage": "0.5.11",
-        "ganache-cli": "6.7.0"
+        "ganache-cli": "6.9.1",
+        "ethereumjs-testrpc-sc": "6.5.1-sc.1",
+        "chai": "4.2.0"
     },
     "resolutions": {
         "braces": "2.3.1",

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-const { BN, shouldFail } = require('openzeppelin-test-helpers');
+const { BN, expectRevert } = require('openzeppelin-test-helpers');
 const WibxToken = artifacts.require('WibxToken');
 const { applyTax } = require('./helpers/tax');
 const expectEvent = require('./helpers/expectEvent');
@@ -34,7 +34,7 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr, taxR
 
         it('should AbiCoder throw an error if the administrator try to set an float point number', async () =>
         {
-            shouldFail(changeTax(1.5, 2, owner));
+            await expectEvent.exception(changeTax(1.5, 2, owner));
         });
 
         it('should adminsitrator change the tax amount', async () =>
@@ -66,17 +66,17 @@ contract('WibxToken: Taxable', ([owner, recipient, anotherAccount, bchAddr, taxR
 
         it('should other user not change the tax amount', async () =>
         {
-            await shouldFail.reverting(changeTax(1, 0, anotherAccount));
+            await expectRevert.unspecified(changeTax(1, 0, anotherAccount));
         });
 
         it('should administrator not change the tax amount greater than 3%', async () =>
         {
-            await shouldFail.reverting(changeTax(400, 0));
+            await expectRevert.unspecified(changeTax(400, 0));
         });
 
         it('should administrator not change the tax shift amount greater than 2 decimal places', async () =>
         {
-            await shouldFail.reverting(changeTax(1, 3));
+            await expectRevert.unspecified(changeTax(1, 3));
         });
 
         it('should keep the tax information available for everyone', async () =>

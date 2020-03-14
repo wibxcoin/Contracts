@@ -5,6 +5,7 @@
  */
 
 const { BN } = require('openzeppelin-test-helpers');
+require('./chai');
 
 /**
  * 12 billion tokens raised by 18 decimal places.

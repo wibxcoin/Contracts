@@ -4,7 +4,7 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-const { BN, shouldFail } = require('openzeppelin-test-helpers');
+const { BN, expectRevert } = require('openzeppelin-test-helpers');
 const WibxToken = artifacts.require('WibxToken');
 const { applyTax } = require('./helpers/tax');
 const {
@@ -29,7 +29,7 @@ contract('WibxToken: BCH batch transfer', ([owner, recipient, anotherAccount, bc
 
     it('should fail with a different number of parameters', async () =>
     {
-        await shouldFail.reverting(tokenInstance.sendBatch(
+        await expectRevert.unspecified(tokenInstance.sendBatch(
             [recipient],
             [1, 2],
             owner
@@ -40,7 +40,7 @@ contract('WibxToken: BCH batch transfer', ([owner, recipient, anotherAccount, bc
     {
         const halfAmount = TRANSFER_TEST_AMOUNT;
 
-        await shouldFail.reverting(tokenInstance.sendBatch(
+        await expectRevert.unspecified(tokenInstance.sendBatch(
             [recipient, anotherAccount],
             [halfAmount, halfAmount],
             owner,
@@ -54,7 +54,7 @@ contract('WibxToken: BCH batch transfer', ([owner, recipient, anotherAccount, bc
         const recipients = Array(transactionNumber).fill(recipient);
         const amounts = Array(transactionNumber).fill(new BN(1));
 
-        await shouldFail.reverting(tokenInstance.sendBatch(
+        await expectRevert.unspecified(tokenInstance.sendBatch(
             recipients,
             amounts,
             owner,

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-const { BN, shouldFail } = require('openzeppelin-test-helpers');
+const { BN, expectRevert } = require('openzeppelin-test-helpers');
 const WibxToken = artifacts.require('WibxToken');
 const { applyTax } = require('./helpers/tax');
 const expectEvent = require('./helpers/expectEvent');
@@ -70,7 +70,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                 it('reverts', async () =>
                 {
-                    await shouldFail.reverting(tokenInstance.transfer(to, amount, { from: owner }));
+                    await expectRevert.unspecified(tokenInstance.transfer(to, amount, { from: owner }));
                 });
             });
 
@@ -135,7 +135,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
             it('reverts', async () =>
             {
-                await shouldFail.reverting(tokenInstance.transfer(to, INITIAL_SUPPLY, { from: owner }));
+                await expectRevert.unspecified(tokenInstance.transfer(to, INITIAL_SUPPLY, { from: owner }));
             });
         });
     });
@@ -236,7 +236,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
             it('reverts', async () =>
             {
-                await shouldFail.reverting(tokenInstance.approve(spender, amount, { from: owner }));
+                await expectRevert.unspecified(tokenInstance.approve(spender, amount, { from: owner }));
             });
         });
     });
@@ -326,7 +326,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                     it('reverts', async () =>
                     {
-                        await shouldFail.reverting(tokenInstance.transferFrom(owner, to, amount, { from: spender }));
+                        await expectRevert.unspecified(tokenInstance.transferFrom(owner, to, amount, { from: spender }));
                     });
                 });
             });
@@ -344,7 +344,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                     it('reverts', async () =>
                     {
-                        await shouldFail.reverting(tokenInstance.transferFrom(owner, to, amount, { from: spender }));
+                        await expectRevert.unspecified(tokenInstance.transferFrom(owner, to, amount, { from: spender }));
                     });
                 });
 
@@ -354,7 +354,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                     it('reverts', async () =>
                     {
-                        await shouldFail.reverting(tokenInstance.transferFrom(owner, to, amount, { from: spender }));
+                        await expectRevert.unspecified(tokenInstance.transferFrom(owner, to, amount, { from: spender }));
                     });
                 });
             });
@@ -372,7 +372,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
             it('reverts', async () =>
             {
-                await shouldFail.reverting(tokenInstance.transferFrom(owner, to, amount, { from: spender }));
+                await expectRevert.unspecified(tokenInstance.transferFrom(owner, to, amount, { from: spender }));
             });
         });
     });
@@ -389,7 +389,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
                 {
                     it('reverts', async () =>
                     {
-                        await shouldFail.reverting(tokenInstance.decreaseAllowance(spender, amount, { from: owner }));
+                        await expectRevert.unspecified(tokenInstance.decreaseAllowance(spender, amount, { from: owner }));
                     });
                 });
 
@@ -431,7 +431,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                     it('reverts when more than the full allowance is removed', async () =>
                     {
-                        await shouldFail.reverting(tokenInstance.decreaseAllowance(
+                        await expectRevert.unspecified(tokenInstance.decreaseAllowance(
                             spender, approvedAmount.add(new BN(1)), { from: owner })
                         );
                     });
@@ -456,7 +456,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
             it('reverts', async () =>
             {
-                await shouldFail.reverting(tokenInstance.decreaseAllowance(spender, amount, { from: owner }));
+                await expectRevert.unspecified(tokenInstance.decreaseAllowance(spender, amount, { from: owner }));
             });
         });
     });
@@ -560,7 +560,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
             it('reverts', async () =>
             {
-                await shouldFail.reverting(tokenInstance.increaseAllowance(spender, amount, { from: owner }));
+                await expectRevert.unspecified(tokenInstance.increaseAllowance(spender, amount, { from: owner }));
             });
         });
     });
@@ -608,7 +608,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
             it('reverts', async function ()
             {
-                await shouldFail.reverting(tokenInstance.burn(amount, { from: owner }));
+                await expectRevert.unspecified(tokenInstance.burn(amount, { from: owner }));
             });
         });
     });
@@ -666,7 +666,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
             it('reverts', async function ()
             {
                 await tokenInstance.approve(burner, amount, { from: owner });
-                await shouldFail.reverting(tokenInstance.burnFrom(owner, amount, { from: burner }));
+                await expectRevert.unspecified(tokenInstance.burnFrom(owner, amount, { from: burner }));
             });
         });
 
@@ -677,7 +677,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
             it('reverts', async function ()
             {
                 await tokenInstance.approve(burner, allowance, { from: owner });
-                await shouldFail.reverting(tokenInstance.burnFrom(owner, allowance.addn(1), { from: burner }));
+                await expectRevert.unspecified(tokenInstance.burnFrom(owner, allowance.addn(1), { from: burner }));
             });
         });
     });
@@ -701,7 +701,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                 it('reverts when pausing from non-pauser', async function ()
                 {
-                    await shouldFail.reverting(tokenInstance.pause({ from: anotherAccount }),
+                    await expectRevert.unspecified(tokenInstance.pause({ from: anotherAccount }),
                         'PauserRole: caller does not have the Pauser role'
                     );
                 });
@@ -720,7 +720,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                     it('cannot perform transfer in pause', async function ()
                     {
-                        await shouldFail.reverting(
+                        await expectRevert.unspecified(
                             tokenInstance.transfer(anotherAccount, '1', { from: owner }),
                             'Pausable: paused'
                         );
@@ -728,7 +728,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                     it('cannot perform transferFrom in pause', async function ()
                     {
-                        await shouldFail.reverting(
+                        await expectRevert.unspecified(
                             tokenInstance.transferFrom(owner, anotherAccount, '1', { from: owner }),
                             'Pausable: paused'
                         );
@@ -736,7 +736,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                     it('cannot perform transferBatch in pause', async function ()
                     {
-                        await shouldFail.reverting(
+                        await expectRevert.unspecified(
                             tokenInstance.sendBatch(
                                 [recipient, anotherAccount],
                                 ['1', '1'],
@@ -749,7 +749,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                     it('reverts when re-pausing', async function ()
                     {
-                        await shouldFail.reverting(tokenInstance.pause({ from: owner }), 'Pausable: paused');
+                        await expectRevert.unspecified(tokenInstance.pause({ from: owner }), 'Pausable: paused');
                     });
 
                     describe('unpausing', function ()
@@ -762,7 +762,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                         it('reverts when unpausing from non-pauser', async function ()
                         {
-                            await shouldFail.reverting(tokenInstance.unpause({ from: anotherAccount }),
+                            await expectRevert.unspecified(tokenInstance.unpause({ from: anotherAccount }),
                                 'PauserRole: caller does not have the Pauser role'
                             );
                         });
@@ -810,7 +810,7 @@ contract('WibxToken: Common ERC20 Functionalities', ([owner, recipient, anotherA
 
                             it('reverts when re-unpausing', async function ()
                             {
-                                await shouldFail.reverting(tokenInstance.unpause({ from: owner }), 'Pausable: not paused');
+                                await expectRevert.unspecified(tokenInstance.unpause({ from: owner }), 'Pausable: not paused');
                             });
                         });
                     });

@@ -4,7 +4,7 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-const { BN, shouldFail, time } = require('openzeppelin-test-helpers');
+const { BN, expectRevert, time } = require('openzeppelin-test-helpers');
 const { applyTax } = require('./helpers/tax');
 const WibxToken = artifacts.require('WibxToken');
 const WibxTokenVesting = artifacts.require('WibxTokenVesting');
@@ -45,7 +45,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
 
         it('should fail add a new user from other user than the contract owner', async () =>
         {
-            await shouldFail.reverting(
+            await expectRevert.unspecified(
                 vestingInstance.addTeamMember(anotherAccount, defaultAmount, { from: anotherAccount })
             );
         });
@@ -54,7 +54,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
         {
             await vestingInstance.addTeamMember(anotherAccount, defaultAmount);
 
-            await shouldFail.reverting.withMessage(
+            await expectRevert(
                 vestingInstance.addTeamMember(anotherAccount, defaultAmount),
                 'Member already added'
             );
@@ -65,7 +65,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
     {
         it('should fail if the member doesnt exists', async () =>
         {
-            await shouldFail.reverting.withMessage(
+            await expectRevert(
                 vestingInstance.withdrawal(anotherAccount),
                 'The team member is not found'
             );
@@ -75,7 +75,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
         {
             await vestingInstance.addTeamMember(anotherAccount, defaultAmount);
 
-            await shouldFail.reverting.withMessage(
+            await expectRevert(
                 vestingInstance.withdrawal(anotherAccount),
                 'The contract doesnt have founds to pay'
             );
@@ -97,7 +97,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
                 await vestingInstance.withdrawal(anotherAccount);
             }
 
-            await shouldFail.reverting.withMessage(
+            await expectRevert(
                 vestingInstance.withdrawal(anotherAccount),
                 'There is no more tokens to transfer to this wallet'
             );
@@ -118,7 +118,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
                 await vestingInstance.withdrawal(anotherAccount);
             }
 
-            await shouldFail.reverting.withMessage(
+            await expectRevert(
                 vestingInstance.withdrawal(anotherAccount),
                 'There is no more tokens to transfer to this wallet'
             );
@@ -134,7 +134,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
 
             await time.increase(timeLeap.div(new BN('2'))); // Time machine
 
-            await shouldFail.reverting.withMessage(
+            await expectRevert(
                 vestingInstance.withdrawal(anotherAccount),
                 'You need to wait the next withdrawal period'
             );
@@ -145,7 +145,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
     {
         it('should throw an exception if other person than owner try to destroy the contract', async () =>
         {
-            await shouldFail.reverting.withMessage(
+            await expectRevert.unspecified(
                 vestingInstance.terminateTokenVesting({ from: anotherAccount }),
             );
         });
@@ -154,7 +154,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
         {
             await vestingInstance.addTeamMember(recipient, defaultAmount);
 
-            await shouldFail.reverting.withMessage(
+            await expectRevert(
                 vestingInstance.terminateTokenVesting(),
                 'All withdrawals have yet to take place'
             );
@@ -176,8 +176,10 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
         {
             await vestingInstance.terminateTokenVesting();
 
-            await shouldFail(
-                vestingInstance.remainingTokenAmount(recipient)
+            // FIXME: expectRevert.outOfGas is not working.
+            await expectRevert(
+                vestingInstance.remainingTokenAmount(recipient),
+                'Out of Gas'
             );
         });
     });
@@ -201,7 +203,7 @@ contract('WibxTokenVesting: Common Functionalities', ([owner, recipient, another
 
         (await wibxInstance.balanceOf(wallet)).should.be.bignumber.equal('9000000000000000000000000');
 
-        await shouldFail.reverting.withMessage(
+        await expectRevert(
             vestingInstance.withdrawal(wallet),
             'You need to wait the next withdrawal period'
         );

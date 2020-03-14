@@ -4,7 +4,27 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-const { BN, expect, should } = require('openzeppelin-test-helpers');
+const { BN } = require('openzeppelin-test-helpers');
+const { expect } = require('./chai');
+
+/**
+ * Fail if some exception is not received.
+ *
+ * @param {Promise<any>} promise The promise to run
+ */
+async function exception (promise)
+{
+    try
+    {
+        await promise;
+    }
+    catch (e)
+    {
+        return;
+    }
+
+    expect.fail('Expected an exception but none was received');
+}
 
 /**
  * Checks if some event is in the log.
@@ -19,10 +39,13 @@ function inLogs (logs, eventName, eventArgs = {})
         e => e.event === eventName && e.args.to === eventArgs.to
     );
 
+    if (!event)
+    {
+        throw new Error(`Event ${eventName} not found!`);
+    }
+
     Object.keys(eventArgs)
         .forEach(key => contains(event.args, key, eventArgs[key]));
-
-    should.exist(event);
 
     return event;
 }
@@ -63,5 +86,6 @@ function isBN (object)
 }
 
 module.exports = {
-    inLogs
+    inLogs,
+    exception
 };

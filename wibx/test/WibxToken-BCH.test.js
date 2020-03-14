@@ -4,7 +4,7 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
-const { shouldFail } = require('openzeppelin-test-helpers');
+const { expectRevert } = require('openzeppelin-test-helpers');
 const WibxToken = artifacts.require('WibxToken');
 const { applyTax } = require('./helpers/tax');
 const expectEvent = require('./helpers/expectEvent');
@@ -98,7 +98,7 @@ contract('WibxToken: BCH Management', ([owner, recipient, anotherAccount, bchAdd
 
     it('should not transfer value from a unauthorized BCH manipulated address', async () =>
     {
-        await shouldFail.reverting(tokenInstance.transferFrom(
+        await expectRevert.unspecified(tokenInstance.transferFrom(
             owner, anotherAccount, INITIAL_SUPPLY, { from: bchAddr })
         );
     });
