@@ -1,15 +1,16 @@
-# <img src="https://wallet.wiboo.io/assets/img/logo-card.png" alt="WiBX" width="150px">	
+# <img src="https://raw.githubusercontent.com/wibxcoin/Contracts/master/assets/wbx_ico_hi.png" alt="WiBX" width="150px">
+
 [![Build Status](https://travis-ci.com/wibxcoin/Contracts.svg?branch=master)](https://travis-ci.com/wibxcoin/Contracts)
 [![Coverage Status](https://coveralls.io/repos/github/wibxcoin/Contracts/badge.svg?branch=master)](https://coveralls.io/github/wibxcoin/Contracts?branch=master)
 
-**WiBX is an Ethereum and Hyperledger DAPP.** The first utility token with mass usability in the exchange of products and services. The best in the NFC (Near Field Communication) wich is a mobile proximity payments transfer method model. The most flexible in his assignments.
+**WiBX is an Ethereum and Hyperledger Fabric DAPP.** The first utility token with mass usability in the exchange of products and services. The best in the NFC (Near Field Communication) wich is a mobile proximity payments transfer method model. The most flexible in his assignments.
 
 How it works technically
 
 WiBX is a generic crypto-currency, designed for retailers to receive payment and retain their customers.
 In order to do this, WiBX needs to provide a solid and fast platform for immediate and reliable transactions.
 
-All tokens are issued in the Ethereum network through the smart contract `WibxToken` and are tracked within the private network Hyperledger, through the chaincode `org.wiboo.wibxp.financial`, which is, the Hyperledger performing a fast network, processing the information well faster than Ethereum mainnet.
+All tokens are issued in the Ethereum network through the smart contract `WibxToken` and are tracked within the private network Hyperledger Fabric, through the chaincode `org.wiboo.wibxp.financial`, which is, the Hyperledger Fabric performing a fast network, processing the information well faster than Ethereum mainnet.
 
 This implies having a module called BCH (Blockchain Handler) that acts on both networks, tracing one blockchain to another and vice versa.
 
@@ -20,6 +21,12 @@ There are two types of addresses:
   * Personal address: Your normal Ethereum address. You can manipulate your WiBX tokens in a free way without the slightest interference from the `BCH` module.
 
   * Custody address: This type of wallet is used totally restricted for the internal operations of the WiBOO mall platform and will not allow any type of creation or external manipulation; these tokens will be administered by the `BCH` in full. Those tokens could be extracted to  a personal address, however it will be possible just via the WiBOO marketplace.
+
+## Useful WiBX Network Addresses
+
+  * 0x4261cDfEA93118677c04f880380d9b86b79C9b6a: The `BCH` system coordinator.
+  * 0x194d1bA9EDb4Bd849CA844870C05AC5cFB632b14: Tax collection account.
+  * 0x02F61ee95e2E7497Bfe4FAfE797ad97A4e8eFe33: `WibxToken` contract owner account.
 
 # How to Install
 
@@ -60,7 +67,7 @@ $ yarn build:coverage
 
 Solidity version: `v0.5.0+commit.1d4f565a`.
 
-## Hyperledger chaincode
+## Hyperledger Fabric Chaincode
 
 Inside the `wibx-private` directory, contains a [generator-hyperledger-composer](https://www.npmjs.com/package/generator-hyperledger-composer) project.
 
