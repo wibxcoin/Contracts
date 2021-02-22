@@ -7,9 +7,11 @@
 
 # truffle build directory
 build/
+.openzeppelin
+bin
 
 # lol macs
-.DS_Store/
+.DS_Store
 
 # truffle
 .node-xmlhttprequest-*

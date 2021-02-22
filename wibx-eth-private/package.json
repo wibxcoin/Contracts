@@ -1,0 +1,11 @@
+{
+    "name": "wibx-eth-private",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "@openzeppelin/contracts": "3.4.0",
+        "@openzeppelin/contracts-upgradeable": "3.4.0",
+        "@openzeppelin/truffle-upgrades": "1.5.0"
+    }
+}
