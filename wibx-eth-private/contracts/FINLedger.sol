@@ -16,6 +16,12 @@ contract FINLedger
     mapping(address => uint256) private _balances;
     mapping(address => uint256) private _reservations;
 
+    event Deposit(
+        address indexed externalFrom,
+        address indexed to,
+        uint256 amount,
+        uint256 txnHash
+    );
     event Reservation(
         address indexed from,
         uint256 amount
@@ -71,6 +77,8 @@ contract FINLedger
         require(balanceOperation, 'Overflow during deposit.');
 
         _balances[to] = newBalance;
+
+        emit Deposit(externalFrom, to, amount, txnHash);
     }
 
     function reserve(address from, uint256 amount) public

@@ -8,11 +8,14 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
 import "./FINLedger.sol";
 
-contract BCHLedger
+contract BCHLedger is Initializable
 {
     using SafeMath for uint256;
+
+    FINLedger private _finLedger;
 
     mapping(address => uint256) private _balances;
 
@@ -28,6 +31,11 @@ contract BCHLedger
         uint256 amount,
         uint256 taxAmount
     );
+
+    function initialize(address finLedgerAddr) public payable initializer
+    {
+        _finLedger = FINLedger(finLedgerAddr);
+    }
 
     function transferFrom(
         address from,
@@ -67,7 +75,7 @@ contract BCHLedger
 
         _balances[to] = newBalance;
 
-        //FINLedger.deposit(externalFrom, to, amount, txnHash);
+        _finLedger.deposit(externalFrom, to, amount, txnHash);
 
         emit Deposit(externalFrom, to, amount, txnHash);
     }

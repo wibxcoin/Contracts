@@ -13,9 +13,10 @@
 
 const { deployProxy } = require('@openzeppelin/truffle-upgrades');
 
+const FINLedger = artifacts.require('FINLedger');
 const BCHLedger = artifacts.require('BCHLedger');
 
 module.exports = async (deployer) =>
 {
-    await deployProxy(BCHLedger, [], { deployer });
+    await deployProxy(BCHLedger, [FINLedger.address], { deployer });
 };
