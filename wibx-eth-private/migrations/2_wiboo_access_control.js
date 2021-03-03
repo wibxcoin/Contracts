@@ -6,16 +6,16 @@
  * This file, project or its parts can not be copied and/or distributed without
  * the express permission of Ecossistema Negócios Digitais LTDA.
  *
- * @file 4_share_engagement_migration.js
+ * @file 2_wiboo_access_control.js
  * @author Gabriel Matos <gabriel.matos@wiboo.io>
- * @date Sunday, 21st February 2021 11:12:46 am
+ * @date Tuesday, 2nd March 2021 6:51:59 pm
  */
 
 const { deployProxy } = require('@openzeppelin/truffle-upgrades');
 
-const ShareEngagement = artifacts.require('IndicationEngagement');
+const WibooAccessControl = artifacts.require('WibooAccessControl');
 
 module.exports = async (deployer) =>
 {
-    await deployProxy(ShareEngagement, [], { deployer });
+    await deployProxy(WibooAccessControl, [], { deployer });
 };

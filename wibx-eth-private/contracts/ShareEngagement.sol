@@ -7,7 +7,10 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity >=0.4.22 <0.9.0;
 
-contract ShareEngagement
+import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
+import "./WibooAccessControl.sol";
+
+contract ShareEngagement is Initializable
 {
     struct Share
     {
@@ -20,7 +23,16 @@ contract ShareEngagement
         uint256 when;
     }
 
+    WibooAccessControl private _wibooAccessControl;
+
     mapping(address => Share) private _shares;
+
+    function initialize(
+        address wibooAccessControlAddr
+    ) public payable initializer
+    {
+        _wibooAccessControl = WibooAccessControl(wibooAccessControlAddr);
+    }
 
     function addShare(
         address key,
@@ -33,6 +45,8 @@ contract ShareEngagement
         uint256 when
     ) public
     {
+        _wibooAccessControl.onlyAdmin();
+
         _shares[key] = Share({
             id: id,
             id_campaign: id_campaign,

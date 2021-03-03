@@ -7,7 +7,10 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity >=0.4.22 <0.9.0;
 
-contract IndicationEngagement
+import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
+import "./WibooAccessControl.sol";
+
+contract IndicationEngagement is Initializable
 {
     struct Indication
     {
@@ -19,7 +22,16 @@ contract IndicationEngagement
         uint256 when;
     }
 
+    WibooAccessControl private _wibooAccessControl;
+
     mapping(address => Indication) private _indications;
+
+    function initialize(
+        address wibooAccessControlAddr
+    ) public payable initializer
+    {
+        _wibooAccessControl = WibooAccessControl(wibooAccessControlAddr);
+    }
 
     function addIndication(
         address key,
@@ -31,6 +43,8 @@ contract IndicationEngagement
         uint256 when
     ) public
     {
+        _wibooAccessControl.onlyAdmin();
+
         _indications[key] = Indication({
             id: id,
             id_campaign: id_campaign,

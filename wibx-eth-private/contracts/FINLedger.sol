@@ -7,11 +7,15 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity >=0.4.22 <0.9.0;
 
+import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
+import "./WibooAccessControl.sol";
 
-contract FINLedger
+contract FINLedger is Initializable
 {
     using SafeMath for uint256;
+
+    WibooAccessControl private _wibooAccessControl;
 
     mapping(address => uint256) private _balances;
     mapping(address => uint256) private _reservations;
@@ -37,6 +41,13 @@ contract FINLedger
         uint256 amount
     );
 
+    function initialize(
+        address wibooAccessControlAddr
+    ) public payable initializer
+    {
+        _wibooAccessControl = WibooAccessControl(wibooAccessControlAddr);
+    }
+
     function getBalance(address from) public view returns (uint256)
     {
         return _balances[from];
@@ -49,16 +60,22 @@ contract FINLedger
 
     function setBalance(address from, uint256 balance) public
     {
+        _wibooAccessControl.onlyAdmin();
+
         _balances[from] = balance;
     }
 
     function setReservation(address from, uint256 reservation) public
     {
+        _wibooAccessControl.onlyAdmin();
+
         _reservations[from] = reservation;
     }
 
     function setFinBalance(address from, uint256 balance, uint256 reservation) public
     {
+        _wibooAccessControl.onlyAdmin();
+
         setBalance(from, balance);
         setReservation(from, reservation);
     }
@@ -70,6 +87,8 @@ contract FINLedger
         uint256 txnHash
     ) public
     {
+        _wibooAccessControl.onlyAdmin();
+
         uint256 balance = _balances[to];
 
         (bool balanceOperation, uint256 newBalance) = balance.trySub(amount);
@@ -83,6 +102,8 @@ contract FINLedger
 
     function reserve(address from, uint256 amount) public
     {
+        _wibooAccessControl.onlyAdmin();
+
         uint256 balance = _balances[from];
 
         require(balance >= amount, 'The origin account doesnt have funds to pay.');
@@ -100,6 +121,8 @@ contract FINLedger
 
     function settle(address from, address to, uint256 amount, uint256 taxAmount) public
     {
+        _wibooAccessControl.onlyAdmin();
+
         uint256 reserved = _reservations[from];
         (bool taxOperation, uint256 amountWithTax) = amount.tryAdd(taxAmount);
 
@@ -118,6 +141,8 @@ contract FINLedger
 
     function cancel(address from, uint256 amount) public
     {
+        _wibooAccessControl.onlyAdmin();
+
         uint256 reserved = _reservations[from];
 
         require(reserved >= amount, 'The origin account doesnt have funds to pay.');

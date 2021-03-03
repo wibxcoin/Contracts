@@ -7,7 +7,10 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity >=0.4.22 <0.9.0;
 
-contract ReferralEngagement
+import "@openzeppelin/contracts-upgradeable/proxy/Initializable.sol";
+import "./WibooAccessControl.sol";
+
+contract ReferralEngagement is Initializable
 {
     struct Referral
     {
@@ -19,7 +22,16 @@ contract ReferralEngagement
         uint256 when;
     }
 
+    WibooAccessControl private _wibooAccessControl;
+
     mapping(address => Referral) private _referrals;
+
+    function initialize(
+        address wibooAccessControlAddr
+    ) public payable initializer
+    {
+        _wibooAccessControl = WibooAccessControl(wibooAccessControlAddr);
+    }
 
     function addReferral(
         address key,
@@ -31,6 +43,8 @@ contract ReferralEngagement
         uint256 when
     ) public
     {
+         _wibooAccessControl.onlyAdmin();
+
         _referrals[key] = Referral({
             id: id,
             ref_conf_id: ref_conf_id,
