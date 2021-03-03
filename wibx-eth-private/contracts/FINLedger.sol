@@ -60,21 +60,21 @@ contract FINLedger is Initializable
 
     function setBalance(address from, uint256 balance) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
         _balances[from] = balance;
     }
 
     function setReservation(address from, uint256 reservation) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
         _reservations[from] = reservation;
     }
 
     function setFinBalance(address from, uint256 balance, uint256 reservation) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
         setBalance(from, balance);
         setReservation(from, reservation);
@@ -87,7 +87,7 @@ contract FINLedger is Initializable
         uint256 txnHash
     ) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
         uint256 balance = _balances[to];
 
@@ -102,7 +102,7 @@ contract FINLedger is Initializable
 
     function reserve(address from, uint256 amount) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
         uint256 balance = _balances[from];
 
@@ -121,7 +121,7 @@ contract FINLedger is Initializable
 
     function settle(address from, address to, uint256 amount, uint256 taxAmount) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
         uint256 reserved = _reservations[from];
         (bool taxOperation, uint256 amountWithTax) = amount.tryAdd(taxAmount);
@@ -141,7 +141,7 @@ contract FINLedger is Initializable
 
     function cancel(address from, uint256 amount) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
         uint256 reserved = _reservations[from];
 

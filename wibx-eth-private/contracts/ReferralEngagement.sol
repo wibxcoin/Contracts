@@ -22,9 +22,20 @@ contract ReferralEngagement is Initializable
         uint256 when;
     }
 
-    WibooAccessControl private _wibooAccessControl;
+    event ReferralCreated
+    (
+        address to,
+        string id,
+        string ref_conf_id,
+        address from,
+        uint256 amount,
+        uint8 status,
+        uint256 when
+    );
 
-    mapping(address => Referral) private _referrals;
+    WibooAccessControl internal _wibooAccessControl;
+
+    mapping(address => mapping(string => Referral)) internal _referrals;
 
     function initialize(
         address wibooAccessControlAddr
@@ -43,9 +54,9 @@ contract ReferralEngagement is Initializable
         uint256 when
     ) public
     {
-         _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
-        _referrals[key] = Referral({
+        _referrals[key][id] = Referral({
             id: id,
             ref_conf_id: ref_conf_id,
             from: from,
@@ -53,9 +64,14 @@ contract ReferralEngagement is Initializable
             status: status,
             when: when
         });
+
+        emit ReferralCreated(key, id, ref_conf_id, from, amount, status, when);
     }
 
-    function getReferral(address key) public view returns (
+    function getReferral(
+        address key,
+        string calldata id_ref
+    ) public view returns (
         address to,
         string memory id,
         string memory ref_conf_id,
@@ -65,7 +81,7 @@ contract ReferralEngagement is Initializable
         uint256 when
     )
     {
-        Referral memory referral = _referrals[key];
+        Referral memory referral = _referrals[key][id_ref];
 
         return (
             key,

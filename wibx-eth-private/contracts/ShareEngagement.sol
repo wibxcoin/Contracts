@@ -15,7 +15,7 @@ contract ShareEngagement is Initializable
     struct Share
     {
         string id;
-        string id_campaign;
+        string idCampaign;
         uint256 token;
         uint16 media;
         uint256 amount;
@@ -23,9 +23,21 @@ contract ShareEngagement is Initializable
         uint256 when;
     }
 
-    WibooAccessControl private _wibooAccessControl;
+    event ShareCreated
+    (
+        address to,
+        string id,
+        string idCampaign,
+        uint256 token,
+        uint16 media,
+        uint256 amount,
+        uint16 status,
+        uint256 when
+    );
 
-    mapping(address => Share) private _shares;
+    WibooAccessControl internal _wibooAccessControl;
+
+    mapping(address => mapping(string => Share)) internal _shares;
 
     function initialize(
         address wibooAccessControlAddr
@@ -37,7 +49,7 @@ contract ShareEngagement is Initializable
     function addShare(
         address key,
         string calldata id,
-        string calldata id_campaign,
+        string calldata idCampaign,
         uint256 token,
         uint16 media,
         uint256 amount,
@@ -45,23 +57,25 @@ contract ShareEngagement is Initializable
         uint256 when
     ) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
-        _shares[key] = Share({
+        _shares[key][id] = Share({
             id: id,
-            id_campaign: id_campaign,
+            idCampaign: idCampaign,
             token: token,
             media: media,
             amount: amount,
             status: status,
             when: when
         });
+
+        emit ShareCreated(key, id, idCampaign, token, media, amount, status, when);
     }
 
-    function getShare(address key) public view returns (
+    function getShare(address key, string calldata idShare) public view returns (
         address to,
         string memory id,
-        string memory id_campaign,
+        string memory idCampaign,
         uint256 token,
         uint16 media,
         uint256 amount,
@@ -69,12 +83,12 @@ contract ShareEngagement is Initializable
         uint256 when
     )
     {
-        Share memory share = _shares[key];
+        Share memory share = _shares[key][idShare];
 
         return (
-            to,
+            key,
             share.id,
-            share.id_campaign,
+            share.idCampaign,
             share.token,
             share.media,
             share.amount,

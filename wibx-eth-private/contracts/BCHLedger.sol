@@ -57,7 +57,7 @@ contract BCHLedger is Initializable
         uint256 taxAmount
     ) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
         uint256 balance = _balances[from];
         (bool taxOperation, uint256 amountWithTax) = amount.tryAdd(taxAmount);
@@ -82,7 +82,7 @@ contract BCHLedger is Initializable
         uint256 txnHash
     ) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
         uint256 balance = _balances[to];
         (bool balanceOperation, uint256 newBalance) = balance.trySub(amount);
@@ -104,7 +104,7 @@ contract BCHLedger is Initializable
         string calldata journalAddr
     ) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
         uint256 balance = _balances[from];
         (bool taxOperation, uint256 amountWithTax) = amount.tryAdd(taxAmount);

@@ -15,16 +15,27 @@ contract IndicationEngagement is Initializable
     struct Indication
     {
         string id;
-        string id_campaign;
-        string id_item;
-        uint256 amount_item;
-        uint256 amount_reward;
+        string idCampaign;
+        string idItem;
+        uint256 amountItem;
+        uint256 amountReward;
         uint256 when;
     }
 
-    WibooAccessControl private _wibooAccessControl;
+    event IndicationCreated
+    (
+        address to,
+        string id,
+        string idCampaign,
+        string idItem,
+        uint256 amountItem,
+        uint256 amountReward,
+        uint256 when
+    );
 
-    mapping(address => Indication) private _indications;
+    WibooAccessControl internal _wibooAccessControl;
+
+    mapping(address => mapping(string => Indication)) internal _indications;
 
     function initialize(
         address wibooAccessControlAddr
@@ -36,44 +47,46 @@ contract IndicationEngagement is Initializable
     function addIndication(
         address key,
         string calldata id,
-        string calldata id_campaign,
-        string calldata id_item,
-        uint256 amount_item,
-        uint256 amount_reward,
+        string calldata idCampaign,
+        string calldata idItem,
+        uint256 amountItem,
+        uint256 amountReward,
         uint256 when
     ) public
     {
-        _wibooAccessControl.onlyAdmin();
+        _wibooAccessControl.onlyAdmin(msg.sender);
 
-        _indications[key] = Indication({
+        _indications[key][id] = Indication({
             id: id,
-            id_campaign: id_campaign,
-            id_item: id_item,
-            amount_item: amount_item,
-            amount_reward: amount_reward,
+            idCampaign: idCampaign,
+            idItem: idItem,
+            amountItem: amountItem,
+            amountReward: amountReward,
             when: when
         });
+
+        emit IndicationCreated(key, id, idCampaign, idItem, amountItem, amountReward, when);
     }
 
-    function getIndication(address key) public view returns (
+    function getIndication(address key, string calldata idIndication) public view returns (
         address to,
         string memory id,
-        string memory id_campaign,
-        string memory id_item,
-        uint256 amount_item,
-        uint256 amount_reward,
+        string memory idCampaign,
+        string memory idItem,
+        uint256 amountItem,
+        uint256 amountReward,
         uint256 when
     )
     {
-        Indication memory indication = _indications[key];
+        Indication memory indication = _indications[key][idIndication];
 
         return (
             key,
             indication.id,
-            indication.id_campaign,
-            indication.id_item,
-            indication.amount_item,
-            indication.amount_reward,
+            indication.idCampaign,
+            indication.idItem,
+            indication.amountItem,
+            indication.amountReward,
             indication.when
         );
     }
