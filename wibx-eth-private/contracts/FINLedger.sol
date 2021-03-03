@@ -24,7 +24,7 @@ contract FINLedger is Initializable
         address indexed externalFrom,
         address indexed to,
         uint256 amount,
-        uint256 txnHash
+        string txnHash
     );
     event Reservation(
         address indexed from,
@@ -48,12 +48,12 @@ contract FINLedger is Initializable
         _wibooAccessControl = WibooAccessControl(wibooAccessControlAddr);
     }
 
-    function getBalance(address from) public view returns (uint256)
+    function balanceOf(address from) public view returns (uint256)
     {
         return _balances[from];
     }
 
-    function getReservation(address from) public view returns (uint256)
+    function reservationOf(address from) public view returns (uint256)
     {
         return _reservations[from];
     }
@@ -84,14 +84,14 @@ contract FINLedger is Initializable
         address externalFrom,
         address to,
         uint256 amount,
-        uint256 txnHash
+        string memory txnHash
     ) public
     {
         _wibooAccessControl.onlyAdmin(msg.sender);
 
         uint256 balance = _balances[to];
 
-        (bool balanceOperation, uint256 newBalance) = balance.trySub(amount);
+        (bool balanceOperation, uint256 newBalance) = balance.tryAdd(amount);
 
         require(balanceOperation, 'Overflow during deposit.');
 

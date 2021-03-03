@@ -25,7 +25,7 @@ contract BCHLedger is Initializable
         address indexed externalFrom,
         address indexed to,
         uint256 amount,
-        uint256 txnHash
+        string txnHash
     );
     event Transfer(
         address indexed from,
@@ -79,7 +79,7 @@ contract BCHLedger is Initializable
         address externalFrom,
         address to,
         uint256 amount,
-        uint256 txnHash
+        string calldata txnHash
     ) public
     {
         _wibooAccessControl.onlyAdmin(msg.sender);

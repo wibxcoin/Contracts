@@ -12,5 +12,6 @@
  */
 
 module.exports = {
-    NOT_ADMIN_ERROR: 'WibooAccessControl: caller is not the admin'
+    NOT_ADMIN_ERROR: 'WibooAccessControl: caller is not the admin',
+    MISSING_FUNDS: 'The origin account doesnt have funds to pay.'
 };
