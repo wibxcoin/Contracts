@@ -11,7 +11,7 @@
  * @date Wednesday, 3rd March 2021 9:25:45 am
  */
 
-const { expectEvent, ether, expectRevert, BN } = require('@openzeppelin/test-helpers');
+const { expectEvent, ether, expectRevert } = require('@openzeppelin/test-helpers');
 const { NOT_ADMIN_ERROR, MISSING_FUNDS } = require('./helpers/exceptions');
 const deployMockedProxy = require('./helpers/deploy-mocked-proxy');
 

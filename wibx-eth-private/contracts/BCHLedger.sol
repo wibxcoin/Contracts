@@ -50,6 +50,39 @@ contract BCHLedger is Initializable
         _wibooAccessControl = WibooAccessControl(wibooAccessControlAddr);
     }
 
+    function balanceOf(address from) public view returns (uint256)
+    {
+        return _balances[from];
+    }
+
+    function setBalance(address from, uint256 amount) public
+    {
+        _wibooAccessControl.onlyAdmin(msg.sender);
+
+        _balances[from] = amount;
+    }
+
+    function deposit(
+        address externalFrom,
+        address to,
+        uint256 amount,
+        string calldata txnHash
+    ) public
+    {
+        _wibooAccessControl.onlyAdmin(msg.sender);
+
+        uint256 balance = _balances[to];
+        (bool balanceOperation, uint256 newBalance) = balance.tryAdd(amount);
+
+        require(balanceOperation, 'Overflow during deposit.');
+
+        _balances[to] = newBalance;
+
+        _finLedger.deposit(externalFrom, to, amount, txnHash);
+
+        emit Deposit(externalFrom, to, amount, txnHash);
+    }
+
     function transferFrom(
         address from,
         address to,
@@ -73,27 +106,6 @@ contract BCHLedger is Initializable
         _balances[to] = newToBalance;
 
         emit Transfer(from, to, amount, taxAmount);
-    }
-
-    function deposit(
-        address externalFrom,
-        address to,
-        uint256 amount,
-        string calldata txnHash
-    ) public
-    {
-        _wibooAccessControl.onlyAdmin(msg.sender);
-
-        uint256 balance = _balances[to];
-        (bool balanceOperation, uint256 newBalance) = balance.trySub(amount);
-
-        require(balanceOperation, 'Overflow during deposit.');
-
-        _balances[to] = newBalance;
-
-        _finLedger.deposit(externalFrom, to, amount, txnHash);
-
-        emit Deposit(externalFrom, to, amount, txnHash);
     }
 
     function withdrawal(
