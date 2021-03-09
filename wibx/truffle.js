@@ -4,6 +4,8 @@
  * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt
  */
 
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
 const LOCALHOST = '127.0.0.1';
 const COMMON_NETWORK_ID = '*';
 const COMMON_GAS_LIMIT = 0x5FDFB1;
@@ -21,6 +23,17 @@ module.exports = {
             port: 8646,
             gas: COMMON_GAS_LIMIT,
             network_id: COMMON_NETWORK_ID
+        },
+
+        rinkeby: {
+            network_id: 4,
+            provider: function()
+            {
+                return new HDWalletProvider(
+                    process.env['INFURA_PK'],
+                    'https://rinkeby.infura.io/v3/' + process.env['INFURA_API_KEY']
+                );
+            }
         },
 
         localdocker: {
