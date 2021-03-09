@@ -1,12 +1,26 @@
 {
     "name": "wibx-eth-private",
     "version": "1.0.0",
-    "main": "index.js",
-    "license": "MIT",
+    "description": "WiBX Private Network Contracts",
+    "license": "Apache-2.0",
+    "private": true,
+    "author": {
+        "name": "Gabriel Matos",
+        "email": "gabriel.matos@wibx.io"
+    },
+    "scripts": {
+        "test": "truffle test",
+        "compile": "truffle compile",
+        "migrate": "truffle migrate",
+        "console": "truffle console",
+        "texec": "truffle exec"
+    },
     "dependencies": {
         "@openzeppelin/contracts": "3.4.0",
         "@openzeppelin/contracts-upgradeable": "3.4.0",
-        "@openzeppelin/truffle-upgrades": "1.5.0",
+        "@openzeppelin/truffle-upgrades": "1.5.0"
+    },
+    "devDependencies": {
         "@openzeppelin/test-helpers": "0.5.10"
     }
 }
