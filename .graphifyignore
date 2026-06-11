@@ -1,0 +1,121 @@
+# .graphifyignore — WiBOO / Wibx platform
+# Goal: maximize architectural signal, minimize noise. Index source, domain
+# code, contracts, migrations, infra, ADRs, memories, devlogs, tests that encode
+# business rules. Exclude generated, binary, cached, reproducible artifacts.
+#
+# Format: gitignore-style, last-match-wins, `!` re-includes. A `.graphifyignore`
+# only EXCLUDES; everything not matched here is indexed by default — so the
+# "always index" intent (docs/**, src/**, libs/**, apps/**, services/**,
+# liquibase/**, migrations/**, TypeORM entities, DTOs, repositories, workers,
+# queues, BPMN, SmartForms, CPM/FIN/DES/BGM/WLC, etc.) needs no entry: it simply
+# is not excluded below.
+#
+# Lockfiles are intentionally NOT ignored (package-lock.json, yarn.lock,
+# pnpm-lock.yaml): for WiBOO they document package versions and dependency
+# evolution. Re-add them here only if the graph becomes too noisy.
+
+# --- Dependencies / vendored ---
+node_modules/
+vendor/
+
+# --- Build outputs ---
+dist/
+build/
+out/
+release/
+target/
+bin/
+obj/
+
+# --- Caches ---
+.cache/
+.parcel-cache/
+.eslintcache
+.turbo/
+.nx/cache/
+.next/
+.nuxt/
+.angular/
+.svelte-kit/
+.nyc_output/
+
+# --- Graphify / tooling artifacts (not in original list; pure output/cache) ---
+graphify-out/
+graphify-out-platform/
+.serena/
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# --- VCS / IDE / OS ---
+.git/
+.git/modules/
+.idea/
+.vscode/
+.DS_Store
+*.swp
+
+# --- Temporary ---
+tmp/
+temp/
+
+# --- Test reports / artifacts ---
+playwright-report/
+test-results/
+blob-report/
+allure-results/
+allure-report/
+screenshots/
+videos/
+artifacts/
+downloads/
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# --- Terraform state ---
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# --- Archives ---
+*.zip
+*.tar
+*.gz
+*.7z
+*.rar
+
+# --- Binary installers / blobs ---
+*.iso
+*.dmg
+*.exe
+*.msi
+*.bin
+
+# --- Images (do not contribute to architecture) ---
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.webp
+
+# --- Audio / video ---
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.mp3
+*.wav
+
+# --- Generated bundles / maps / snapshots ---
+*.min.js
+*.map
+*.snap
