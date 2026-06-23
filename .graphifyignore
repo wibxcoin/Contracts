@@ -33,6 +33,7 @@ obj/
 .eslintcache
 .turbo/
 .nx/cache/
+.ts-cache/
 .next/
 .nuxt/
 .angular/
