@@ -2,7 +2,7 @@
 
 This file is the index of the domain memory for `Contracts`. The domain memory captures durable knowledge that is specific to this domain — design decisions, bug history, operational caveats, follow-up work — and is mandatory reading for any agent (human or AI) about to touch this repository or any cross-boundary code that depends on it.
 
-The platform-wide orientation lives in `development-environment/agents/`. The reading order, the relationship between memory layers, and the rules that govern this file are documented in [`ONBOARDING.md`](../../development-environment/agents/ONBOARDING.md) and in [`working_norms.md`](../../development-environment/agents/working_norms.md) (rules 24 and 25).
+The platform-wide orientation lives in `development-environment/agents/`. The reading order, the relationship between memory layers, and the rules that govern this file are documented in [`ONBOARDING.md`](../../../development-environment/agents/ONBOARDING.md) and in [`working_norms.md`](../../../development-environment/agents/working_norms.md) (rules 24 and 25).
 
 Add one line per memory file under this directory. Keep entries short — one sentence describing what the file covers — and let the file itself carry the depth.
 

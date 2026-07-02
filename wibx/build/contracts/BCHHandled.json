@@ -4,6 +4,7 @@
     {
       "inputs": [
         {
+          "internalType": "address",
           "name": "bchAddress",
           "type": "address"
         }
@@ -17,11 +18,13 @@
       "inputs": [
         {
           "indexed": true,
+          "internalType": "address",
           "name": "to",
           "type": "address"
         },
         {
           "indexed": false,
+          "internalType": "bool",
           "name": "state",
           "type": "bool"
         }
@@ -33,6 +36,7 @@
       "constant": true,
       "inputs": [
         {
+          "internalType": "address",
           "name": "wallet",
           "type": "address"
         }
@@ -40,6 +44,7 @@
       "name": "isBchHandled",
       "outputs": [
         {
+          "internalType": "bool",
           "name": "",
           "type": "bool"
         }
@@ -54,6 +59,7 @@
       "name": "bchAuthorize",
       "outputs": [
         {
+          "internalType": "bool",
           "name": "",
           "type": "bool"
         }
@@ -68,6 +74,7 @@
       "name": "bchRevoke",
       "outputs": [
         {
+          "internalType": "bool",
           "name": "",
           "type": "bool"
         }
@@ -77,31 +84,32 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b5060405160208061030a8339810180604052602081101561003057600080fd5b8101908080519060200190929190505050806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555050610279806100916000396000f3fe608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063102bf9b91461005c5780631b1a48f5146100c55780639ea605c3146100f4575b600080fd5b34801561006857600080fd5b506100ab6004803603602081101561007f57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610123565b604051808215151515815260200191505060405180910390f35b3480156100d157600080fd5b506100da610179565b604051808215151515815260200191505060405180910390f35b34801561010057600080fd5b5061010961018a565b604051808215151515815260200191505060405180910390f35b6000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff169050919050565b6000610185600061019b565b905090565b6000610196600161019b565b905090565b60003373ffffffffffffffffffffffffffffffffffffffff167f387797210916a5c520f420b0ef09d9bee966f0728f388056ec40f6ac4a8a81ef83600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055604051808215151515815260200191505060405180910390a26001905091905056fea165627a7a72305820a49d9414c6883b264cc3f2df1735b2a6839a6031f3244bde0b274ef8298fed520029",
-  "deployedBytecode": "0x608060405260043610610057576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063102bf9b91461005c5780631b1a48f5146100c55780639ea605c3146100f4575b600080fd5b34801561006857600080fd5b506100ab6004803603602081101561007f57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610123565b604051808215151515815260200191505060405180910390f35b3480156100d157600080fd5b506100da610179565b604051808215151515815260200191505060405180910390f35b34801561010057600080fd5b5061010961018a565b604051808215151515815260200191505060405180910390f35b6000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff169050919050565b6000610185600061019b565b905090565b6000610196600161019b565b905090565b60003373ffffffffffffffffffffffffffffffffffffffff167f387797210916a5c520f420b0ef09d9bee966f0728f388056ec40f6ac4a8a81ef83600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055604051808215151515815260200191505060405180910390a26001905091905056fea165627a7a72305820a49d9414c6883b264cc3f2df1735b2a6839a6031f3244bde0b274ef8298fed520029",
-  "sourceMap": "310:1490:0:-;;;615:84;8:9:-1;5:2;;;30:1;27;20:12;5:2;615:84:0;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;615:84:0;;;;;;;;;;;;;;;;682:10;668:11;;:24;;;;;;;;;;;;;;;;;;615:84;310:1490;;;;;;",
-  "deployedSourceMap": "310:1490:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;822:112;;8:9:-1;5:2;;;30:1;27;20:12;5:2;822:112:0;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;822:112:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1152:90;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1152:90:0;;;;;;;;;;;;;;;;;;;;;;;;;;;1003:92;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1003:92:0;;;;;;;;;;;;;;;;;;;;;;;;;;;822:112;881:4;908:11;:19;920:6;908:19;;;;;;;;;;;;;;;;;;;;;;;;;901:26;;822:112;;;:::o;1152:90::-;1189:4;1216:19;1229:5;1216:12;:19::i;:::-;1209:26;;1152:90;:::o;1003:92::-;1043:4;1070:18;1083:4;1070:12;:18::i;:::-;1063:25;;1003:92;:::o;1637:161::-;1688:4;1725:10;1713:56;;;1763:5;1737:11;:23;1749:10;1737:23;;;;;;;;;;;;;;;;:31;;;;;;;;;;;;;;;;;1713:56;;;;;;;;;;;;;;;;;;;;;;1787:4;1780:11;;1637:161;;;:::o",
-  "source": "/**\n * This smart contract code is Copyright 2018 WiBX. For more information see https://wibx.io\n *\n * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt\n */\n\npragma solidity 0.5.0;\n\n/**\n * @title BCH Handled tokens contract\n *\n * @dev Addresses owned by BCH\n */\ncontract BCHHandled\n{\n    /**\n     * The BCH module address.\n     */\n    address private _bchAddress;\n\n    /**\n     * Accounts managed by BCH.\n     */\n    mapping (address => bool) private _bchAllowed;\n\n    /**\n     * BCH Approval event\n     */\n    event BchApproval(address indexed to, bool state);\n\n    constructor(address bchAddress) public\n    {\n        _bchAddress = bchAddress;\n    }\n\n    /**\n     * @dev Check if the address is handled by BCH.\n     *\n     * @param wallet The address to check\n     */\n    function isBchHandled(address wallet) public view returns (bool)\n    {\n        return _bchAllowed[wallet];\n    }\n\n    /**\n     * @dev Authorize the full control of BCH.\n     */\n    function bchAuthorize() public returns (bool)\n    {\n        return _changeState(true);\n    }\n\n    /**\n     * @dev Revoke the BCH access.\n     */\n    function bchRevoke() public returns (bool)\n    {\n        return _changeState(false);\n    }\n\n    /**\n     * @dev Check if the transaction can be handled by BCH and its authenticity.\n     *\n     * @param from The spender address\n     */\n    function canBchHandle(address from) internal view returns (bool)\n    {\n        return isBchHandled(from) && msg.sender == _bchAddress;\n    }\n\n    /**\n     * @dev Change the BCH ownership state\n     *\n     * @param state The new state\n     */\n    function _changeState(bool state) private returns (bool)\n    {\n        emit BchApproval(msg.sender, _bchAllowed[msg.sender] = state);\n\n        return true;\n    }\n}",
-  "sourcePath": "/home/ubuntu/Contracts/wibx/contracts/BCHHandled.sol",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.12+commit.7709ece9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"bchAddress\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"state\",\"type\":\"bool\"}],\"name\":\"BchApproval\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[],\"name\":\"bchAuthorize\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"bchRevoke\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"wallet\",\"type\":\"address\"}],\"name\":\"isBchHandled\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Addresses owned by BCH\",\"methods\":{\"bchAuthorize()\":{\"details\":\"Authorize the full control of BCH.\"},\"bchRevoke()\":{\"details\":\"Revoke the BCH access.\"},\"isBchHandled(address)\":{\"details\":\"Check if the address is handled by BCH.\",\"params\":{\"wallet\":\"The address to check\"}}},\"title\":\"BCH Handled tokens contract\"},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/BCHHandled.sol\":\"BCHHandled\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/BCHHandled.sol\":{\"keccak256\":\"0xd4600e240c8940b5c5d758ed7dd165950233d9ccf985edb56f0fcd8dde76367e\",\"urls\":[\"bzz-raw://fc60b1d9b10067ec6351416f5aba6dd7d3c03f466f4a0fd60b89b4b879bd1be5\",\"dweb:/ipfs/Qmc77HpubPgSwKR4GK3ThQF7Z34e4tgGSJcvVGifmfoNgM\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516101bf3803806101bf8339818101604052602081101561003357600080fd5b5051600080546001600160a01b039092166001600160a01b031990921691909117905561015a806100656000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c8063102bf9b9146100465780631b1a48f5146100805780639ea605c314610088575b600080fd5b61006c6004803603602081101561005c57600080fd5b50356001600160a01b0316610090565b604080519115158252519081900360200190f35b61006c6100ae565b61006c6100bf565b6001600160a01b031660009081526001602052604090205460ff1690565b60006100ba60006100c7565b905090565b60006100ba60015b336000818152600160209081526040808320805460ff1916861515908117909155815190815290519293927f387797210916a5c520f420b0ef09d9bee966f0728f388056ec40f6ac4a8a81ef929181900390910190a250600191905056fea265627a7a7231582059aabaa9630d4c38b8c074d9366aa504c70cd01d9a4175ce00b6e21ebf74f87364736f6c634300050c0032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c8063102bf9b9146100465780631b1a48f5146100805780639ea605c314610088575b600080fd5b61006c6004803603602081101561005c57600080fd5b50356001600160a01b0316610090565b604080519115158252519081900360200190f35b61006c6100ae565b61006c6100bf565b6001600160a01b031660009081526001602052604090205460ff1690565b60006100ba60006100c7565b905090565b60006100ba60015b336000818152600160209081526040808320805460ff1916861515908117909155815190815290519293927f387797210916a5c520f420b0ef09d9bee966f0728f388056ec40f6ac4a8a81ef929181900390910190a250600191905056fea265627a7a7231582059aabaa9630d4c38b8c074d9366aa504c70cd01d9a4175ce00b6e21ebf74f87364736f6c634300050c0032",
+  "sourceMap": "311:1490:11:-;;;616:84;8:9:-1;5:2;;;30:1;27;20:12;5:2;616:84:11;;;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;616:84:11;669:11;:24;;-1:-1:-1;;;;;669:24:11;;;-1:-1:-1;;;;;;669:24:11;;;;;;;;;311:1490;;;;;;",
+  "deployedSourceMap": "311:1490:11:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;311:1490:11;;;;;;;;;;;;;;;;;;;;;;;;;;;;;823:112;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;823:112:11;-1:-1:-1;;;;;823:112:11;;:::i;:::-;;;;;;;;;;;;;;;;;;1153:90;;;:::i;1004:92::-;;;:::i;823:112::-;-1:-1:-1;;;;;909:19:11;882:4;909:19;;;:11;:19;;;;;;;;;823:112::o;1153:90::-;1190:4;1217:19;1230:5;1217:12;:19::i;:::-;1210:26;;1153:90;:::o;1004:92::-;1044:4;1071:18;1084:4;1638:161;1726:10;1689:4;1738:23;;;:11;:23;;;;;;;;:31;;-1:-1:-1;;1738:31:11;;;;;;;;;;1714:56;;;;;;;1689:4;;1726:10;1714:56;;;;;;;;;;;-1:-1:-1;1788:4:11;1638:161;;;:::o",
+  "source": "/**\n * This smart contract code is Copyright 2018 WiBX. For more information see https://wibx.io\n *\n * Licensed under the Apache License, version 2.0: https://github.com/wibxcoin/Contracts/LICENSE.txt\n */\n\npragma solidity 0.5.12;\n\n/**\n * @title BCH Handled tokens contract\n *\n * @dev Addresses owned by BCH\n */\ncontract BCHHandled\n{\n    /**\n     * The BCH module address.\n     */\n    address private _bchAddress;\n\n    /**\n     * Accounts managed by BCH.\n     */\n    mapping (address => bool) private _bchAllowed;\n\n    /**\n     * BCH Approval event\n     */\n    event BchApproval(address indexed to, bool state);\n\n    constructor(address bchAddress) public\n    {\n        _bchAddress = bchAddress;\n    }\n\n    /**\n     * @dev Check if the address is handled by BCH.\n     *\n     * @param wallet The address to check\n     */\n    function isBchHandled(address wallet) public view returns (bool)\n    {\n        return _bchAllowed[wallet];\n    }\n\n    /**\n     * @dev Authorize the full control of BCH.\n     */\n    function bchAuthorize() public returns (bool)\n    {\n        return _changeState(true);\n    }\n\n    /**\n     * @dev Revoke the BCH access.\n     */\n    function bchRevoke() public returns (bool)\n    {\n        return _changeState(false);\n    }\n\n    /**\n     * @dev Check if the transaction can be handled by BCH and its authenticity.\n     *\n     * @param from The spender address\n     */\n    function canBchHandle(address from) internal view returns (bool)\n    {\n        return isBchHandled(from) && msg.sender == _bchAddress;\n    }\n\n    /**\n     * @dev Change the BCH ownership state\n     *\n     * @param state The new state\n     */\n    function _changeState(bool state) private returns (bool)\n    {\n        emit BchApproval(msg.sender, _bchAllowed[msg.sender] = state);\n\n        return true;\n    }\n}",
+  "sourcePath": "/root/Contracts/wibx/contracts/BCHHandled.sol",
   "ast": {
-    "absolutePath": "/home/ubuntu/Contracts/wibx/contracts/BCHHandled.sol",
+    "absolutePath": "project:/contracts/BCHHandled.sol",
     "exportedSymbols": {
       "BCHHandled": [
-        94
+        1366
       ]
     },
-    "id": 95,
+    "id": 1367,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1,
+        "id": 1273,
         "literals": [
           "solidity",
           "0.5",
-          ".0"
+          ".12"
         ],
         "nodeType": "PragmaDirective",
-        "src": "206:22:0"
+        "src": "206:23:11"
       },
       {
         "baseContracts": [],
@@ -109,20 +117,20 @@
         "contractKind": "contract",
         "documentation": "@title BCH Handled tokens contract\n * @dev Addresses owned by BCH",
         "fullyImplemented": true,
-        "id": 94,
+        "id": 1366,
         "linearizedBaseContracts": [
-          94
+          1366
         ],
         "name": "BCHHandled",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 3,
+            "id": 1275,
             "name": "_bchAddress",
             "nodeType": "VariableDeclaration",
-            "scope": 94,
-            "src": "383:27:0",
+            "scope": 1366,
+            "src": "384:27:11",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -130,10 +138,10 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 2,
+              "id": 1274,
               "name": "address",
               "nodeType": "ElementaryTypeName",
-              "src": "383:7:0",
+              "src": "384:7:11",
               "stateMutability": "nonpayable",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
@@ -145,11 +153,11 @@
           },
           {
             "constant": false,
-            "id": 7,
+            "id": 1279,
             "name": "_bchAllowed",
             "nodeType": "VariableDeclaration",
-            "scope": 94,
-            "src": "465:45:0",
+            "scope": 1366,
+            "src": "466:45:11",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -157,28 +165,28 @@
               "typeString": "mapping(address => bool)"
             },
             "typeName": {
-              "id": 6,
+              "id": 1278,
               "keyType": {
-                "id": 4,
+                "id": 1276,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
-                "src": "474:7:0",
+                "src": "475:7:11",
                 "typeDescriptions": {
                   "typeIdentifier": "t_address",
                   "typeString": "address"
                 }
               },
               "nodeType": "Mapping",
-              "src": "465:25:0",
+              "src": "466:25:11",
               "typeDescriptions": {
                 "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                 "typeString": "mapping(address => bool)"
               },
               "valueType": {
-                "id": 5,
+                "id": 1277,
                 "name": "bool",
                 "nodeType": "ElementaryTypeName",
-                "src": "485:4:0",
+                "src": "486:4:11",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bool",
                   "typeString": "bool"
@@ -191,21 +199,21 @@
           {
             "anonymous": false,
             "documentation": "BCH Approval event",
-            "id": 13,
+            "id": 1285,
             "name": "BchApproval",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 12,
+              "id": 1284,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 9,
+                  "id": 1281,
                   "indexed": true,
                   "name": "to",
                   "nodeType": "VariableDeclaration",
-                  "scope": 13,
-                  "src": "577:18:0",
+                  "scope": 1285,
+                  "src": "578:18:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -213,10 +221,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 8,
+                    "id": 1280,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "577:7:0",
+                    "src": "578:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -228,12 +236,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 11,
+                  "id": 1283,
                   "indexed": false,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 13,
-                  "src": "597:10:0",
+                  "scope": 1285,
+                  "src": "598:10:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -241,10 +249,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 10,
+                    "id": 1282,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "597:4:0",
+                    "src": "598:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -254,32 +262,32 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "576:32:0"
+              "src": "577:32:11"
             },
-            "src": "559:50:0"
+            "src": "560:50:11"
           },
           {
             "body": {
-              "id": 22,
+              "id": 1294,
               "nodeType": "Block",
-              "src": "658:41:0",
+              "src": "659:41:11",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 20,
+                    "id": 1292,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 18,
+                      "id": 1290,
                       "name": "_bchAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3,
-                      "src": "668:11:0",
+                      "referencedDeclaration": 1275,
+                      "src": "669:11:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -289,47 +297,47 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 19,
+                      "id": 1291,
                       "name": "bchAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 15,
-                      "src": "682:10:0",
+                      "referencedDeclaration": 1287,
+                      "src": "683:10:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-                    "src": "668:24:0",
+                    "src": "669:24:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 21,
+                  "id": 1293,
                   "nodeType": "ExpressionStatement",
-                  "src": "668:24:0"
+                  "src": "669:24:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 23,
+            "id": 1295,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 16,
+              "id": 1288,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 15,
+                  "id": 1287,
                   "name": "bchAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 23,
-                  "src": "627:18:0",
+                  "scope": 1295,
+                  "src": "628:18:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -337,10 +345,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 14,
+                    "id": 1286,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "627:7:0",
+                    "src": "628:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -351,51 +359,51 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "626:20:0"
+              "src": "627:20:11"
             },
             "returnParameters": {
-              "id": 17,
+              "id": 1289,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "658:0:0"
+              "src": "659:0:11"
             },
-            "scope": 94,
-            "src": "615:84:0",
+            "scope": 1366,
+            "src": "616:84:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 34,
+              "id": 1306,
               "nodeType": "Block",
-              "src": "891:43:0",
+              "src": "892:43:11",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
                     "baseExpression": {
                       "argumentTypes": null,
-                      "id": 30,
+                      "id": 1302,
                       "name": "_bchAllowed",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 7,
-                      "src": "908:11:0",
+                      "referencedDeclaration": 1279,
+                      "src": "909:11:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                         "typeString": "mapping(address => bool)"
                       }
                     },
-                    "id": 32,
+                    "id": 1304,
                     "indexExpression": {
                       "argumentTypes": null,
-                      "id": 31,
+                      "id": 1303,
                       "name": "wallet",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 25,
-                      "src": "920:6:0",
+                      "referencedDeclaration": 1297,
+                      "src": "921:6:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -406,37 +414,37 @@
                     "isPure": false,
                     "lValueRequested": false,
                     "nodeType": "IndexAccess",
-                    "src": "908:19:0",
+                    "src": "909:19:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 29,
-                  "id": 33,
+                  "functionReturnParameters": 1301,
+                  "id": 1305,
                   "nodeType": "Return",
-                  "src": "901:26:0"
+                  "src": "902:26:11"
                 }
               ]
             },
             "documentation": "@dev Check if the address is handled by BCH.\n     * @param wallet The address to check",
-            "id": 35,
+            "id": 1307,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "isBchHandled",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 26,
+              "id": 1298,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 25,
+                  "id": 1297,
                   "name": "wallet",
                   "nodeType": "VariableDeclaration",
-                  "scope": 35,
-                  "src": "844:14:0",
+                  "scope": 1307,
+                  "src": "845:14:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -444,10 +452,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 24,
+                    "id": 1296,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "844:7:0",
+                    "src": "845:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -458,19 +466,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "843:16:0"
+              "src": "844:16:11"
             },
             "returnParameters": {
-              "id": 29,
+              "id": 1301,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 28,
+                  "id": 1300,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 35,
-                  "src": "881:4:0",
+                  "scope": 1307,
+                  "src": "882:4:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -478,10 +486,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 27,
+                    "id": 1299,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "881:4:0",
+                    "src": "882:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -491,19 +499,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "880:6:0"
+              "src": "881:6:11"
             },
-            "scope": 94,
-            "src": "822:112:0",
+            "scope": 1366,
+            "src": "823:112:11",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 44,
+              "id": 1316,
               "nodeType": "Block",
-              "src": "1053:42:0",
+              "src": "1054:42:11",
               "statements": [
                 {
                   "expression": {
@@ -512,14 +520,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "74727565",
-                        "id": 41,
+                        "id": 1313,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "bool",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "1083:4:0",
+                        "src": "1084:4:11",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
@@ -535,18 +543,18 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 40,
+                      "id": 1312,
                       "name": "_changeState",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 93,
-                      "src": "1070:12:0",
+                      "referencedDeclaration": 1365,
+                      "src": "1071:12:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bool_$returns$_t_bool_$",
                         "typeString": "function (bool) returns (bool)"
                       }
                     },
-                    "id": 42,
+                    "id": 1314,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -554,43 +562,43 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1070:18:0",
+                    "src": "1071:18:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 39,
-                  "id": 43,
+                  "functionReturnParameters": 1311,
+                  "id": 1315,
                   "nodeType": "Return",
-                  "src": "1063:25:0"
+                  "src": "1064:25:11"
                 }
               ]
             },
             "documentation": "@dev Authorize the full control of BCH.",
-            "id": 45,
+            "id": 1317,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "bchAuthorize",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 36,
+              "id": 1308,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1024:2:0"
+              "src": "1025:2:11"
             },
             "returnParameters": {
-              "id": 39,
+              "id": 1311,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 38,
+                  "id": 1310,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 45,
-                  "src": "1043:4:0",
+                  "scope": 1317,
+                  "src": "1044:4:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -598,10 +606,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 37,
+                    "id": 1309,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1043:4:0",
+                    "src": "1044:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -611,19 +619,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1042:6:0"
+              "src": "1043:6:11"
             },
-            "scope": 94,
-            "src": "1003:92:0",
+            "scope": 1366,
+            "src": "1004:92:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 54,
+              "id": 1326,
               "nodeType": "Block",
-              "src": "1199:43:0",
+              "src": "1200:43:11",
               "statements": [
                 {
                   "expression": {
@@ -632,14 +640,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "66616c7365",
-                        "id": 51,
+                        "id": 1323,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "bool",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "1229:5:0",
+                        "src": "1230:5:11",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
@@ -655,18 +663,18 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 50,
+                      "id": 1322,
                       "name": "_changeState",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 93,
-                      "src": "1216:12:0",
+                      "referencedDeclaration": 1365,
+                      "src": "1217:12:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bool_$returns$_t_bool_$",
                         "typeString": "function (bool) returns (bool)"
                       }
                     },
-                    "id": 52,
+                    "id": 1324,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -674,43 +682,43 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1216:19:0",
+                    "src": "1217:19:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 49,
-                  "id": 53,
+                  "functionReturnParameters": 1321,
+                  "id": 1325,
                   "nodeType": "Return",
-                  "src": "1209:26:0"
+                  "src": "1210:26:11"
                 }
               ]
             },
             "documentation": "@dev Revoke the BCH access.",
-            "id": 55,
+            "id": 1327,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "bchRevoke",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 46,
+              "id": 1318,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1170:2:0"
+              "src": "1171:2:11"
             },
             "returnParameters": {
-              "id": 49,
+              "id": 1321,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 48,
+                  "id": 1320,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 55,
-                  "src": "1189:4:0",
+                  "scope": 1327,
+                  "src": "1190:4:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -718,10 +726,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 47,
+                    "id": 1319,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1189:4:0",
+                    "src": "1190:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -731,19 +739,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1188:6:0"
+              "src": "1189:6:11"
             },
-            "scope": 94,
-            "src": "1152:90:0",
+            "scope": 1366,
+            "src": "1153:90:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 71,
+              "id": 1343,
               "nodeType": "Block",
-              "src": "1460:71:0",
+              "src": "1461:71:11",
               "statements": [
                 {
                   "expression": {
@@ -752,7 +760,7 @@
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     },
-                    "id": 69,
+                    "id": 1341,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -762,12 +770,12 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "id": 63,
+                          "id": 1335,
                           "name": "from",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 57,
-                          "src": "1490:4:0",
+                          "referencedDeclaration": 1329,
+                          "src": "1491:4:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
@@ -781,18 +789,18 @@
                             "typeString": "address"
                           }
                         ],
-                        "id": 62,
+                        "id": 1334,
                         "name": "isBchHandled",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 35,
-                        "src": "1477:12:0",
+                        "referencedDeclaration": 1307,
+                        "src": "1478:12:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_bool_$",
                           "typeString": "function (address) view returns (bool)"
                         }
                       },
-                      "id": 64,
+                      "id": 1336,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -800,7 +808,7 @@
                       "lValueRequested": false,
                       "names": [],
                       "nodeType": "FunctionCall",
-                      "src": "1477:18:0",
+                      "src": "1478:18:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
@@ -814,7 +822,7 @@
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       },
-                      "id": 68,
+                      "id": 1340,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -823,18 +831,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 65,
+                          "id": 1337,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2254,
-                          "src": "1499:3:0",
+                          "referencedDeclaration": 2341,
+                          "src": "1500:3:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 66,
+                        "id": 1338,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -842,7 +850,7 @@
                         "memberName": "sender",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": null,
-                        "src": "1499:10:0",
+                        "src": "1500:10:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address_payable",
                           "typeString": "address payable"
@@ -852,54 +860,54 @@
                       "operator": "==",
                       "rightExpression": {
                         "argumentTypes": null,
-                        "id": 67,
+                        "id": 1339,
                         "name": "_bchAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3,
-                        "src": "1513:11:0",
+                        "referencedDeclaration": 1275,
+                        "src": "1514:11:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         }
                       },
-                      "src": "1499:25:0",
+                      "src": "1500:25:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
                       }
                     },
-                    "src": "1477:47:0",
+                    "src": "1478:47:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 61,
-                  "id": 70,
+                  "functionReturnParameters": 1333,
+                  "id": 1342,
                   "nodeType": "Return",
-                  "src": "1470:54:0"
+                  "src": "1471:54:11"
                 }
               ]
             },
             "documentation": "@dev Check if the transaction can be handled by BCH and its authenticity.\n     * @param from The spender address",
-            "id": 72,
+            "id": 1344,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "canBchHandle",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 58,
+              "id": 1330,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 57,
+                  "id": 1329,
                   "name": "from",
                   "nodeType": "VariableDeclaration",
-                  "scope": 72,
-                  "src": "1413:12:0",
+                  "scope": 1344,
+                  "src": "1414:12:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -907,10 +915,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 56,
+                    "id": 1328,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1413:7:0",
+                    "src": "1414:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -921,19 +929,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1412:14:0"
+              "src": "1413:14:11"
             },
             "returnParameters": {
-              "id": 61,
+              "id": 1333,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 60,
+                  "id": 1332,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 72,
-                  "src": "1450:4:0",
+                  "scope": 1344,
+                  "src": "1451:4:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -941,10 +949,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 59,
+                    "id": 1331,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1450:4:0",
+                    "src": "1451:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -954,19 +962,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1449:6:0"
+              "src": "1450:6:11"
             },
-            "scope": 94,
-            "src": "1391:140:0",
+            "scope": 1366,
+            "src": "1392:140:11",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 92,
+              "id": 1364,
               "nodeType": "Block",
-              "src": "1698:100:0",
+              "src": "1699:100:11",
               "statements": [
                 {
                   "eventCall": {
@@ -976,18 +984,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 80,
+                          "id": 1352,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2254,
-                          "src": "1725:3:0",
+                          "referencedDeclaration": 2341,
+                          "src": "1726:3:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 81,
+                        "id": 1353,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -995,7 +1003,7 @@
                         "memberName": "sender",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": null,
-                        "src": "1725:10:0",
+                        "src": "1726:10:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address_payable",
                           "typeString": "address payable"
@@ -1003,7 +1011,7 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 87,
+                        "id": 1359,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1012,34 +1020,34 @@
                           "argumentTypes": null,
                           "baseExpression": {
                             "argumentTypes": null,
-                            "id": 82,
+                            "id": 1354,
                             "name": "_bchAllowed",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 7,
-                            "src": "1737:11:0",
+                            "referencedDeclaration": 1279,
+                            "src": "1738:11:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                               "typeString": "mapping(address => bool)"
                             }
                           },
-                          "id": 85,
+                          "id": 1357,
                           "indexExpression": {
                             "argumentTypes": null,
                             "expression": {
                               "argumentTypes": null,
-                              "id": 83,
+                              "id": 1355,
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 2254,
-                              "src": "1749:3:0",
+                              "referencedDeclaration": 2341,
+                              "src": "1750:3:11",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
                                 "typeString": "msg"
                               }
                             },
-                            "id": 84,
+                            "id": 1356,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -1047,7 +1055,7 @@
                             "memberName": "sender",
                             "nodeType": "MemberAccess",
                             "referencedDeclaration": null,
-                            "src": "1749:10:0",
+                            "src": "1750:10:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address_payable",
                               "typeString": "address payable"
@@ -1058,7 +1066,7 @@
                           "isPure": false,
                           "lValueRequested": true,
                           "nodeType": "IndexAccess",
-                          "src": "1737:23:0",
+                          "src": "1738:23:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
                             "typeString": "bool"
@@ -1068,18 +1076,18 @@
                         "operator": "=",
                         "rightHandSide": {
                           "argumentTypes": null,
-                          "id": 86,
+                          "id": 1358,
                           "name": "state",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 74,
-                          "src": "1763:5:0",
+                          "referencedDeclaration": 1346,
+                          "src": "1764:5:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
                             "typeString": "bool"
                           }
                         },
-                        "src": "1737:31:0",
+                        "src": "1738:31:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -1097,18 +1105,18 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 79,
+                      "id": 1351,
                       "name": "BchApproval",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 13,
-                      "src": "1713:11:0",
+                      "referencedDeclaration": 1285,
+                      "src": "1714:11:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_bool_$returns$__$",
                         "typeString": "function (address,bool)"
                       }
                     },
-                    "id": 88,
+                    "id": 1360,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1116,28 +1124,28 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1713:56:0",
+                    "src": "1714:56:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 89,
+                  "id": 1361,
                   "nodeType": "EmitStatement",
-                  "src": "1708:61:0"
+                  "src": "1709:61:11"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "74727565",
-                    "id": 90,
+                    "id": 1362,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "bool",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "1787:4:0",
+                    "src": "1788:4:11",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
@@ -1145,31 +1153,31 @@
                     },
                     "value": "true"
                   },
-                  "functionReturnParameters": 78,
-                  "id": 91,
+                  "functionReturnParameters": 1350,
+                  "id": 1363,
                   "nodeType": "Return",
-                  "src": "1780:11:0"
+                  "src": "1781:11:11"
                 }
               ]
             },
             "documentation": "@dev Change the BCH ownership state\n     * @param state The new state",
-            "id": 93,
+            "id": 1365,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_changeState",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 75,
+              "id": 1347,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 74,
+                  "id": 1346,
                   "name": "state",
                   "nodeType": "VariableDeclaration",
-                  "scope": 93,
-                  "src": "1659:10:0",
+                  "scope": 1365,
+                  "src": "1660:10:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1177,10 +1185,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 73,
+                    "id": 1345,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1659:4:0",
+                    "src": "1660:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -1190,19 +1198,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1658:12:0"
+              "src": "1659:12:11"
             },
             "returnParameters": {
-              "id": 78,
+              "id": 1350,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 77,
+                  "id": 1349,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 93,
-                  "src": "1688:4:0",
+                  "scope": 1365,
+                  "src": "1689:4:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1210,10 +1218,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 76,
+                    "id": 1348,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1688:4:0",
+                    "src": "1689:4:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -1223,1183 +1231,1307 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1687:6:0"
+              "src": "1688:6:11"
             },
-            "scope": 94,
-            "src": "1637:161:0",
+            "scope": 1366,
+            "src": "1638:161:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "private"
           }
         ],
-        "scope": 95,
-        "src": "310:1490:0"
+        "scope": 1367,
+        "src": "311:1490:11"
       }
     ],
-    "src": "206:1594:0"
+    "src": "206:1595:11"
   },
   "legacyAST": {
-    "absolutePath": "/home/ubuntu/Contracts/wibx/contracts/BCHHandled.sol",
-    "exportedSymbols": {
-      "BCHHandled": [
-        94
-      ]
+    "attributes": {
+      "absolutePath": "project:/contracts/BCHHandled.sol",
+      "exportedSymbols": {
+        "BCHHandled": [
+          1366
+        ]
+      }
     },
-    "id": 95,
-    "nodeType": "SourceUnit",
-    "nodes": [
+    "children": [
       {
-        "id": 1,
-        "literals": [
-          "solidity",
-          "0.5",
-          ".0"
-        ],
-        "nodeType": "PragmaDirective",
-        "src": "206:22:0"
+        "attributes": {
+          "literals": [
+            "solidity",
+            "0.5",
+            ".12"
+          ]
+        },
+        "id": 1273,
+        "name": "PragmaDirective",
+        "src": "206:23:11"
       },
       {
-        "baseContracts": [],
-        "contractDependencies": [],
-        "contractKind": "contract",
-        "documentation": "@title BCH Handled tokens contract\n * @dev Addresses owned by BCH",
-        "fullyImplemented": true,
-        "id": 94,
-        "linearizedBaseContracts": [
-          94
-        ],
-        "name": "BCHHandled",
-        "nodeType": "ContractDefinition",
-        "nodes": [
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": "@title BCH Handled tokens contract\n * @dev Addresses owned by BCH",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            1366
+          ],
+          "name": "BCHHandled",
+          "scope": 1367
+        },
+        "children": [
           {
-            "constant": false,
-            "id": 3,
-            "name": "_bchAddress",
-            "nodeType": "VariableDeclaration",
-            "scope": 94,
-            "src": "383:27:0",
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_address",
-              "typeString": "address"
+            "attributes": {
+              "constant": false,
+              "name": "_bchAddress",
+              "scope": 1366,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "address",
+              "value": null,
+              "visibility": "private"
             },
-            "typeName": {
-              "id": 2,
-              "name": "address",
-              "nodeType": "ElementaryTypeName",
-              "src": "383:7:0",
-              "stateMutability": "nonpayable",
-              "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
-              }
-            },
-            "value": null,
-            "visibility": "private"
-          },
-          {
-            "constant": false,
-            "id": 7,
-            "name": "_bchAllowed",
-            "nodeType": "VariableDeclaration",
-            "scope": 94,
-            "src": "465:45:0",
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
-              "typeString": "mapping(address => bool)"
-            },
-            "typeName": {
-              "id": 6,
-              "keyType": {
-                "id": 4,
-                "name": "address",
-                "nodeType": "ElementaryTypeName",
-                "src": "474:7:0",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_address",
-                  "typeString": "address"
-                }
-              },
-              "nodeType": "Mapping",
-              "src": "465:25:0",
-              "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
-                "typeString": "mapping(address => bool)"
-              },
-              "valueType": {
-                "id": 5,
-                "name": "bool",
-                "nodeType": "ElementaryTypeName",
-                "src": "485:4:0",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_bool",
-                  "typeString": "bool"
-                }
-              }
-            },
-            "value": null,
-            "visibility": "private"
-          },
-          {
-            "anonymous": false,
-            "documentation": "BCH Approval event",
-            "id": 13,
-            "name": "BchApproval",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 12,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 9,
-                  "indexed": true,
-                  "name": "to",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 13,
-                  "src": "577:18:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 8,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "577:7:0",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
+            "children": [
+              {
+                "attributes": {
+                  "name": "address",
+                  "stateMutability": "nonpayable",
+                  "type": "address"
                 },
-                {
-                  "constant": false,
-                  "id": 11,
-                  "indexed": false,
-                  "name": "state",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 13,
-                  "src": "597:10:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_bool",
-                    "typeString": "bool"
-                  },
-                  "typeName": {
-                    "id": 10,
-                    "name": "bool",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "597:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "576:32:0"
-            },
-            "src": "559:50:0"
+                "id": 1274,
+                "name": "ElementaryTypeName",
+                "src": "384:7:11"
+              }
+            ],
+            "id": 1275,
+            "name": "VariableDeclaration",
+            "src": "384:27:11"
           },
           {
-            "body": {
-              "id": 22,
-              "nodeType": "Block",
-              "src": "658:41:0",
-              "statements": [
-                {
-                  "expression": {
-                    "argumentTypes": null,
-                    "id": 20,
-                    "isConstant": false,
-                    "isLValue": false,
-                    "isPure": false,
-                    "lValueRequested": false,
-                    "leftHandSide": {
-                      "argumentTypes": null,
-                      "id": 18,
-                      "name": "_bchAddress",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 3,
-                      "src": "668:11:0",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_address",
-                        "typeString": "address"
-                      }
+            "attributes": {
+              "constant": false,
+              "name": "_bchAllowed",
+              "scope": 1366,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "mapping(address => bool)",
+              "value": null,
+              "visibility": "private"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "type": "mapping(address => bool)"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "type": "address"
                     },
-                    "nodeType": "Assignment",
-                    "operator": "=",
-                    "rightHandSide": {
-                      "argumentTypes": null,
-                      "id": 19,
+                    "id": 1276,
+                    "name": "ElementaryTypeName",
+                    "src": "475:7:11"
+                  },
+                  {
+                    "attributes": {
+                      "name": "bool",
+                      "type": "bool"
+                    },
+                    "id": 1277,
+                    "name": "ElementaryTypeName",
+                    "src": "486:4:11"
+                  }
+                ],
+                "id": 1278,
+                "name": "Mapping",
+                "src": "466:25:11"
+              }
+            ],
+            "id": 1279,
+            "name": "VariableDeclaration",
+            "src": "466:45:11"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "documentation": "BCH Approval event",
+              "name": "BchApproval"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": true,
+                      "name": "to",
+                      "scope": 1285,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 1280,
+                        "name": "ElementaryTypeName",
+                        "src": "578:7:11"
+                      }
+                    ],
+                    "id": 1281,
+                    "name": "VariableDeclaration",
+                    "src": "578:18:11"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "state",
+                      "scope": 1285,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bool",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bool",
+                          "type": "bool"
+                        },
+                        "id": 1282,
+                        "name": "ElementaryTypeName",
+                        "src": "598:4:11"
+                      }
+                    ],
+                    "id": 1283,
+                    "name": "VariableDeclaration",
+                    "src": "598:10:11"
+                  }
+                ],
+                "id": 1284,
+                "name": "ParameterList",
+                "src": "577:32:11"
+              }
+            ],
+            "id": 1285,
+            "name": "EventDefinition",
+            "src": "560:50:11"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "implemented": true,
+              "isConstructor": true,
+              "kind": "constructor",
+              "modifiers": [
+                null
+              ],
+              "name": "",
+              "scope": 1366,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
                       "name": "bchAddress",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 15,
-                      "src": "682:10:0",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_address",
-                        "typeString": "address"
-                      }
+                      "scope": 1295,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
                     },
-                    "src": "668:24:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "id": 21,
-                  "nodeType": "ExpressionStatement",
-                  "src": "668:24:0"
-                }
-              ]
-            },
-            "documentation": null,
-            "id": 23,
-            "implemented": true,
-            "kind": "constructor",
-            "modifiers": [],
-            "name": "",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 16,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 15,
-                  "name": "bchAddress",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 23,
-                  "src": "627:18:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 14,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "627:7:0",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "626:20:0"
-            },
-            "returnParameters": {
-              "id": 17,
-              "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "658:0:0"
-            },
-            "scope": 94,
-            "src": "615:84:0",
-            "stateMutability": "nonpayable",
-            "superFunction": null,
-            "visibility": "public"
-          },
-          {
-            "body": {
-              "id": 34,
-              "nodeType": "Block",
-              "src": "891:43:0",
-              "statements": [
-                {
-                  "expression": {
-                    "argumentTypes": null,
-                    "baseExpression": {
-                      "argumentTypes": null,
-                      "id": 30,
-                      "name": "_bchAllowed",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 7,
-                      "src": "908:11:0",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
-                        "typeString": "mapping(address => bool)"
-                      }
-                    },
-                    "id": 32,
-                    "indexExpression": {
-                      "argumentTypes": null,
-                      "id": 31,
-                      "name": "wallet",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 25,
-                      "src": "920:6:0",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_address",
-                        "typeString": "address"
-                      }
-                    },
-                    "isConstant": false,
-                    "isLValue": true,
-                    "isPure": false,
-                    "lValueRequested": false,
-                    "nodeType": "IndexAccess",
-                    "src": "908:19:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    }
-                  },
-                  "functionReturnParameters": 29,
-                  "id": 33,
-                  "nodeType": "Return",
-                  "src": "901:26:0"
-                }
-              ]
-            },
-            "documentation": "@dev Check if the address is handled by BCH.\n     * @param wallet The address to check",
-            "id": 35,
-            "implemented": true,
-            "kind": "function",
-            "modifiers": [],
-            "name": "isBchHandled",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 26,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 25,
-                  "name": "wallet",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 35,
-                  "src": "844:14:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 24,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "844:7:0",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "843:16:0"
-            },
-            "returnParameters": {
-              "id": 29,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 28,
-                  "name": "",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 35,
-                  "src": "881:4:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_bool",
-                    "typeString": "bool"
-                  },
-                  "typeName": {
-                    "id": 27,
-                    "name": "bool",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "881:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "880:6:0"
-            },
-            "scope": 94,
-            "src": "822:112:0",
-            "stateMutability": "view",
-            "superFunction": null,
-            "visibility": "public"
-          },
-          {
-            "body": {
-              "id": 44,
-              "nodeType": "Block",
-              "src": "1053:42:0",
-              "statements": [
-                {
-                  "expression": {
-                    "argumentTypes": null,
-                    "arguments": [
+                    "children": [
                       {
-                        "argumentTypes": null,
-                        "hexValue": "74727565",
-                        "id": 41,
-                        "isConstant": false,
-                        "isLValue": false,
-                        "isPure": true,
-                        "kind": "bool",
-                        "lValueRequested": false,
-                        "nodeType": "Literal",
-                        "src": "1083:4:0",
-                        "subdenomination": null,
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_bool",
-                          "typeString": "bool"
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
                         },
-                        "value": "true"
+                        "id": 1286,
+                        "name": "ElementaryTypeName",
+                        "src": "628:7:11"
                       }
                     ],
-                    "expression": {
-                      "argumentTypes": [
-                        {
-                          "typeIdentifier": "t_bool",
-                          "typeString": "bool"
-                        }
-                      ],
-                      "id": 40,
-                      "name": "_changeState",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 93,
-                      "src": "1070:12:0",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_nonpayable$_t_bool_$returns$_t_bool_$",
-                        "typeString": "function (bool) returns (bool)"
-                      }
-                    },
-                    "id": 42,
-                    "isConstant": false,
-                    "isLValue": false,
-                    "isPure": false,
-                    "kind": "functionCall",
-                    "lValueRequested": false,
-                    "names": [],
-                    "nodeType": "FunctionCall",
-                    "src": "1070:18:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    }
-                  },
-                  "functionReturnParameters": 39,
-                  "id": 43,
-                  "nodeType": "Return",
-                  "src": "1063:25:0"
-                }
-              ]
-            },
-            "documentation": "@dev Authorize the full control of BCH.",
-            "id": 45,
-            "implemented": true,
-            "kind": "function",
-            "modifiers": [],
-            "name": "bchAuthorize",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 36,
-              "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "1024:2:0"
-            },
-            "returnParameters": {
-              "id": 39,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 38,
-                  "name": "",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 45,
-                  "src": "1043:4:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_bool",
-                    "typeString": "bool"
-                  },
-                  "typeName": {
-                    "id": 37,
-                    "name": "bool",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "1043:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "1042:6:0"
-            },
-            "scope": 94,
-            "src": "1003:92:0",
-            "stateMutability": "nonpayable",
-            "superFunction": null,
-            "visibility": "public"
-          },
-          {
-            "body": {
-              "id": 54,
-              "nodeType": "Block",
-              "src": "1199:43:0",
-              "statements": [
-                {
-                  "expression": {
-                    "argumentTypes": null,
-                    "arguments": [
+                    "id": 1287,
+                    "name": "VariableDeclaration",
+                    "src": "628:18:11"
+                  }
+                ],
+                "id": 1288,
+                "name": "ParameterList",
+                "src": "627:20:11"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1289,
+                "name": "ParameterList",
+                "src": "659:0:11"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
                       {
-                        "argumentTypes": null,
-                        "hexValue": "66616c7365",
-                        "id": 51,
-                        "isConstant": false,
-                        "isLValue": false,
-                        "isPure": true,
-                        "kind": "bool",
-                        "lValueRequested": false,
-                        "nodeType": "Literal",
-                        "src": "1229:5:0",
-                        "subdenomination": null,
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_bool",
-                          "typeString": "bool"
-                        },
-                        "value": "false"
-                      }
-                    ],
-                    "expression": {
-                      "argumentTypes": [
-                        {
-                          "typeIdentifier": "t_bool",
-                          "typeString": "bool"
-                        }
-                      ],
-                      "id": 50,
-                      "name": "_changeState",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 93,
-                      "src": "1216:12:0",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_nonpayable$_t_bool_$returns$_t_bool_$",
-                        "typeString": "function (bool) returns (bool)"
-                      }
-                    },
-                    "id": 52,
-                    "isConstant": false,
-                    "isLValue": false,
-                    "isPure": false,
-                    "kind": "functionCall",
-                    "lValueRequested": false,
-                    "names": [],
-                    "nodeType": "FunctionCall",
-                    "src": "1216:19:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    }
-                  },
-                  "functionReturnParameters": 49,
-                  "id": 53,
-                  "nodeType": "Return",
-                  "src": "1209:26:0"
-                }
-              ]
-            },
-            "documentation": "@dev Revoke the BCH access.",
-            "id": 55,
-            "implemented": true,
-            "kind": "function",
-            "modifiers": [],
-            "name": "bchRevoke",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 46,
-              "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "1170:2:0"
-            },
-            "returnParameters": {
-              "id": 49,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 48,
-                  "name": "",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 55,
-                  "src": "1189:4:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_bool",
-                    "typeString": "bool"
-                  },
-                  "typeName": {
-                    "id": 47,
-                    "name": "bool",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "1189:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "1188:6:0"
-            },
-            "scope": 94,
-            "src": "1152:90:0",
-            "stateMutability": "nonpayable",
-            "superFunction": null,
-            "visibility": "public"
-          },
-          {
-            "body": {
-              "id": 71,
-              "nodeType": "Block",
-              "src": "1460:71:0",
-              "statements": [
-                {
-                  "expression": {
-                    "argumentTypes": null,
-                    "commonType": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    },
-                    "id": 69,
-                    "isConstant": false,
-                    "isLValue": false,
-                    "isPure": false,
-                    "lValueRequested": false,
-                    "leftExpression": {
-                      "argumentTypes": null,
-                      "arguments": [
-                        {
+                        "attributes": {
                           "argumentTypes": null,
-                          "id": 63,
-                          "name": "from",
-                          "nodeType": "Identifier",
-                          "overloadedDeclarations": [],
-                          "referencedDeclaration": 57,
-                          "src": "1490:4:0",
-                          "typeDescriptions": {
-                            "typeIdentifier": "t_address",
-                            "typeString": "address"
-                          }
-                        }
-                      ],
-                      "expression": {
-                        "argumentTypes": [
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "address"
+                        },
+                        "children": [
                           {
-                            "typeIdentifier": "t_address",
-                            "typeString": "address"
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1275,
+                              "type": "address",
+                              "value": "_bchAddress"
+                            },
+                            "id": 1290,
+                            "name": "Identifier",
+                            "src": "669:11:11"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1287,
+                              "type": "address",
+                              "value": "bchAddress"
+                            },
+                            "id": 1291,
+                            "name": "Identifier",
+                            "src": "683:10:11"
                           }
                         ],
-                        "id": 62,
-                        "name": "isBchHandled",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 35,
-                        "src": "1477:12:0",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_bool_$",
-                          "typeString": "function (address) view returns (bool)"
-                        }
-                      },
-                      "id": 64,
-                      "isConstant": false,
-                      "isLValue": false,
-                      "isPure": false,
-                      "kind": "functionCall",
-                      "lValueRequested": false,
-                      "names": [],
-                      "nodeType": "FunctionCall",
-                      "src": "1477:18:0",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_bool",
-                        "typeString": "bool"
+                        "id": 1292,
+                        "name": "Assignment",
+                        "src": "669:24:11"
                       }
-                    },
-                    "nodeType": "BinaryOperation",
-                    "operator": "&&",
-                    "rightExpression": {
-                      "argumentTypes": null,
-                      "commonType": {
-                        "typeIdentifier": "t_address",
-                        "typeString": "address"
-                      },
-                      "id": 68,
-                      "isConstant": false,
-                      "isLValue": false,
-                      "isPure": false,
-                      "lValueRequested": false,
-                      "leftExpression": {
-                        "argumentTypes": null,
-                        "expression": {
-                          "argumentTypes": null,
-                          "id": 65,
-                          "name": "msg",
-                          "nodeType": "Identifier",
-                          "overloadedDeclarations": [],
-                          "referencedDeclaration": 2254,
-                          "src": "1499:3:0",
-                          "typeDescriptions": {
-                            "typeIdentifier": "t_magic_message",
-                            "typeString": "msg"
-                          }
-                        },
-                        "id": 66,
-                        "isConstant": false,
-                        "isLValue": false,
-                        "isPure": false,
-                        "lValueRequested": false,
-                        "memberName": "sender",
-                        "nodeType": "MemberAccess",
-                        "referencedDeclaration": null,
-                        "src": "1499:10:0",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_address_payable",
-                          "typeString": "address payable"
-                        }
-                      },
-                      "nodeType": "BinaryOperation",
-                      "operator": "==",
-                      "rightExpression": {
-                        "argumentTypes": null,
-                        "id": 67,
-                        "name": "_bchAddress",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 3,
-                        "src": "1513:11:0",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
-                        }
-                      },
-                      "src": "1499:25:0",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_bool",
-                        "typeString": "bool"
-                      }
-                    },
-                    "src": "1477:47:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    }
-                  },
-                  "functionReturnParameters": 61,
-                  "id": 70,
-                  "nodeType": "Return",
-                  "src": "1470:54:0"
-                }
-              ]
-            },
-            "documentation": "@dev Check if the transaction can be handled by BCH and its authenticity.\n     * @param from The spender address",
-            "id": 72,
-            "implemented": true,
-            "kind": "function",
-            "modifiers": [],
-            "name": "canBchHandle",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 58,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 57,
-                  "name": "from",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 72,
-                  "src": "1413:12:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 56,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "1413:7:0",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "1412:14:0"
-            },
-            "returnParameters": {
-              "id": 61,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 60,
-                  "name": "",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 72,
-                  "src": "1450:4:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_bool",
-                    "typeString": "bool"
-                  },
-                  "typeName": {
-                    "id": 59,
-                    "name": "bool",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "1450:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "1449:6:0"
-            },
-            "scope": 94,
-            "src": "1391:140:0",
-            "stateMutability": "view",
-            "superFunction": null,
-            "visibility": "internal"
+                    ],
+                    "id": 1293,
+                    "name": "ExpressionStatement",
+                    "src": "669:24:11"
+                  }
+                ],
+                "id": 1294,
+                "name": "Block",
+                "src": "659:41:11"
+              }
+            ],
+            "id": 1295,
+            "name": "FunctionDefinition",
+            "src": "616:84:11"
           },
           {
-            "body": {
-              "id": 92,
-              "nodeType": "Block",
-              "src": "1698:100:0",
-              "statements": [
-                {
-                  "eventCall": {
-                    "argumentTypes": null,
-                    "arguments": [
+            "attributes": {
+              "documentation": "@dev Check if the address is handled by BCH.\n     * @param wallet The address to check",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "isBchHandled",
+              "scope": 1366,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "wallet",
+                      "scope": 1307,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
                       {
-                        "argumentTypes": null,
-                        "expression": {
-                          "argumentTypes": null,
-                          "id": 80,
-                          "name": "msg",
-                          "nodeType": "Identifier",
-                          "overloadedDeclarations": [],
-                          "referencedDeclaration": 2254,
-                          "src": "1725:3:0",
-                          "typeDescriptions": {
-                            "typeIdentifier": "t_magic_message",
-                            "typeString": "msg"
-                          }
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
                         },
-                        "id": 81,
-                        "isConstant": false,
-                        "isLValue": false,
-                        "isPure": false,
-                        "lValueRequested": false,
-                        "memberName": "sender",
-                        "nodeType": "MemberAccess",
-                        "referencedDeclaration": null,
-                        "src": "1725:10:0",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_address_payable",
-                          "typeString": "address payable"
-                        }
-                      },
+                        "id": 1296,
+                        "name": "ElementaryTypeName",
+                        "src": "845:7:11"
+                      }
+                    ],
+                    "id": 1297,
+                    "name": "VariableDeclaration",
+                    "src": "845:14:11"
+                  }
+                ],
+                "id": 1298,
+                "name": "ParameterList",
+                "src": "844:16:11"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 1307,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bool",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
                       {
-                        "argumentTypes": null,
-                        "id": 87,
-                        "isConstant": false,
-                        "isLValue": false,
-                        "isPure": false,
-                        "lValueRequested": false,
-                        "leftHandSide": {
+                        "attributes": {
+                          "name": "bool",
+                          "type": "bool"
+                        },
+                        "id": 1299,
+                        "name": "ElementaryTypeName",
+                        "src": "882:4:11"
+                      }
+                    ],
+                    "id": 1300,
+                    "name": "VariableDeclaration",
+                    "src": "882:4:11"
+                  }
+                ],
+                "id": 1301,
+                "name": "ParameterList",
+                "src": "881:6:11"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 1301
+                    },
+                    "children": [
+                      {
+                        "attributes": {
                           "argumentTypes": null,
-                          "baseExpression": {
-                            "argumentTypes": null,
-                            "id": 82,
-                            "name": "_bchAllowed",
-                            "nodeType": "Identifier",
-                            "overloadedDeclarations": [],
-                            "referencedDeclaration": 7,
-                            "src": "1737:11:0",
-                            "typeDescriptions": {
-                              "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
-                              "typeString": "mapping(address => bool)"
-                            }
-                          },
-                          "id": 85,
-                          "indexExpression": {
-                            "argumentTypes": null,
-                            "expression": {
-                              "argumentTypes": null,
-                              "id": 83,
-                              "name": "msg",
-                              "nodeType": "Identifier",
-                              "overloadedDeclarations": [],
-                              "referencedDeclaration": 2254,
-                              "src": "1749:3:0",
-                              "typeDescriptions": {
-                                "typeIdentifier": "t_magic_message",
-                                "typeString": "msg"
-                              }
-                            },
-                            "id": 84,
-                            "isConstant": false,
-                            "isLValue": false,
-                            "isPure": false,
-                            "lValueRequested": false,
-                            "memberName": "sender",
-                            "nodeType": "MemberAccess",
-                            "referencedDeclaration": null,
-                            "src": "1749:10:0",
-                            "typeDescriptions": {
-                              "typeIdentifier": "t_address_payable",
-                              "typeString": "address payable"
-                            }
-                          },
                           "isConstant": false,
                           "isLValue": true,
                           "isPure": false,
-                          "lValueRequested": true,
-                          "nodeType": "IndexAccess",
-                          "src": "1737:23:0",
-                          "typeDescriptions": {
-                            "typeIdentifier": "t_bool",
-                            "typeString": "bool"
-                          }
+                          "lValueRequested": false,
+                          "type": "bool"
                         },
-                        "nodeType": "Assignment",
-                        "operator": "=",
-                        "rightHandSide": {
-                          "argumentTypes": null,
-                          "id": 86,
-                          "name": "state",
-                          "nodeType": "Identifier",
-                          "overloadedDeclarations": [],
-                          "referencedDeclaration": 74,
-                          "src": "1763:5:0",
-                          "typeDescriptions": {
-                            "typeIdentifier": "t_bool",
-                            "typeString": "bool"
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1279,
+                              "type": "mapping(address => bool)",
+                              "value": "_bchAllowed"
+                            },
+                            "id": 1302,
+                            "name": "Identifier",
+                            "src": "909:11:11"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1297,
+                              "type": "address",
+                              "value": "wallet"
+                            },
+                            "id": 1303,
+                            "name": "Identifier",
+                            "src": "921:6:11"
                           }
-                        },
-                        "src": "1737:31:0",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_bool",
-                          "typeString": "bool"
-                        }
+                        ],
+                        "id": 1304,
+                        "name": "IndexAccess",
+                        "src": "909:19:11"
                       }
                     ],
-                    "expression": {
-                      "argumentTypes": [
-                        {
-                          "typeIdentifier": "t_address_payable",
-                          "typeString": "address payable"
-                        },
-                        {
-                          "typeIdentifier": "t_bool",
-                          "typeString": "bool"
-                        }
-                      ],
-                      "id": 79,
-                      "name": "BchApproval",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 13,
-                      "src": "1713:11:0",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_bool_$returns$__$",
-                        "typeString": "function (address,bool)"
-                      }
-                    },
-                    "id": 88,
-                    "isConstant": false,
-                    "isLValue": false,
-                    "isPure": false,
-                    "kind": "functionCall",
-                    "lValueRequested": false,
-                    "names": [],
-                    "nodeType": "FunctionCall",
-                    "src": "1713:56:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_tuple$__$",
-                      "typeString": "tuple()"
-                    }
-                  },
-                  "id": 89,
-                  "nodeType": "EmitStatement",
-                  "src": "1708:61:0"
+                    "id": 1305,
+                    "name": "Return",
+                    "src": "902:26:11"
+                  }
+                ],
+                "id": 1306,
+                "name": "Block",
+                "src": "892:43:11"
+              }
+            ],
+            "id": 1307,
+            "name": "FunctionDefinition",
+            "src": "823:112:11"
+          },
+          {
+            "attributes": {
+              "documentation": "@dev Authorize the full control of BCH.",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "bchAuthorize",
+              "scope": 1366,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
                 },
-                {
-                  "expression": {
-                    "argumentTypes": null,
-                    "hexValue": "74727565",
-                    "id": 90,
-                    "isConstant": false,
-                    "isLValue": false,
-                    "isPure": true,
-                    "kind": "bool",
-                    "lValueRequested": false,
-                    "nodeType": "Literal",
-                    "src": "1787:4:0",
-                    "subdenomination": null,
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
+                "children": [],
+                "id": 1308,
+                "name": "ParameterList",
+                "src": "1025:2:11"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 1317,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bool",
+                      "value": null,
+                      "visibility": "internal"
                     },
-                    "value": "true"
-                  },
-                  "functionReturnParameters": 78,
-                  "id": 91,
-                  "nodeType": "Return",
-                  "src": "1780:11:0"
-                }
-              ]
-            },
-            "documentation": "@dev Change the BCH ownership state\n     * @param state The new state",
-            "id": 93,
-            "implemented": true,
-            "kind": "function",
-            "modifiers": [],
-            "name": "_changeState",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 75,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 74,
-                  "name": "state",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 93,
-                  "src": "1659:10:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_bool",
-                    "typeString": "bool"
-                  },
-                  "typeName": {
-                    "id": 73,
-                    "name": "bool",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "1659:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bool",
+                          "type": "bool"
+                        },
+                        "id": 1309,
+                        "name": "ElementaryTypeName",
+                        "src": "1044:4:11"
+                      }
+                    ],
+                    "id": 1310,
+                    "name": "VariableDeclaration",
+                    "src": "1044:4:11"
+                  }
+                ],
+                "id": 1311,
+                "name": "ParameterList",
+                "src": "1043:6:11"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 1311
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "bool",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1365,
+                              "type": "function (bool) returns (bool)",
+                              "value": "_changeState"
+                            },
+                            "id": 1312,
+                            "name": "Identifier",
+                            "src": "1071:12:11"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "74727565",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "bool",
+                              "type": "bool",
+                              "value": "true"
+                            },
+                            "id": 1313,
+                            "name": "Literal",
+                            "src": "1084:4:11"
+                          }
+                        ],
+                        "id": 1314,
+                        "name": "FunctionCall",
+                        "src": "1071:18:11"
+                      }
+                    ],
+                    "id": 1315,
+                    "name": "Return",
+                    "src": "1064:25:11"
+                  }
+                ],
+                "id": 1316,
+                "name": "Block",
+                "src": "1054:42:11"
+              }
+            ],
+            "id": 1317,
+            "name": "FunctionDefinition",
+            "src": "1004:92:11"
+          },
+          {
+            "attributes": {
+              "documentation": "@dev Revoke the BCH access.",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
               ],
-              "src": "1658:12:0"
+              "name": "bchRevoke",
+              "scope": 1366,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
             },
-            "returnParameters": {
-              "id": 78,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 77,
-                  "name": "",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 93,
-                  "src": "1688:4:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_bool",
-                    "typeString": "bool"
-                  },
-                  "typeName": {
-                    "id": 76,
-                    "name": "bool",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "1688:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_bool",
-                      "typeString": "bool"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1318,
+                "name": "ParameterList",
+                "src": "1171:2:11"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 1327,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bool",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bool",
+                          "type": "bool"
+                        },
+                        "id": 1319,
+                        "name": "ElementaryTypeName",
+                        "src": "1190:4:11"
+                      }
+                    ],
+                    "id": 1320,
+                    "name": "VariableDeclaration",
+                    "src": "1190:4:11"
+                  }
+                ],
+                "id": 1321,
+                "name": "ParameterList",
+                "src": "1189:6:11"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 1321
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "bool",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1365,
+                              "type": "function (bool) returns (bool)",
+                              "value": "_changeState"
+                            },
+                            "id": 1322,
+                            "name": "Identifier",
+                            "src": "1217:12:11"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "66616c7365",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "bool",
+                              "type": "bool",
+                              "value": "false"
+                            },
+                            "id": 1323,
+                            "name": "Literal",
+                            "src": "1230:5:11"
+                          }
+                        ],
+                        "id": 1324,
+                        "name": "FunctionCall",
+                        "src": "1217:19:11"
+                      }
+                    ],
+                    "id": 1325,
+                    "name": "Return",
+                    "src": "1210:26:11"
+                  }
+                ],
+                "id": 1326,
+                "name": "Block",
+                "src": "1200:43:11"
+              }
+            ],
+            "id": 1327,
+            "name": "FunctionDefinition",
+            "src": "1153:90:11"
+          },
+          {
+            "attributes": {
+              "documentation": "@dev Check if the transaction can be handled by BCH and its authenticity.\n     * @param from The spender address",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
               ],
-              "src": "1687:6:0"
+              "name": "canBchHandle",
+              "scope": 1366,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "internal"
             },
-            "scope": 94,
-            "src": "1637:161:0",
-            "stateMutability": "nonpayable",
-            "superFunction": null,
-            "visibility": "private"
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "from",
+                      "scope": 1344,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 1328,
+                        "name": "ElementaryTypeName",
+                        "src": "1414:7:11"
+                      }
+                    ],
+                    "id": 1329,
+                    "name": "VariableDeclaration",
+                    "src": "1414:12:11"
+                  }
+                ],
+                "id": 1330,
+                "name": "ParameterList",
+                "src": "1413:14:11"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 1344,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bool",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bool",
+                          "type": "bool"
+                        },
+                        "id": 1331,
+                        "name": "ElementaryTypeName",
+                        "src": "1451:4:11"
+                      }
+                    ],
+                    "id": 1332,
+                    "name": "VariableDeclaration",
+                    "src": "1451:4:11"
+                  }
+                ],
+                "id": 1333,
+                "name": "ParameterList",
+                "src": "1450:6:11"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 1333
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          },
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "&&",
+                          "type": "bool"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "bool",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_address",
+                                      "typeString": "address"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1307,
+                                  "type": "function (address) view returns (bool)",
+                                  "value": "isBchHandled"
+                                },
+                                "id": 1334,
+                                "name": "Identifier",
+                                "src": "1478:12:11"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1329,
+                                  "type": "address",
+                                  "value": "from"
+                                },
+                                "id": 1335,
+                                "name": "Identifier",
+                                "src": "1491:4:11"
+                              }
+                            ],
+                            "id": 1336,
+                            "name": "FunctionCall",
+                            "src": "1478:18:11"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "commonType": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "==",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "sender",
+                                  "referencedDeclaration": null,
+                                  "type": "address payable"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 2341,
+                                      "type": "msg",
+                                      "value": "msg"
+                                    },
+                                    "id": 1337,
+                                    "name": "Identifier",
+                                    "src": "1500:3:11"
+                                  }
+                                ],
+                                "id": 1338,
+                                "name": "MemberAccess",
+                                "src": "1500:10:11"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1275,
+                                  "type": "address",
+                                  "value": "_bchAddress"
+                                },
+                                "id": 1339,
+                                "name": "Identifier",
+                                "src": "1514:11:11"
+                              }
+                            ],
+                            "id": 1340,
+                            "name": "BinaryOperation",
+                            "src": "1500:25:11"
+                          }
+                        ],
+                        "id": 1341,
+                        "name": "BinaryOperation",
+                        "src": "1478:47:11"
+                      }
+                    ],
+                    "id": 1342,
+                    "name": "Return",
+                    "src": "1471:54:11"
+                  }
+                ],
+                "id": 1343,
+                "name": "Block",
+                "src": "1461:71:11"
+              }
+            ],
+            "id": 1344,
+            "name": "FunctionDefinition",
+            "src": "1392:140:11"
+          },
+          {
+            "attributes": {
+              "documentation": "@dev Change the BCH ownership state\n     * @param state The new state",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "_changeState",
+              "scope": 1366,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "private"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "state",
+                      "scope": 1365,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bool",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bool",
+                          "type": "bool"
+                        },
+                        "id": 1345,
+                        "name": "ElementaryTypeName",
+                        "src": "1660:4:11"
+                      }
+                    ],
+                    "id": 1346,
+                    "name": "VariableDeclaration",
+                    "src": "1660:10:11"
+                  }
+                ],
+                "id": 1347,
+                "name": "ParameterList",
+                "src": "1659:12:11"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 1365,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bool",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bool",
+                          "type": "bool"
+                        },
+                        "id": 1348,
+                        "name": "ElementaryTypeName",
+                        "src": "1689:4:11"
+                      }
+                    ],
+                    "id": 1349,
+                    "name": "VariableDeclaration",
+                    "src": "1689:4:11"
+                  }
+                ],
+                "id": 1350,
+                "name": "ParameterList",
+                "src": "1688:6:11"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address_payable",
+                                  "typeString": "address payable"
+                                },
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1285,
+                              "type": "function (address,bool)",
+                              "value": "BchApproval"
+                            },
+                            "id": 1351,
+                            "name": "Identifier",
+                            "src": "1714:11:11"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "sender",
+                              "referencedDeclaration": null,
+                              "type": "address payable"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 2341,
+                                  "type": "msg",
+                                  "value": "msg"
+                                },
+                                "id": 1352,
+                                "name": "Identifier",
+                                "src": "1726:3:11"
+                              }
+                            ],
+                            "id": 1353,
+                            "name": "MemberAccess",
+                            "src": "1726:10:11"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "=",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": true,
+                                  "type": "bool"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1279,
+                                      "type": "mapping(address => bool)",
+                                      "value": "_bchAllowed"
+                                    },
+                                    "id": 1354,
+                                    "name": "Identifier",
+                                    "src": "1738:11:11"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "sender",
+                                      "referencedDeclaration": null,
+                                      "type": "address payable"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 2341,
+                                          "type": "msg",
+                                          "value": "msg"
+                                        },
+                                        "id": 1355,
+                                        "name": "Identifier",
+                                        "src": "1750:3:11"
+                                      }
+                                    ],
+                                    "id": 1356,
+                                    "name": "MemberAccess",
+                                    "src": "1750:10:11"
+                                  }
+                                ],
+                                "id": 1357,
+                                "name": "IndexAccess",
+                                "src": "1738:23:11"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1346,
+                                  "type": "bool",
+                                  "value": "state"
+                                },
+                                "id": 1358,
+                                "name": "Identifier",
+                                "src": "1764:5:11"
+                              }
+                            ],
+                            "id": 1359,
+                            "name": "Assignment",
+                            "src": "1738:31:11"
+                          }
+                        ],
+                        "id": 1360,
+                        "name": "FunctionCall",
+                        "src": "1714:56:11"
+                      }
+                    ],
+                    "id": 1361,
+                    "name": "EmitStatement",
+                    "src": "1709:61:11"
+                  },
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 1350
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "hexvalue": "74727565",
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "subdenomination": null,
+                          "token": "bool",
+                          "type": "bool",
+                          "value": "true"
+                        },
+                        "id": 1362,
+                        "name": "Literal",
+                        "src": "1788:4:11"
+                      }
+                    ],
+                    "id": 1363,
+                    "name": "Return",
+                    "src": "1781:11:11"
+                  }
+                ],
+                "id": 1364,
+                "name": "Block",
+                "src": "1699:100:11"
+              }
+            ],
+            "id": 1365,
+            "name": "FunctionDefinition",
+            "src": "1638:161:11"
           }
         ],
-        "scope": 95,
-        "src": "310:1490:0"
+        "id": 1366,
+        "name": "ContractDefinition",
+        "src": "311:1490:11"
       }
     ],
-    "src": "206:1594:0"
+    "id": 1367,
+    "name": "SourceUnit",
+    "src": "206:1595:11"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+    "version": "0.5.12+commit.7709ece9.Linux.g++"
   },
   "networks": {},
-  "schemaVersion": "3.0.1",
-  "updatedAt": "2019-04-11T00:56:02.104Z",
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2026-06-29T23:20:24.236Z",
   "devdoc": {
     "details": "Addresses owned by BCH",
     "methods": {
