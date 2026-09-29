@@ -1,10 +1,10 @@
 /*
- *  WiBOO CONFIDENTIAL
+ *  Wibx Company
  *  ------------------
- *  Copyright (C) 2019 Ecossistema Negócios Digitais LTDA - All Rights Reserved.
+ *  Copyright (C) 2022 STAMPS Soluções Tecnológicas Aplicáveis a Mídias e Produtos Sociais LTDA - All Rights Reserved.
  *
  *  This file, project or its parts can not be copied and/or distributed without
- *  the express permission of Ecossistema Negócios Digitais LTDA.
+ *  the express permission of STAMPS Soluções Tecnológicas Aplicáveis a Mídias e Produtos Sociais LTDA.
  *
  *  @file simulate-deposit.js
  *  @author Gabriel Matos <gabriel.matos@wiboo.com.br>

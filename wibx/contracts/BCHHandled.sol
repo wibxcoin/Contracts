@@ -9,7 +9,7 @@ pragma solidity 0.5.12;
 /**
  * @title BCH Handled tokens contract
  *
- * @dev Addresses owned by BCH
+ * @dev Revocable transfer delegation to the BCH module, opted in by each holder
  */
 contract BCHHandled
 {
@@ -19,7 +19,7 @@ contract BCHHandled
     address private _bchAddress;
 
     /**
-     * Accounts managed by BCH.
+     * Accounts whose holders delegated transfers to BCH.
      */
     mapping (address => bool) private _bchAllowed;
 
@@ -34,7 +34,7 @@ contract BCHHandled
     }
 
     /**
-     * @dev Check if the address is handled by BCH.
+     * @dev Check if the address holder delegated transfers to BCH.
      *
      * @param wallet The address to check
      */
@@ -44,7 +44,7 @@ contract BCHHandled
     }
 
     /**
-     * @dev Authorize the full control of BCH.
+     * @dev Delegate transfers of the caller tokens to BCH (revocable at any time).
      */
     function bchAuthorize() public returns (bool)
     {
@@ -52,7 +52,7 @@ contract BCHHandled
     }
 
     /**
-     * @dev Revoke the BCH access.
+     * @dev Revoke the BCH delegation.
      */
     function bchRevoke() public returns (bool)
     {
@@ -60,7 +60,7 @@ contract BCHHandled
     }
 
     /**
-     * @dev Check if the transaction can be handled by BCH and its authenticity.
+     * @dev Check if the holder delegated to BCH and the caller is BCH.
      *
      * @param from The spender address
      */
@@ -70,7 +70,7 @@ contract BCHHandled
     }
 
     /**
-     * @dev Change the BCH ownership state
+     * @dev Change the BCH delegation state
      *
      * @param state The new state
      */
